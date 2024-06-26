@@ -11,9 +11,15 @@ importers:
       '@astrojs/check':
         specifier: ^0.7.0
         version: 0.7.0(typescript@5.5.2)
+      '@fontsource-variable/fira-code':
+        specifier: ^5.0.18
+        version: 5.0.18
       astro:
         specifier: ^4.11.3
         version: 4.11.3(typescript@5.5.2)
+      remixicon:
+        specifier: ^4.3.0
+        version: 4.3.0
       typescript:
         specifier: ^5.5.2
         version: 5.5.2
@@ -327,6 +333,9 @@ packages:
     engines: {node: '>=12'}
     cpu: [x64]
     os: [win32]
+
+  '@fontsource-variable/fira-code@5.0.18':
+    resolution: {integrity: sha512-Pmbnf4HukX4y928RY9g47hWyVECQglwV7HLv5taaDQwI3UBXyoLUnyRsjJxeviCPhdwJY5qyLT4GaCMlgC9oCQ==}
 
   '@img/sharp-darwin-arm64@0.33.4':
     resolution: {integrity: sha512-p0suNqXufJs9t3RqLBO6vvrgr5OhgbWp76s5gTRvdmxmuv9E1rcaqGUsl3l4mKVmXPkTkTErXediAui4x+8PSA==}
@@ -1456,6 +1465,9 @@ packages:
   remark-stringify@11.0.0:
     resolution: {integrity: sha512-1OSmLd3awB/t8qdoEOMazZkNsfVTeY4fTsgzcQFdXNq8ToTN4ZGwrMnlda4K6smTFKD+GRV6O48i6Z4iKgPPpw==}
 
+  remixicon@4.3.0:
+    resolution: {integrity: sha512-jRYQ37dTFSkJtvcxwTUAkIiXkYRvA9EDvVuXPNrmt2xf/VS//CRgFtsX2TAFBoQOhh9SDh7l6La4Xu12snEyxg==}
+
   request-light@0.7.0:
     resolution: {integrity: sha512-lMbBMrDoxgsyO+yB3sDcrDuX85yYt7sS8BfQd11jtbW/z5ZWgLZRcEGLsLoYw7I0WSUGQBs8CC8ScIxkTX1+6Q==}
 
@@ -2191,6 +2203,8 @@ snapshots:
 
   '@esbuild/win32-x64@0.21.5':
     optional: true
+
+  '@fontsource-variable/fira-code@5.0.18': {}
 
   '@img/sharp-darwin-arm64@0.33.4':
     optionalDependencies:
@@ -3577,6 +3591,8 @@ snapshots:
       '@types/mdast': 4.0.4
       mdast-util-to-markdown: 2.1.0
       unified: 11.0.5
+
+  remixicon@4.3.0: {}
 
   request-light@0.7.0: {}
 
