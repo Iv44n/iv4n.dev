@@ -1,7 +1,167 @@
 ---
-
+import GitHub from "@icons/GitHub.astro";
+import Hamburger from "./Hamburger.astro";
+import Link from "./Link.astro";
+import Logo from "@icons/Logo.astro";
+import Linkedin from "@icons/Linkedin.astro";
+import Instagram from "@icons/Instagram.astro";
+import Download from "@/icons/Download.astro";
 ---
 
-<header>
-    
+<header class="width-padding">
+    <div>
+        <div class="logo">
+            <a href="/">
+                <Logo />
+            </a>
+        </div>
+
+        <Hamburger />
+    </div>
+
+    <nav>
+        <div>
+            <Link href="/projects" span>projects</Link>
+            <Link href="/about" span>about-me</Link>
+            <Link href="/contact" span>contact</Link>
+            <Link href="/cv.pdf" button color="orange" size="sm">
+                Download-cv <Download type="line" size="sm" />
+            </Link>
+        </div>
+
+        <div>
+            <a href="https://github.com/Iv44n" target="_blank">
+                <GitHub />
+            </a>
+            <a href="" target="_blank">
+                <Linkedin />
+            </a>
+            <a
+                href="https://instagram.com/atm.iv4n?igshid=OGQ5ZDc2ODk2ZA=="
+                target="_blank"
+            >
+                <Instagram />
+            </a>
+        </div>
+    </nav>
 </header>
+
+<style>
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding-top: 2rem;
+    }
+
+    .logo a {
+        display: flex;
+        align-items: center;
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    nav div:first-child {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    nav div:last-child {
+        display: none;
+    }
+
+    @media (max-width: 970px) {
+        header {
+            display: block;
+            transition: height 0.4s linear;
+            position: absolute;
+            top: 0;
+            z-index: 100;
+            overflow: hidden;
+            height: 30px;
+        }
+
+        header > div {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header.active {
+            background: transparent;
+            backdrop-filter: blur(15px);
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        nav {
+            margin-top: 5rem;
+            gap: 5rem;
+            display: none;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        header.active nav {
+            display: flex;
+        }
+
+        nav div:first-child {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 5rem;
+            text-align: center;
+        }
+
+        nav div:last-child {
+            display: flex;
+            gap: 2rem;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("astro:page-load", () => {
+        const hamburger = document.querySelector(".hamburger") as HTMLDivElement;
+        const navMenu = document.querySelector("nav") as HTMLElement;
+        const header = document.querySelector("header") as HTMLElement;
+        const element = document.documentElement as HTMLElement;
+
+        function scrollBlock() {
+            const scrollLeft = window.scrollX || element.scrollLeft;
+            const scrollTop = window.scrollY || element.scrollTop;
+
+            element.style.cssText = `
+            overflow: hidden;
+            position: fixed;
+            top: -${scrollTop}px;
+            left: -${scrollLeft}px;
+            width: 100vw;
+            height: 100vh;
+        `;
+        }
+
+        function scrollUnblock() {
+            element.style.cssText = "";
+        }
+
+        const menuIsActive = () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+            header.classList.toggle("active");
+            hamburger.classList.contains("active")
+                ? scrollBlock()
+                : scrollUnblock();
+        };
+
+        hamburger.addEventListener("click", menuIsActive);
+    });
+</script>
