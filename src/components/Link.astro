@@ -13,7 +13,7 @@ interface Props extends HTMLLinkProps {
 
 const {
     href,
-    span,
+    span = false,
     button,
     size = "md",
     color = "blue",
@@ -87,6 +87,11 @@ const linkClass = `${isActive ? "active" : ""} ${button ? "button-link" : ""} ${
         border-color: var(--color-orange);
     }
 
+    .cyan {
+        color: var(--color-cyan);
+        border-color: var(--color-cyan);
+    }
+
     .xs {
         font-size: 12px;
         padding: 4px 8px;
@@ -105,5 +110,10 @@ const linkClass = `${isActive ? "active" : ""} ${button ? "button-link" : ""} ${
     .lg {
         font-size: 18px;
         padding: 10px 20px;
+    }
+
+    .xl {
+        font-size: 20px;
+        padding: 12px 24px;
     }
 </style>
