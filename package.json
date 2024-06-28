@@ -13,7 +13,6 @@
     "@astrojs/check": "^0.7.0",
     "@fontsource-variable/fira-code": "^5.0.18",
     "astro": "^4.11.3",
-    "remixicon": "^4.3.0",
     "typescript": "^5.5.2"
   }
 }
