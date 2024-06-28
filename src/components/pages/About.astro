@@ -1,7 +1,145 @@
 ---
-import Layout from "@layouts/Layout.astro"
+import Layout from "@layouts/Layout.astro";
+
+const skills = [
+    "HTML5",
+    "CSS3",
+    "JavaScript",
+    "React",
+    "React Native",
+    "Astro",
+    "Nextjs",
+    "TypeScript",
+    "Git/GitHub",
+    "Node.js",
+    "Express",
+    "Zustand",
+    "Figma",
+    "Tailwind",
+    "PWAs",
+    "Command Line",
+    "Java",
+];
+
+const greetingText: () => string = () => {
+    const hour = new Date().getHours();
+    
+    if (hour < 12) {
+        return "Good Morning";
+    } else if (hour < 18) {
+        return "Good Afternoon";
+    } else {
+        return "Good Evening";
+    }
+};
 ---
 
 <Layout title="About" description="About Page">
-    
+    <header>
+        <span id="greeting">{greetingText()}</span>
+        <h1>
+            I'm Ivan!, i am a self-taught front-end developer based in Lima,
+            Peru.
+        </h1>
+    </header>
+
+    <section>
+        <article class="description">
+            <p>
+                My main experience is focused on creating responsive websites,
+                building them from scratch and tuning them into modern and
+                friendly web
+                <span class="blue-text" translate="no">Astro</span>
+                and
+                <span class="blue-text" translate="no">Next.js</span>.
+            </p>
+
+            <p>
+                Throughout my career, I have developed skills in handling
+                frameworks such as
+                <span class="blue-text" translate="no">Astro</span>
+                and
+                <span class="blue-text" translate="no">Next.js</span>, as well
+                as mastering
+                <span class="blue-text" translate="no">React</span>,
+                <span class="blue-text" translate="no">Javascript</span>
+                and
+                <span class="blue-text" translate="no">Typescript</span>. My
+                commitment to the constant pursuit of learning drives me to keep
+                myself updated with the latest technologies, which allows me to
+                offer innovative quality solutions in every project I work on.
+            </p>
+        </article>
+
+        <article>
+            <h2>
+                <span class="blue-text">#&nbsp</span>Skills
+            </h2>
+
+            <div class="skills">
+                {
+                    skills.map((skill) => (
+                        <div class="skill">
+                            <span>{skill}</span>
+                        </div>
+                    ))
+                }
+            </div>
+        </article>
+    </section>
 </Layout>
+
+<style>
+    header {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    h1 {
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    #greeting {
+        color: var(--site-color-600);
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    section {
+        margin-top: 2rem;
+        width: 100%;
+    }
+
+    .description {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        max-width: 850px;
+
+        @media (max-width: 1050px) {
+            max-width: 100%;
+        }
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .skills {
+        margin-top: 1rem;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .skill {
+        border-radius: 50px;
+        padding: 6px 12px;
+        font-size: 14px;
+        font-weight: 500;
+        background: var(--bg-transparent);
+    }
+</style>
