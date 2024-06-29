@@ -22,7 +22,7 @@ const {
 
 const isActive = href === Astro.url.pathname;
 
-const linkClass = `${isActive ? "active" : ""} ${button ? "button-link" : ""} ${button && size} ${button && color}`;
+const linkClass = `${isActive && !button ? "active" : ""} ${button ? "button-link" : ""} ${button && size} ${button && color}`;
 ---
 
 <a href={href} {...attrs} class={linkClass}>
@@ -72,7 +72,7 @@ const linkClass = `${isActive ? "active" : ""} ${button ? "button-link" : ""} ${
         display: flex;
         align-items: center;
         border-radius: 4px;
-        border: 1px solid;
+        border: 1.5px solid;
         max-width: fit-content;
         justify-content: center;
         gap: 0.5rem;
