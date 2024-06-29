@@ -1,0 +1,97 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Link from "@components/Link.astro";
+---
+
+<Layout title="404" description="Page Not Found">
+    <div class="container">
+        <h1 class="number">
+            <span class="digit">4</span>
+            <span class="digit">0</span>
+            <span class="digit">4</span>
+        </h1>
+        <div class="error-message">
+            <h2>Oops! Looks like you're lost.</h2>
+            <p class="message">
+                The page you're looking for isn't here. It might be a broken link or has been moved.
+            </p>
+            <Link href="/" class="home-link">Go home →</Link>
+        </div>
+    </div>
+</Layout>
+
+<style>
+    .container {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .error-message h2 {
+        font-size: 2.5rem;
+        margin: 10px 0;
+        color: var(--text-muted);
+    }
+
+    .error-message p {
+        font-size: 1rem;
+        color: var(--text);
+        margin-bottom: 1.5rem;
+    }
+
+    .home-link {
+        font-size: 18px;
+        color: var(--site-color-600);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        transition: border 0.3s, opacity 0.3s;
+        opacity: 0;
+        animation: fadeIn 2s forwards;
+    }
+
+    .home-link:hover {
+        border: 1.5px solid var(--site-color-600);
+    }
+
+    .number {
+        font-size: 12rem;
+        font-weight: bold;
+        display: flex;
+    }
+
+    .digit {
+        display: inline-block;
+        animation: bounce 2s infinite;
+    }
+
+    .digit:nth-child(1) {
+        color: var(--site-color-600);
+        animation-delay: 0.1s;
+    }
+
+    .digit:nth-child(2) {
+        color: var(--text-muted);
+        animation-delay: 0.2s;
+    }
+
+    .digit:nth-child(3) {
+        color: var(--site-color-600);
+        animation-delay: 0.3s;
+    }
+
+    @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
+    }
+</style>
