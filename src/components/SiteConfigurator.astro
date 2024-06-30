@@ -1,5 +1,20 @@
 ---
 import ThemeConfig from "./ThemeConfig.astro";
+import LanguagePicker from "./LanguagePicker.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { pathname } = Astro.url;
+const path = pathname.split(lang)[1] || pathname;
+
+const themes = {
+    light: t('nav-buttons.light'),
+    dark: t('nav-buttons.dark'),
+    system: t('nav-buttons.auto'),
+};
+
 ---
 
-<ThemeConfig />
+<ThemeConfig themes={themes}/>
+<LanguagePicker lang={lang} path={path} />
