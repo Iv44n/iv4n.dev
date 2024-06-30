@@ -1,3 +1,11 @@
+---
+interface Props {
+    themes: Record<string, string>;
+}
+
+const { themes } = Astro.props;
+---
+
 <div class="theme-selector">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
         <path
@@ -7,9 +15,9 @@
         </path>
     </svg>
     <select name="theme" id="select-theme">
-        <option value="auto">Auto</option>
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
+        <option value="light">{themes.light}</option>
+        <option value="dark">{themes.dark}</option>
+        <option value="auto">{themes.system}</option>
     </select>
 </div>
 
@@ -23,22 +31,6 @@
     .theme-selector div {
         display: flex;
         align-items: center;
-    }
-
-    select {
-        background: transparent;
-        border: none;
-        color: var(--text);
-        width: fit-content;
-        max-width: 88px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 14px;
-    }
-
-    option {
-        background: var(--bg);
-        font-size: 14px;
     }
 </style>
 
