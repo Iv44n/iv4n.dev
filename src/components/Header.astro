@@ -7,12 +7,21 @@ import Linkedin from "@icons/Linkedin.astro";
 import Instagram from "@icons/Instagram.astro";
 import Download from "@/icons/Download.astro";
 import SiteConfigurator from "./SiteConfigurator.astro";
+import {
+    getLangFromUrl,
+    useTranslations,
+    useTranslatedPath,
+} from "@i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <header class="width-padding">
     <div class="logo-and-hamburger">
         <div class="logo">
-            <a href="/">
+            <a href={translatePath("/")}>
                 <Logo />
             </a>
         </div>
@@ -22,11 +31,16 @@ import SiteConfigurator from "./SiteConfigurator.astro";
 
     <nav>
         <div>
-            <Link href="/projects" span>projects</Link>
-            <Link href="/about" span>about-me</Link>
-            <Link href="/contact" span>contact</Link>
+            <Link href={translatePath("/projects/")} span
+                >{t("nav.projects")}</Link
+            >
+            <Link href={translatePath("/about/")} span>{t("nav.about")}</Link>
+            <Link href={translatePath("/contact/")} span
+                >{t("nav.contact")}</Link
+            >
             <Link href="/cv.pdf" button color="orange" size="sm">
-                Download-cv <Download type="line" size="sm" />
+                {t("nav.cv")}
+                <Download type="line" size="sm" />
             </Link>
         </div>
 
