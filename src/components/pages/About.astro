@@ -1,5 +1,9 @@
 ---
 import Layout from "@layouts/Layout.astro";
+import { getI18n } from "@i18n/index";
+
+const { currentLocale } = Astro;
+const i18n = getI18n({ currentLocale });
 
 const skills = [
     "HTML5",
@@ -21,59 +25,50 @@ const skills = [
     "Java",
 ];
 
+const greetingTexts = {
+    es: ["¡Buenos Días!", "¡Buenas Tardes!", "¡Buenas Noches!"],
+    en: ["Good Morning!", "Good Afternoon!", "Good Evening!"],
+};
+
 const greetingText: () => string = () => {
     const hour = new Date().getHours();
-    
+    const lang = currentLocale as keyof typeof currentLocale;
+
     if (hour < 12) {
-        return "Good Morning";
+        return greetingTexts[lang][0];
     } else if (hour < 18) {
-        return "Good Afternoon";
+        return greetingTexts[lang][1];
     } else {
-        return "Good Evening";
+        return greetingTexts[lang][2];
     }
 };
 ---
 
-<Layout title="About" description="About Page">
+<Layout title={i18n.ABOUT.PAGE_TITLE} description={i18n.ABOUT.META_DESCRIPTION}>
     <header>
         <span id="greeting">{greetingText()}</span>
-        <h1>
-            I'm Ivan!, i am a self-taught front-end developer based in Lima,
-            Peru.
-        </h1>
+        <h1>{i18n.ABOUT.TITLE}</h1>
     </header>
 
     <section>
         <article class="description">
             <p>
-                My main experience is focused on creating responsive websites,
-                building them from scratch and tuning them into modern and
-                friendly web
-                <span class="blue-text" translate="no">Astro</span>
-                and
-                <span class="blue-text" translate="no">Next.js</span>.
-            </p>
-
-            <p>
-                Throughout my career, I have developed skills in handling
-                frameworks such as
-                <span class="blue-text" translate="no">Astro</span>
-                and
-                <span class="blue-text" translate="no">Next.js</span>, as well
-                as mastering
+                {i18n.ABOUT.DESCRIPTION.P1[0]}
+                <span class="blue-text" translate="no">JavaScript</span>,
+                <span class="blue-text" translate="no">TypeScript</span>,
                 <span class="blue-text" translate="no">React</span>,
-                <span class="blue-text" translate="no">Javascript</span>
-                and
-                <span class="blue-text" translate="no">Typescript</span>. My
-                commitment to the constant pursuit of learning drives me to keep
-                myself updated with the latest technologies, which allows me to
-                offer innovative quality solutions in every project I work on.
+                <span class="blue-text" translate="no">HTML</span>,
+                <span class="blue-text" translate="no">CSS</span>
+                {i18n.ABOUT.DESCRIPTION.P1[1]}
+                <span class="blue-text" translate="no">Astro</span>.
+                {i18n.ABOUT.DESCRIPTION.P1[2]}
             </p>
+            <p>{i18n.ABOUT.DESCRIPTION.P2}</p>
         </article>
 
         <article>
             <h2>
-                <span class="blue-text">#&nbsp</span>Skills
+                <span class="blue-text">#&nbsp</span>{i18n.ABOUT.SKILLS_TITLE}
             </h2>
 
             <div class="skills">
@@ -97,8 +92,9 @@ const greetingText: () => string = () => {
     }
 
     h1 {
-        font-size: 18px;
-        font-weight: 500;
+        font-size: 17px;
+        font-weight: 400;
+        max-width: 850px;
     }
 
     #greeting {
@@ -108,7 +104,7 @@ const greetingText: () => string = () => {
     }
 
     section {
-        margin-top: 2rem;
+        margin-top: 1rem;
         width: 100%;
     }
 
@@ -117,7 +113,7 @@ const greetingText: () => string = () => {
         flex-direction: column;
         gap: 1rem;
         margin-bottom: 2rem;
-        max-width: 850px;
+        max-width: 700px;
 
         @media (max-width: 1050px) {
             max-width: 100%;
