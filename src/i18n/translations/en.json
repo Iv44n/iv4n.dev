@@ -27,21 +27,23 @@
         ],
         "PROJECTS_LIST": [
             {
-                "TITLE": "",
-                "SUBTITLE": "",
+                "TITLE": "Tune",
+                "SUBTITLE": "A music web application with a modern design.",
                 "DESCRIPTION": {
-                    "P1": "",
-                    "P2": ""
+                    "P1": "Developed with the Astro framework to optimize performance by reducing JavaScript overhead. It employs the concept of islands with React for efficient loading of components and resources.",
+                    "P2": "Tailwind CSS was used for the layout, offering quick customization of the interface. Global state was managed with Zustand, for efficient data management across the application, complemented by an API route for song fetching."
                 },
-                "IMAGE": "",
+                "IMAGE": "/PROJECT_IMGS/tune.webp",
                 "TAGS": [
-                    "",
-                    "",
-                    ""
+                    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/astro/astro-original.svg",
+                    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+                    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg",
+                    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+                    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
                 ],
                 "ISOPENSOURCE": true,
-                "SOURCECODE": "https://github.com/Iv44n",
-                "PROJECTLINK": "",
+                "SOURCECODE": "https://github.com/Iv44n/tune",
+                "PROJECTLINK": "tune-ivan.netlify.app",
                 "YEAR": 2024
             }
         ]
@@ -62,7 +64,7 @@
     },
     "CONTACT": {
         "PAGE_TITLE": "Contact",
-        "META_DESCRIPTION":"Are you interested in collaborating with me or do you have any questions? Do not hesitate to contact me through the means available on this page.",
+        "META_DESCRIPTION": "Are you interested in collaborating with me or do you have any questions? Do not hesitate to contact me through the means available on this page.",
         "TITLE": "Contact",
         "DESCRIPTION": "I'm interested in new professional opportunities to bring my experience and skills. If you have any other requests or questions, do not hesitate to contact me.",
         "MESSAGE_ME": "Message me here",
@@ -72,7 +74,10 @@
             "SUBJECT": "Subject",
             "MESSAGE": "Message",
             "SEND": "Send",
-            "SEND_MESSAGE": ["Sent", "Error"]
+            "SEND_MESSAGE": [
+                "Sent",
+                "Error"
+            ]
         }
     },
     "ERROR_404": {
