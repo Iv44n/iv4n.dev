@@ -1,6 +1,26 @@
+---
+interface Props {
+    NAME: string;
+    EMAIL: string;
+    SUBJECT: string;
+    MESSAGE: string;
+    SEND: string;
+    SEND_MESSAGE: string[];
+}
+
+const {
+    NAME: name,
+    EMAIL: email,
+    SUBJECT: subject,
+    MESSAGE: message,
+    SEND: send,
+    SEND_MESSAGE: sendMessage,
+} = Astro.props;
+---
+
 <form id="contact-form">
     <span class="responsive-inputs">
-        <input type="text" id="name" name="name" placeholder="Name" required />
+        <input type="text" id="name" name="name" placeholder={name} required />
         <input
             type="email"
             id="email"
@@ -14,14 +34,14 @@
         type="text"
         id="subject"
         name="subject"
-        placeholder="Subject"
+        placeholder={subject}
         required
     />
 
     <textarea
         name="message"
         id="message"
-        placeholder="Message"
+        placeholder={message}
         rows="5"
         required></textarea>
 
@@ -37,13 +57,13 @@
                 </svg>
             </div>
         </div>
-        <span>Send</span>
+        <span>{send}</span>
     </button>
 
     <div class="status">
         |
-        <span class="green">Email Sent Successfully</span>
-        <span class="red">Email Sent Failed</span>
+        <span class="green">{sendMessage[0]}</span>
+        <span class="red">{sendMessage[1]}</span>
     </div>
 </form>
 
