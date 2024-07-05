@@ -1,0 +1,85 @@
+{
+    "INDEX": {
+        "PAGE_TITLE": "Portafolio",
+        "META_DESCRIPTION": "Explore my personal portfolio. Where you will find a variety of projects I have worked on.",
+        "INTRO": {
+            "WELCOME": "Welcome, my name is",
+            "INTRO": "I create engaging and dynamic web experiences."
+        },
+        "DESCRIPTION": [
+            "Frontend Developer specialized in",
+            "and",
+            "frameworks, skilled in crafting dynamic and efficient user interfaces."
+        ],
+        "BUTTON_CONTENT": "See my projects"
+    },
+    "PROJECTS": {
+        "PAGE_TITLE": "Projects",
+        "META_DESCRIPTION": "Explore my featured projects that demonstrate my expertise in web development and programming.",
+        "HEADER": {
+            "TITLE": "Projects",
+            "DESCRIPTION": "Explore my projects, where you will find a wide variety of works I have worked on."
+        },
+        "BUTTON_CONTENT": [
+            "Ope Source",
+            "View project",
+            "Source code"
+        ],
+        "PROJECTS_LIST": [
+            {
+                "TITLE": "",
+                "SUBTITLE": "",
+                "DESCRIPTION": {
+                    "P1": "",
+                    "P2": ""
+                },
+                "IMAGE": "",
+                "TAGS": [
+                    "",
+                    "",
+                    ""
+                ],
+                "ISOPENSOURCE": true,
+                "SOURCECODE": "https://github.com/Iv44n",
+                "PROJECTLINK": "",
+                "YEAR": 2024
+            }
+        ]
+    },
+    "ABOUT": {
+        "PAGE_TITLE": "About me",
+        "META_DESCRIPTION": "I'm Ivan, web developer specialized in frontend, with experience in creating websites and applications.",
+        "TITLE": "I'm Ivan, web developer specialized in frontend based in Lima, Peru. With +1.5 years of experience in creating websites and applications.",
+        "DESCRIPTION": {
+            "P1": [
+                "I am proficient in a variety of technologies including",
+                "and",
+                "I have a keen interest in UI/UX design, which allows me to create attractive and functional interfaces for users."
+            ],
+            "P2": "I'm passionate about solving problems and building efficient, organised systems that are fast, performant and accessible to everyone."
+        },
+        "SKILLS_TITLE": "My skills"
+    },
+    "CONTACT": {
+        "PAGE_TITLE": "Contact",
+        "META_DESCRIPTION":"Are you interested in collaborating with me or do you have any questions? Do not hesitate to contact me through the means available on this page.",
+        "TITLE": "Contact",
+        "DESCRIPTION": "I'm interested in new professional opportunities to bring my experience and skills. If you have any other requests or questions, do not hesitate to contact me.",
+        "MESSAGE_ME": "Message me here",
+        "FORM": {
+            "NAME": "Name",
+            "EMAIL": "Email",
+            "SUBJECT": "Subject",
+            "MESSAGE": "Message",
+            "SEND": "Send",
+            "SEND_MESSAGE": ["Sent", "Error"]
+        }
+    },
+    "ERROR_404": {
+        "PAGE_TITLE": "Page not found",
+        "META_DESCRIPTION": "The page you are looking for does not exist. Please check the URL and try again.",
+        "TITLE": "Oops ! Looks like you're lost.",
+        "DESCRIPTION": "The page you are looking for isn't here. It might be a broken link or has been moved.",
+        "BACK_TO_HOME": "Back to home"
+    }
+}
