@@ -1,42 +1,57 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import ProjectCard from "../ProjectCard.astro";
+import { getI18n } from "@i18n/index";
+
+const { currentLocale } = Astro;
+const i18n = getI18n({ currentLocale });
 ---
 
-<Layout title="Projects" description="Projects Page">
+<Layout
+    title={i18n.PROJECTS.PAGE_TITLE}
+    description={i18n.PROJECTS.META_DESCRIPTION}
+>
     <header>
-        <h1><span class="blue-text">/&nbsp;</span>Projects</h1>
-        <p>
-            Explore my projects, where you will find a variety of different
-            projects I have worked on.
-        </p>
+        <h1>
+            <span class="blue-text">/&nbsp;</span>{i18n.PROJECTS.HEADER.TITLE}
+        </h1>
+        <p>{i18n.PROJECTS.HEADER.DESCRIPTION}</p>
     </header>
 
     <section>
-        <ProjectCard
-            tags={["https://lukeliasi.com/images/dev-logos/javascript.svg"]}
-            projectLink="https://lukeliasi.com"
-            isOpenSource={true}
-            image="https://w7.pngwing.com/pngs/334/118/png-transparent-music-music-logo-texture-comics-text.png"
-            title="NextCent"
-        >
-            <p slot="subtitle">
-                This script is designed to automate the process of backing up
-                various databases to AWS S3. It supports PostgreSQL, MySQL, and
-                MongoDB.
-            </p>
-            <div slot="description">
-                <p>
-                    When initialized, the script reads database connection URIs
-                    from environment variables.
-                </p>
-                <p>
-                    Scheduled through a cron job, it dumps the databases,
-                    compresses the data, and transfers the files to a
-                    predetermined AWS S3 bucket.
-                </p>
-            </div>
-        </ProjectCard>
+        {
+            i18n.PROJECTS.PROJECTS_LIST.map((project) => {
+                const {
+                    TAGS,
+                    ISOPENSOURCE,
+                    SOURCECODE,
+                    PROJECTLINK,
+                    IMAGE,
+                    TITLE,
+                    SUBTITLE,
+                    DESCRIPTION,
+                    YEAR,
+                } = project;
+                return (
+                    <ProjectCard
+                        buttonLabel={i18n.PROJECTS.BUTTON_CONTENT}
+                        tags={TAGS}
+                        projectLink={PROJECTLINK}
+                        isOpenSource={ISOPENSOURCE}
+                        sourceCode={SOURCECODE}
+                        image={IMAGE}
+                        title={TITLE}
+                        year={YEAR}
+                    >
+                        <p slot="subtitle" class="subtitle">{SUBTITLE}</p>
+                        <div slot="description">
+                            <p>{DESCRIPTION.P1}</p>
+                            <p>{DESCRIPTION.P2}</p>
+                        </div>
+                    </ProjectCard>
+                );
+            })
+        }
     </section>
 </Layout>
 
