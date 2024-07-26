@@ -38,7 +38,12 @@ const translatePath = useTranslatedPath(lang);
             <Link href={translatePath("/contact/")} span
                 >{t("nav.contact")}</Link
             >
-            <Link href="/cv.pdf" button color="orange" size="sm">
+            <Link
+                href={lang === "en" ? "/cv-en.pdf" : "/cv-es.pdf"}
+                button
+                color="orange"
+                size="sm"
+            >
                 {t("nav.cv")}
                 <Download type="line" size="sm" />
             </Link>
