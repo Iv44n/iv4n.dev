@@ -11,10 +11,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.7.0",
-    "@astrojs/netlify": "^5.3.3",
+    "@astrojs/check": "^0.8.3",
+    "@astrojs/netlify": "^5.4.0",
     "@fontsource-variable/fira-code": "^5.0.18",
-    "astro": "^4.11.3",
+    "astro": "^4.12.2",
     "resend": "^3.4.0",
     "typescript": "^5.5.2"
   }
