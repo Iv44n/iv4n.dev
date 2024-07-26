@@ -223,15 +223,16 @@ const {
 </style>
 
 <script>
-    const form = document.getElementById("contact-form") as HTMLFormElement;
-    const submitButton = document.getElementById("submit");
-    const nameInput = form?.querySelector("#name") as HTMLInputElement;
-    const emailInput = form?.querySelector("#email") as HTMLInputElement;
-    const subjectInput = form?.querySelector("#subject") as HTMLInputElement;
-    const messageInput = form?.querySelector("#message") as HTMLInputElement;
-    const statusSpan = document.querySelector(".status") as HTMLSpanElement;
+    document.addEventListener("astro:after-swap", () => {
+        const form = document.getElementById("contact-form") as HTMLFormElement;
+        const submitButton = document.getElementById("submit");
+        const nameInput = form?.querySelector("#name") as HTMLInputElement;
+        const emailInput = form?.querySelector("#email") as HTMLInputElement;
+        const subjectInput = form?.querySelector("#subject") as HTMLInputElement;
+        const messageInput = form?.querySelector("#message") as HTMLInputElement;
+        const statusSpan = document.querySelector(".status") as HTMLSpanElement;
 
-    document.addEventListener("astro:page-load", () => {
+
         const sendEmail = async () => {
             submitButton?.classList.add("loading");
 
