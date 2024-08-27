@@ -1,29 +1,28 @@
 ---
-import GitHub from "@icons/GitHub.astro";
-import Instagram from "@icons/Instagram.astro";
-import Linkedin from "@icons/Linkedin.astro";
-import { getLangFromUrl, useTranslations } from '@i18n/utils';
+import GitHub from '@icons/GitHub.astro'
+import Instagram from '@icons/Instagram.astro'
+import Linkedin from '@icons/Linkedin.astro'
+import { getLangFromUrl, useTranslations } from '@i18n/utils'
 
-
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 ---
 
-<footer class="width-padding">
+<footer class='width-padding'>
     <div>
         <p>
-            {t("footer.made")}
-            <a href="https://github.com/Iv44n/iv4n.dev" rel="noopener noreferrer" class="blue-text">GitHub</a>.
+            {t('footer.made')}
+            <a href='https://github.om/Iv44n/iv4n.dev' rel='noopener noreferrer' class='blue-text'>GitHub</a>.
         </p>
     </div>
     <div>
-        <a href="https://github.com/Iv44n" target="_blank" rel="noopener noreferrer">
+        <a href='https://github.com/Iv44n' target='_blank' rel='noopener noreferrer'>
             <GitHub />
         </a>
-        <a href="" target="_blank" rel="noopener noreferrer">
+        <a href='' target='_blank' rel='noopener noreferrer'>
             <Linkedin />
         </a>
-        <a href="" target="_blank" rel="noopener noreferrer">
+        <a href='' target='_blank' rel='noopener noreferrer'>
             <Instagram />
         </a>
     </div>

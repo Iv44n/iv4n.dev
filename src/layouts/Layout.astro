@@ -1,31 +1,31 @@
 ---
-import ViewTransitions from "astro/components/ViewTransitions.astro";
-import "@fontsource-variable/fira-code";
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
-import { getLangFromUrl } from "@/i18n/utils";
+import ViewTransitions from 'astro/components/ViewTransitions.astro'
+import '@fontsource-variable/fira-code'
+import Header from '@components/Header.astro'
+import Footer from '@components/Footer.astro'
+import { getLangFromUrl } from '@/i18n/utils'
 interface Props {
     title: string;
     description: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description } = Astro.props
 
 ---
 
 <!doctype html>
 <html lang={getLangFromUrl(Astro.url)}>
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content={description} />
+        <meta charset='UTF-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+        <meta name='description' content={description} />
         <title>Ivan - {title}</title>
 
         <ViewTransitions />
     </head>
-    <body class="dark-mode">
+    <body class='dark-mode'>
         <Header />
-        <main class="width-padding">
+        <main class='width-padding'>
             <slot />
         </main>
         <Footer />
@@ -45,7 +45,7 @@ const { title, description } = Astro.props;
         --site-color-800: #0638cd;
         --site-color-900: #10379f;
         --site-color-950: #0a1e5c;
-        
+
         --color-orange: #F97300;
         --color-cyan: #0ee9b6;
     }
@@ -75,7 +75,7 @@ const { title, description } = Astro.props;
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "Fira Code Variable", sans-serif;
+        font-family: 'Fira Code Variable', sans-serif;
     }
 
     html {
@@ -95,7 +95,7 @@ const { title, description } = Astro.props;
 
     main {
         width: 100%;
-        
+
         @media (max-width: 970px) {
             margin: 8rem 0 3rem;
         }
@@ -196,7 +196,7 @@ const { title, description } = Astro.props;
     }
 
     .text-swipe-animation::after {
-        content: "";
+        content: '';
         position: absolute;
         inset: 0;
         pointer-events: none;

@@ -14,45 +14,45 @@ const {
     SUBJECT: subject,
     MESSAGE: message,
     SEND: send,
-    SEND_MESSAGE: sendMessage,
-} = Astro.props;
+    SEND_MESSAGE: sendMessage
+} = Astro.props
 ---
 
-<form id="contact-form">
-    <span class="responsive-inputs">
-        <input type="text" id="name" name="name" placeholder={name} required />
+<form id='contact-form'>
+    <span class='responsive-inputs'>
+        <input type='text' id='name' name='name' placeholder={name} required />
         <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email"
+            type='email'
+            id='email'
+            name='email'
+            placeholder={email}
             required
         />
     </span>
 
     <input
-        type="text"
-        id="subject"
-        name="subject"
+        type='text'
+        id='subject'
+        name='subject'
         placeholder={subject}
         required
     />
 
     <textarea
-        name="message"
-        id="message"
+        name='message'
+        id='message'
         placeholder={message}
-        rows="5"
+        rows='5'
         required></textarea>
 
-    <button type="submit" class="submit-button" id="submit">
-        <div class="svg-wrapper-1">
-            <div class="svg-wrapper">
-                <svg viewBox="0 0 24 24" width="16" height="16">
-                    <path fill="none" d="M0 0h24v24H0z"></path>
+    <button type='submit' class='submit-button' id='submit'>
+        <div class='svg-wrapper-1'>
+            <div class='svg-wrapper'>
+                <svg viewBox='0 0 24 24' width='16' height='16'>
+                    <path fill='none' d='M0 0h24v24H0z'></path>
                     <path
-                        fill="currentColor"
-                        d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"
+                        fill='currentColor'
+                        d='M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z'
                     ></path>
                 </svg>
             </div>
@@ -60,10 +60,10 @@ const {
         <span>{send}</span>
     </button>
 
-    <div class="status">
+    <div class='status'>
         |
-        <span class="green">{sendMessage[0]}</span>
-        <span class="red">{sendMessage[1]}</span>
+        <span class='green'>{sendMessage[0]}</span>
+        <span class='red'>{sendMessage[1]}</span>
     </div>
 </form>
 
@@ -223,54 +223,53 @@ const {
 </style>
 
 <script>
-    document.addEventListener("astro:after-swap", () => {
-        const form = document.getElementById("contact-form") as HTMLFormElement;
-        const submitButton = document.getElementById("submit");
-        const nameInput = form?.querySelector("#name") as HTMLInputElement;
-        const emailInput = form?.querySelector("#email") as HTMLInputElement;
-        const subjectInput = form?.querySelector("#subject") as HTMLInputElement;
-        const messageInput = form?.querySelector("#message") as HTMLInputElement;
-        const statusSpan = document.querySelector(".status") as HTMLSpanElement;
+document.addEventListener('astro:after-swap', () => {
+    const form = document.getElementById('contact-form') as HTMLFormElement
+    const submitButton = document.getElementById('submit')
+    const nameInput = form?.querySelector('#name') as HTMLInputElement
+    const emailInput = form?.querySelector('#email') as HTMLInputElement
+    const subjectInput = form?.querySelector('#subject') as HTMLInputElement
+    const messageInput = form?.querySelector('#message') as HTMLInputElement
+    const statusSpan = document.querySelector('.status') as HTMLSpanElement
 
+    const sendEmail = async () => {
+        submitButton?.classList.add('loading')
 
-        const sendEmail = async () => {
-            submitButton?.classList.add("loading");
+        try {
+            const response = await fetch('/api/resend.json', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: nameInput.value,
+                    email: emailInput.value,
+                    subject: subjectInput.value,
+                    message: messageInput.value
+                })
+            })
 
-            try {
-                const response = await fetch("/api/resend.json", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                        name: nameInput.value,
-                        email: emailInput.value,
-                        subject: subjectInput.value,
-                        message: messageInput.value,
-                    }),
-                });
-
-                if (!response.ok) {
-                    statusSpan.classList.add("error");
-                } else {
-                    statusSpan.classList.add("success");
-                }
-            } catch (error) {
-                console.error(error);
-            } finally {
-                setTimeout(() => {
-                    statusSpan.classList.remove("success");
-                    statusSpan.classList.remove("error");
-                }, 4000);
-
-                form.reset();
-                submitButton?.classList.remove("loading");
+            if (!response.ok) {
+                statusSpan.classList.add('error')
+            } else {
+                statusSpan.classList.add('success')
             }
-        };
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setTimeout(() => {
+                statusSpan.classList.remove('success')
+                statusSpan.classList.remove('error')
+            }, 4000)
 
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
-            sendEmail();
-        });
-    });
+            form.reset()
+            submitButton?.classList.remove('loading')
+        }
+    }
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault()
+        sendEmail()
+    })
+})
 </script>

@@ -1,7 +1,7 @@
 import { Resend } from 'resend'
 import type { APIRoute } from 'astro'
 
-export const prerender = false;
+export const prerender = false
 
 type Email = {
     name: string
@@ -24,7 +24,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const { data, error } = await resend.emails.send({
-        from: `Acme <onboarding@resend.dev>`,
+        from: 'Acme <onboarding@resend.dev>',
         to: ['todelanoivan13@gmail.com'],
         subject,
         html: `

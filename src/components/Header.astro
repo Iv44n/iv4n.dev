@@ -1,27 +1,27 @@
 ---
-import GitHub from "@icons/GitHub.astro";
-import Hamburger from "./Hamburger.astro";
-import Link from "./Link.astro";
-import Logo from "@icons/Logo.astro";
-import Linkedin from "@icons/Linkedin.astro";
-import Instagram from "@icons/Instagram.astro";
-import Download from "@/icons/Download.astro";
-import SiteConfigurator from "./SiteConfigurator.astro";
+import GitHub from '@icons/GitHub.astro'
+import Hamburger from './Hamburger.astro'
+import Link from './Link.astro'
+import Logo from '@icons/Logo.astro'
+import Linkedin from '@icons/Linkedin.astro'
+import Instagram from '@icons/Instagram.astro'
+import Download from '@/icons/Download.astro'
+import SiteConfigurator from './SiteConfigurator.astro'
 import {
     getLangFromUrl,
     useTranslations,
-    useTranslatedPath,
-} from "@i18n/utils";
+    useTranslatedPath
+} from '@i18n/utils'
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const translatePath = useTranslatedPath(lang)
 ---
 
-<header class="width-padding">
-    <div class="logo-and-hamburger">
-        <div class="logo">
-            <a href={translatePath("/")}>
+<header class='width-padding'>
+    <div class='logo-and-hamburger'>
+        <div class='logo'>
+            <a href={translatePath('/')}>
                 <Logo />
             </a>
         </div>
@@ -31,41 +31,41 @@ const translatePath = useTranslatedPath(lang);
 
     <nav>
         <div>
-            <Link href={translatePath("/projects/")} span
-                >{t("nav.projects")}</Link
+            <Link href={translatePath('/projects/')} span
+            >{t('nav.projects')}</Link
             >
-            <Link href={translatePath("/about/")} span>{t("nav.about")}</Link>
-            <Link href={translatePath("/contact/")} span
-                >{t("nav.contact")}</Link
+            <Link href={translatePath('/about/')} span>{t('nav.about')}</Link>
+            <Link href={translatePath('/contact/')} span
+            >{t('nav.contact')}</Link
             >
             <Link
-                href={lang === "en" ? "/cv-en.pdf" : "/cv-es.pdf"}
+                href={lang === 'en' ? '/cv-en.pdf' : '/cv-es.pdf'}
                 button
-                color="orange"
-                size="sm"
+                color='orange'
+                size='sm'
             >
-                {t("nav.cv")}
-                <Download type="line" size="sm" />
+                {t('nav.cv')}
+                <Download type='line' size='sm' />
             </Link>
         </div>
 
         <div>
-            <a href="https://github.com/Iv44n" target="_blank">
+            <a href='https://github.com/Iv44n' target='_blank'>
                 <GitHub />
             </a>
-            <a href="" target="_blank">
+            <a href='' target='_blank'>
                 <Linkedin />
             </a>
             <a
-                href="https://instagram.com/atm.iv4n?igshid=OGQ5ZDc2ODk2ZA=="
-                target="_blank"
+                href='https://instagram.com/atm.iv4n?igshid=OGQ5ZDc2ODk2ZA=='
+                target='_blank'
             >
                 <Instagram />
             </a>
         </div>
     </nav>
 
-    <div class="site-config">
+    <div class='site-config'>
         <SiteConfigurator />
     </div>
 </header>
@@ -177,39 +177,39 @@ const translatePath = useTranslatedPath(lang);
 </style>
 
 <script>
-    document.addEventListener("astro:page-load", () => {
-        const hamburger = document.querySelector(".hamburger") as HTMLDivElement;
-        const navMenu = document.querySelector("nav") as HTMLElement;
-        const header = document.querySelector("header") as HTMLElement;
-        const element = document.documentElement as HTMLElement;
+document.addEventListener('astro:page-load', () => {
+    const hamburger = document.querySelector('.hamburger') as HTMLDivElement
+    const navMenu = document.querySelector('nav') as HTMLElement
+    const header = document.querySelector('header') as HTMLElement
+    const element = document.documentElement as HTMLElement
 
-        function scrollBlock() {
-            const scrollLeft = window.scrollX || element.scrollLeft;
-            const scrollTop = window.scrollY || element.scrollTop;
+    function scrollBlock() {
+        const scrollLeft = window.scrollX || element.scrollLeft
+        const scrollTop = window.scrollY || element.scrollTop
 
-            element.style.cssText = `
+        element.style.cssText = `
             overflow: hidden;
             position: fixed;
             top: -${scrollTop}px;
             left: -${scrollLeft}px;
-            width: 100vw;
-            height: 100vh;
-        `;
-        }
+        width: 100vw;
+        height: 100vh;
+    `
+    }
 
-        function scrollUnblock() {
-            element.style.cssText = "";
-        }
+    function scrollUnblock() {
+        element.style.cssText = ''
+    }
 
-        const menuIsActive = () => {
-            hamburger.classList.toggle("active");
-            navMenu.classList.toggle("active");
-            header.classList.toggle("active");
-            hamburger.classList.contains("active")
-                ? scrollBlock()
-                : scrollUnblock();
-        };
+    const menuIsActive = () => {
+        hamburger.classList.toggle('active')
+        navMenu.classList.toggle('active')
+        header.classList.toggle('active')
+        hamburger.classList.contains('active')
+            ? scrollBlock()
+            : scrollUnblock()
+    }
 
-        hamburger.addEventListener("click", menuIsActive);
-    });
+    hamburger.addEventListener('click', menuIsActive)
+})
 </script>

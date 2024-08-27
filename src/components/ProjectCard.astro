@@ -1,5 +1,5 @@
 ---
-import Link from "./Link.astro";
+import Link from './Link.astro'
 
 interface Props {
     title: string;
@@ -20,23 +20,23 @@ const {
     sourceCode,
     projectLink,
     year,
-    buttonLabel,
-} = Astro.props;
+    buttonLabel
+} = Astro.props
 ---
 
 <article>
-    <div class="card">
-        <div class="project-year">{year}</div>
+    <div class='card'>
+        <div class='project-year'>{year}</div>
         <div>
-            <div class="title">
+            <div class='title'>
                 <h2>{title}</h2>
                 {
                     isOpenSource && (
                         <Link
                             href={sourceCode || ''}
-                            target={"_blank"}
-                            rel={"noopener noreferrer"}
-                            class={"open-source"}
+                            target={'_blank'}
+                            rel={'noopener noreferrer'}
+                            class={'open-source'}
                         >
                             {buttonLabel[0]}
                         </Link>
@@ -44,36 +44,36 @@ const {
                 }
             </div>
 
-            <slot name="subtitle" />
-            <slot name="description" />
+            <slot name='subtitle' />
+            <slot name='description' />
 
-            <div class="tags">
+            <div class='tags'>
                 {tags.map((tag) => <img src={tag} alt={tag} />)}
             </div>
 
-            <div class="buttons">
+            <div class='buttons'>
                 {
                     projectLink && (
                         <Link
                             href={projectLink}
-                            target={"_blank"}
-                            rel={"noopener noreferrer"}
+                            target={'_blank'}
+                            rel={'noopener noreferrer'}
                             button
-                            color="blue"
+                            color='blue'
                         >
                             {buttonLabel[1]}
                             <svg
-                                style="margin-left: 5px;"
-                                stroke="currentColor"
-                                fill="currentColor"
-                                stroke-width="0"
-                                viewBox="0 0 24 24"
-                                height="1em"
-                                width="1em"
+                                style='margin-left: 5px;'
+                                stroke='currentColor'
+                                fill='currentColor'
+                                stroke-width='0'
+                                viewBox='0 0 24 24'
+                                height='1em'
+                                width='1em'
                             >
                                 <>
-                                    <path d="m13 3 3.293 3.293-7 7 1.414 1.414 7-7L21 11V3z" />
-                                    <path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z" />
+                                    <path d='m13 3 3.293 3.293-7 7 1.414 1.414 7-7L21 11V3z' />
+                                    <path d='M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z' />
                                 </>
                             </svg>
                         </Link>
@@ -83,24 +83,24 @@ const {
                     sourceCode && isOpenSource && (
                         <Link
                             href={sourceCode}
-                            target={"_blank"}
-                            rel={"noopener noreferrer"}
+                            target={'_blank'}
+                            rel={'noopener noreferrer'}
                             button
-                            color="blue"
+                            color='blue'
                         >
                             {buttonLabel[2]}
                             <svg
-                                style="margin-left: 5px;"
-                                stroke="currentColor"
-                                fill="currentColor"
-                                stroke-width="0"
-                                viewBox="0 0 24 24"
-                                height="1em"
-                                width="1em"
+                                style='margin-left: 5px;'
+                                stroke='currentColor'
+                                fill='currentColor'
+                                stroke-width='0'
+                                viewBox='0 0 24 24'
+                                height='1em'
+                                width='1em'
                             >
                                 <path
-                                    d="m7.375 16.781 1.25-1.562L4.601 12l4.024-3.219-1.25-1.562-5 4a1 1 0 0 0 0 1.562l5 4zm9.25-9.562-1.25 1.562L19.399 12l-4.024 3.219 1.25 1.562 5-4a1 1 0 0 0 0-1.562l-5-4zm-1.649-4.003-4 18-1.953-.434 4-18z"
-                                    stroke="none"
+                                    d='m7.375 16.781 1.25-1.562L4.601 12l4.024-3.219-1.25-1.562-5 4a1 1 0 0 0 0 1.562l5 4zm9.25-9.562-1.25 1.562L19.399 12l-4.024 3.219 1.25 1.562 5-4a1 1 0 0 0 0-1.562l-5-4zm-1.649-4.003-4 18-1.953-.434 4-18z'
+                                    stroke='none'
                                 />
                             </svg>
                         </Link>
@@ -108,7 +108,7 @@ const {
                 }
             </div>
         </div>
-        <img src={image} alt={title + " image"} class="project-image" />
+        <img src={image} alt={title + ' image'} class='project-image' />
     </div>
 </article>
 

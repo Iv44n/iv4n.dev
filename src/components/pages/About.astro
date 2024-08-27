@@ -1,66 +1,66 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import { getI18n } from "@i18n/index";
+import Layout from '@layouts/Layout.astro'
+import { getI18n } from '@i18n/index'
 
-const { currentLocale } = Astro;
-const i18n = getI18n({ currentLocale });
+const { currentLocale } = Astro
+const i18n = getI18n({ currentLocale })
 
 const skills = [
-    "HTML5",
-    "CSS3",
-    "JavaScript",
-    "React",
-    "React Native",
-    "Astro",
-    "Nextjs",
-    "TypeScript",
-    "Git/GitHub",
-    "Node.js",
-    "Express",
-    "Zustand",
-    "Figma",
-    "Tailwind",
-    "PWAs",
-    "Command Line",
-    "Java",
-];
+    'HTML5',
+    'CSS3',
+    'JavaScript',
+    'React',
+    'React Native',
+    'Astro',
+    'Nextjs',
+    'TypeScript',
+    'Git/GitHub',
+    'Node.js',
+    'Express',
+    'Zustand',
+    'Figma',
+    'Tailwind',
+    'PWAs',
+    'Command Line',
+    'Java'
+]
 
 const greetingTexts = {
-    es: ["¡Buenos Días!", "¡Buenas Tardes!", "¡Buenas Noches!"],
-    en: ["Good Morning!", "Good Afternoon!", "Good Evening!"],
-};
+    es: ['¡Buenos Días!', '¡Buenas Tardes!', '¡Buenas Noches!'],
+    en: ['Good Morning!', 'Good Afternoon!', 'Good Evening!']
+}
 
 const greetingText: () => string = () => {
-    const hour = new Date().getHours();
-    const lang = currentLocale as keyof typeof currentLocale;
+    const hour = new Date().getHours()
+    const lang = currentLocale as keyof typeof currentLocale
 
     if (hour < 12) {
-        return greetingTexts[lang][0];
+        return greetingTexts[lang][0]
     } else if (hour < 18) {
-        return greetingTexts[lang][1];
+        return greetingTexts[lang][1]
     } else {
-        return greetingTexts[lang][2];
+        return greetingTexts[lang][2]
     }
-};
+}
 ---
 
 <Layout title={i18n.ABOUT.PAGE_TITLE} description={i18n.ABOUT.META_DESCRIPTION}>
     <header>
-        <span id="greeting">{greetingText()}</span>
+        <span id='greeting'>{greetingText()}</span>
         <h1>{i18n.ABOUT.TITLE}</h1>
     </header>
 
     <section>
-        <article class="description">
+        <article class='description'>
             <p>
                 {i18n.ABOUT.DESCRIPTION.P1[0]}
-                <span class="blue-text" translate="no">JavaScript</span>,
-                <span class="blue-text" translate="no">TypeScript</span>,
-                <span class="blue-text" translate="no">React</span>,
-                <span class="blue-text" translate="no">HTML</span>,
-                <span class="blue-text" translate="no">CSS</span>
+                <span class='blue-text' translate='no'>JavaScript</span>,
+                <span class='blue-text' translate='no'>TypeScript</span>,
+                <span class='blue-text' translate='no'>React</span>,
+                <span class='blue-text' translate='no'>HTML</span>,
+                <span class='blue-text' translate='no'>CSS</span>
                 {i18n.ABOUT.DESCRIPTION.P1[1]}
-                <span class="blue-text" translate="no">Astro</span>.
+                <span class='blue-text' translate='no'>Astro</span>.
                 {i18n.ABOUT.DESCRIPTION.P1[2]}
             </p>
             <p>{i18n.ABOUT.DESCRIPTION.P2}</p>
@@ -68,13 +68,13 @@ const greetingText: () => string = () => {
 
         <article>
             <h2>
-                <span class="blue-text">#&nbsp</span>{i18n.ABOUT.SKILLS_TITLE}
+                <span class='blue-text'>#&nbsp</span>{i18n.ABOUT.SKILLS_TITLE}
             </h2>
 
-            <div class="skills">
+            <div class='skills'>
                 {
                     skills.map((skill) => (
-                        <div class="skill">
+                        <div class='skill'>
                             <span>{skill}</span>
                         </div>
                     ))

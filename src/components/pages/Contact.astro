@@ -1,18 +1,17 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import Whatsapp from "@/icons/Whatsapp.astro";
-import Email from "@/icons/Email.astro";
-import Form from "@/components/Form.astro";
-import { getI18n } from "@/i18n";
-import type { ActionError } from "astro:actions";
+import Layout from '@layouts/Layout.astro'
+import Whatsapp from '@/icons/Whatsapp.astro'
+import Email from '@/icons/Email.astro'
+import Form from '@/components/Form.astro'
+import { getI18n } from '@/i18n'
 
-const { currentLocale } = Astro;
-const i18n = getI18n({ currentLocale });
+const { currentLocale } = Astro
+const i18n = getI18n({ currentLocale })
 ---
 
 <Layout title={i18n.CONTACT.PAGE_TITLE} description={i18n.CONTACT.META_DESCRIPTION}>
     <h1>
-        <span class="blue-text">/&nbsp;</span>{i18n.CONTACT.TITLE}
+        <span class='blue-text'>/&nbsp;</span>{i18n.CONTACT.TITLE}
     </h1>
 
     <section>
@@ -23,8 +22,8 @@ const i18n = getI18n({ currentLocale });
             <div>
                 <h3>{i18n.CONTACT.MESSAGE_ME}</h3>
                 <ul>
-                    <li><Whatsapp type="line" /> +51-921-853-713</li>
-                    <li><Email type="line" /> ivandev2oo6@gmail.com</li>
+                    <li><Whatsapp type='line' /> +51-921-853-713</li>
+                    <li><Email type='line' /> ivandev2oo6@gmail.com</li>
                 </ul>
             </div>
 

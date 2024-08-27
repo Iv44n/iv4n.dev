@@ -1,32 +1,32 @@
 ---
-import type { HTMLAttributes } from "astro/types";
+import type { HTMLAttributes } from 'astro/types'
 
-type HTMLLinkProps = HTMLAttributes<"a">;
+type HTMLLinkProps = HTMLAttributes<'a'>
 
 interface Props extends HTMLLinkProps {
     href: string;
     span?: boolean;
     button?: boolean;
-    size?: "xs" | "sm" | "md" | "lg" | "xl";
-    color?: "blue" | "orange" | "hotpink" | "cyan";
+    size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+    color?: 'blue' | 'orange' | 'hotpink' | 'cyan';
 }
 
 const {
     href,
     span = false,
     button,
-    size = "md",
-    color = "blue",
+    size = 'md',
+    color = 'blue',
     ...attrs
-} = Astro.props;
+} = Astro.props
 
-const isActive = href === Astro.url.pathname;
+const isActive = href === Astro.url.pathname
 
-const linkClass = `${isActive && !button ? "active" : ""} ${button ? "button-link" : ""} ${button && size} ${button && color}`;
+const linkClass = `${isActive && !button ? 'active' : ''} ${button ? 'button-link' : ''} ${button && size} ${button && color}`
 ---
 
 <a href={href} {...attrs} class={linkClass}>
-    {span && <span class="blue-text">#</span>}<slot />
+    {span && <span class='blue-text'>#</span>}<slot />
 </a>
 
 <style>

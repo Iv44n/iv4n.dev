@@ -1,10 +1,10 @@
 ---
-import Layout from "@layouts/Layout.astro";
-import ProjectCard from "../ProjectCard.astro";
-import { getI18n } from "@i18n/index";
+import Layout from '@layouts/Layout.astro'
+import ProjectCard from '../ProjectCard.astro'
+import { getI18n } from '@i18n/index'
 
-const { currentLocale } = Astro;
-const i18n = getI18n({ currentLocale });
+const { currentLocale } = Astro
+const i18n = getI18n({ currentLocale })
 ---
 
 <Layout
@@ -13,7 +13,7 @@ const i18n = getI18n({ currentLocale });
 >
     <header>
         <h1>
-            <span class="blue-text">/&nbsp;</span>{i18n.PROJECTS.HEADER.TITLE}
+            <span class='blue-text'>/&nbsp;</span>{i18n.PROJECTS.HEADER.TITLE}
         </h1>
         <p>{i18n.PROJECTS.HEADER.DESCRIPTION}</p>
     </header>
@@ -30,8 +30,8 @@ const i18n = getI18n({ currentLocale });
                     TITLE,
                     SUBTITLE,
                     DESCRIPTION,
-                    YEAR,
-                } = project;
+                    YEAR
+                } = project
                 return (
                     <ProjectCard
                         buttonLabel={i18n.PROJECTS.BUTTON_CONTENT}
@@ -43,13 +43,13 @@ const i18n = getI18n({ currentLocale });
                         title={TITLE}
                         year={YEAR}
                     >
-                        <p slot="subtitle" class="subtitle">{SUBTITLE}</p>
-                        <div slot="description">
+                        <p slot='subtitle' class='subtitle'>{SUBTITLE}</p>
+                        <div slot='description'>
                             <p>{DESCRIPTION.P1}</p>
                             <p>{DESCRIPTION.P2}</p>
                         </div>
                     </ProjectCard>
-                );
+                )
             })
         }
     </section>
