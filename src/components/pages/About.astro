@@ -24,29 +24,11 @@ const skills = [
     'Command Line',
     'Java'
 ]
-
-const greetingTexts = {
-    es: ['¡Buenos Días!', '¡Buenas Tardes!', '¡Buenas Noches!'],
-    en: ['Good Morning!', 'Good Afternoon!', 'Good Evening!']
-}
-
-const greetingText: () => string = () => {
-    const hour = new Date().getHours()
-    const lang = currentLocale as keyof typeof currentLocale
-
-    if (hour < 12) {
-        return greetingTexts[lang][0]
-    } else if (hour < 18) {
-        return greetingTexts[lang][1]
-    } else {
-        return greetingTexts[lang][2]
-    }
-}
 ---
 
 <Layout title={i18n.ABOUT.PAGE_TITLE} description={i18n.ABOUT.META_DESCRIPTION}>
     <header>
-        <span id='greeting'>{greetingText()}</span>
+        <span id='greeting'></span>
         <h1>{i18n.ABOUT.TITLE}</h1>
     </header>
 
@@ -139,3 +121,24 @@ const greetingText: () => string = () => {
         background: var(--bg-transparent);
     }
 </style>
+
+<script>
+document.addEventListener('astro:page-load', () => {
+    const spanGreeting: HTMLSpanElement | null = document.getElementById('greeting')
+    const pathnameFromUrl = window.location.pathname
+
+    const greetingTexts: Record<string, string[]> = {
+        es: ['¡Buenos Días!', '¡Buenas Tardes!', '¡Buenas Noches!'],
+        en: ['Good Morning!', 'Good Afternoon!', 'Good Evening!']
+    }
+
+    const greetingText = (): string => {
+        const hour = new Date().getHours()
+        const lang = pathnameFromUrl.includes('en') ? 'en' : 'es'
+
+        return greetingTexts[lang][hour < 12 ? 0 : hour < 18 ? 1 : 2]
+    }
+
+    if (spanGreeting) spanGreeting.textContent = greetingText()
+})
+</script>
