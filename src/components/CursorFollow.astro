@@ -1,0 +1,62 @@
+<div class='cursor-follow'>
+    <div class='cursor'></div>
+    <div class='cursor'></div>
+    <div class='cursor'></div>
+    <div class='cursor'></div>
+    <div class='cursor'></div>
+    <div class='cursor'></div>
+    <div class='cursor'></div>
+    <div class='cursor'></div>
+    <div class='cursor'></div>
+    <div class='cursor'></div>
+    <div class='cursor'></div>
+    <div class='cursor'></div>
+    <div class='cursor'></div>
+</div>
+
+<style>
+    .cursor-follow {
+        @media (max-width: 990px) {
+            display: none;
+        }
+    }
+
+    .cursor {
+        position: fixed;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: -10;
+        pointer-events: none;
+    }
+
+    body.light-mode .cursor {
+        background-color: rgb(0, 0, 0, 0.7);
+    }
+</style>
+
+<script>
+    document.addEventListener('astro:page-load', () => {
+        if(window.outerWidth < 990) return
+
+        const cursors = document.querySelectorAll('.cursor') as NodeListOf<HTMLDivElement>
+
+        document.addEventListener('mousemove', (e) => {
+            const { clientX: x, clientY: y } = e
+
+            cursors.forEach((cursor, i) => {
+                const cursorX = x - cursor.offsetWidth / 2
+                const cursorY = y - cursor.offsetHeight / 2
+                const arrayCount = cursors.length - i
+
+                cursor.style.width = `${arrayCount}px`
+                cursor.style.height = `${arrayCount}px`
+
+                setTimeout(() => {
+                    cursor.style.left = `${cursorX}px`
+                    cursor.style.top = `${cursorY}px`
+                }, i * 10)
+            })
+        })
+    })
+</script>
