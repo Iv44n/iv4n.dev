@@ -11,7 +11,6 @@ type Email = {
 }
 
 const resend = new Resend(import.meta.env.RESEND_API_KEY)
-const domain = import.meta.env.DOMAIN_NAME
 
 export const POST: APIRoute = async ({ request }) => {
     const body: Email = await request.json()
@@ -25,7 +24,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const { data, error } = await resend.emails.send({
-        from: `${name} <${domain}>`,
+        from: `${name} <iv4n@iv4n.dev>`,
         to: ['todelanoivan13@gmail.com', 'ivandev2oo6@gmail.com'],
         subject,
         html: `
