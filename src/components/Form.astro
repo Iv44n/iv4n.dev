@@ -223,7 +223,7 @@ const {
 </style>
 
 <script>
-document.addEventListener('astro:after-swap', () => {
+document.addEventListener('astro:page-load', () => {
     const form = document.getElementById('contact-form') as HTMLFormElement
     const submitButton = document.getElementById('submit')
     const nameInput = form?.querySelector('#name') as HTMLInputElement
