@@ -1,8 +1,6 @@
 import { Resend } from 'resend'
 import type { APIRoute } from 'astro'
 
-export const prerender = false
-
 type Email = {
     name: string
     email: string
