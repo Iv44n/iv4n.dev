@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "start:ide": "pnpm run dev",
+    "start:ide": "pnpm install && pnpm run dev",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
