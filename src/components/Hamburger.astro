@@ -1,0 +1,57 @@
+<div class='menu-toggle h-14 w-14 rounded-full hover:bg-white/10 flex items-center justify-center mt-1'>
+  <label class='hamburger cursor-pointer rounded-full' aria-label='Toggle navigation'>
+    <input type='checkbox' class='hidden' id='hamburger-toggle' />
+    <svg class='icon h-10 transition-transform' viewBox='0 0 33 32' aria-hidden='true'>
+      <path
+        d='M27 10H13c-2.2 0-4-1.8-4-4 0-2.5 1.8-4 4-4s4 1.8 4 4v20c0 2.2 1.8 4 4 4s4-1.8 4-4-1.8-4-4-4H7'
+        class='line line-top-bottom'
+      />
+      <path d='M7 16h20' class='line' />
+    </svg>
+  </label>
+</div>
+
+<style>
+  .menu-toggle {
+    height: 3.5rem;
+    width: 3.5rem;
+  }
+
+  .hamburger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .icon {
+    transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .line {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+    transition:
+      stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+      stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .line-top-bottom {
+    stroke-dasharray: 12 63;
+  }
+
+  .hamburger input:checked + .icon {
+    transform: rotate(-45deg);
+  }
+
+  .hamburger input:checked + .icon .line-top-bottom {
+    stroke-dasharray: 20 300;
+    stroke-dashoffset: -32.42;
+  }
+
+  .menu-toggle:hover .icon {
+    color: rgba(255, 255, 255, 0.8);
+  }
+</style>
