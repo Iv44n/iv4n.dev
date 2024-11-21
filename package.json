@@ -14,6 +14,7 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/tailwind": "^5.1.2",
+    "@fontsource-variable/merienda": "^5.1.0",
     "astro": "^4.16.9",
     "tailwindcss": "^3.4.15",
     "typescript": "^5.6.3"
