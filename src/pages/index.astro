@@ -1,4 +1,5 @@
 ---
+import ProjectCard from '../components/ProjectCard.astro'
 import { EMAIL_URL } from '../constants/urls'
 import Layout from '../layouts/Layout.astro'
 ---
@@ -23,9 +24,9 @@ import Layout from '../layouts/Layout.astro'
       <h2 class='text-2xl font-medium mb-6'>
         Here's a selection of some of my works
       </h2>
-      <div class='grid grid-cols-1 gap-8 sm:grid-cols-2'>
-        {Array.from({ length: 3 }).map(() => (
-          <p>1</p>
+      <div class='grid grid-cols-1 gap-4 sm:grid-cols-2'>
+        {Array.from({ length: 5 }).map(() => (
+          <ProjectCard title='Tune' description='A music web application with modern design' imageUrl='https://iv4n.dev/PROJECT_IMGS/tune.webp'/>
         ))}
       </div>
     </section>
