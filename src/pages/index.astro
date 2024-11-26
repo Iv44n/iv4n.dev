@@ -1,7 +1,33 @@
 ---
+import { EMAIL_URL } from '../constants/urls'
 import Layout from '../layouts/Layout.astro'
 ---
 
-<Layout title=''>
-  <h1>New Portfolio</h1>
+<Layout title='Ivan - Web Developer'>
+  <main class='px-6 py-8 md:px-28 md:py-12'>
+
+    <section class='sm:max-w-3xl text-left'>
+      <h1 class='text-3xl font-semibold leading-snug md:text-5xl'>
+        A
+        <span class='text-primary-500'>web developer</span>
+        passionate about building modern, functional, and user-focused web applications.
+      </h1>
+      <p class='mt-6 text-lg italic text-gray-300'>
+        Based in Lima, Peru
+        <span class='mx-2 font-medium text-primary-500'>|</span>
+        <a href={EMAIL_URL} class='font-medium text-primary-500 hover:underline'>Open to work</a>
+      </p>
+    </section>
+
+    <section class='mt-36'>
+      <h2 class='text-2xl font-medium mb-6'>
+        Here's a selection of some of my works
+      </h2>
+      <div class='grid grid-cols-1 gap-8 sm:grid-cols-2'>
+        {Array.from({ length: 3 }).map(() => (
+          <p>1</p>
+        ))}
+      </div>
+    </section>
+  </main>
 </Layout>
