@@ -1,0 +1,61 @@
+<div>
+  <div class='z-50 cursor outer absolute top-0 left-0 w-5 h-5 rounded-full border-2 border-primary-500 pointer-events-none'></div>
+  <div class='z-50 cursor inner absolute top-0 left-0 w-2 h-2 rounded-full bg-primary-500 pointer-events-none'></div>
+</div>
+
+<script>
+  const outerCursor = document.querySelector<HTMLDivElement>('.cursor.outer')
+  const innerCursor = document.querySelector<HTMLDivElement>('.cursor.inner')
+
+  let mouseX = 0 // Mouse coordinates
+  let mouseY = 0
+
+  let outerX = 0 // External cursor position
+  let outerY = 0
+
+  let innerX = 0 // Internal cursor position
+  let innerY = 0
+
+  const outerSpeed = 0.1 // Speed of the outer cursor
+  const innerSpeed = 0.2 // Speed of the inner cursor
+
+  function animate() {
+    if (!outerCursor || !innerCursor) return
+
+    // Smoothly interpolate positions
+    outerX += (mouseX - outerX) * outerSpeed
+    outerY += (mouseY - outerY) * outerSpeed
+
+    innerX += (mouseX - innerX) * innerSpeed
+    innerY += (mouseY - innerY) * innerSpeed
+
+    // Update cursor positions
+    outerCursor.style.transform = `translate3d(${outerX}px, ${outerY}px, 0)`
+    innerCursor.style.transform = `translate3d(${innerX}px, ${innerY}px, 0)`
+
+    // Continue the animation
+    requestAnimationFrame(animate)
+  }
+
+  window.addEventListener('mousemove', (e: MouseEvent) => {
+    mouseX = e.clientX
+    mouseY = e.clientY
+  })
+
+  animate()
+</script>
+
+<style>
+  .cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+    pointer-events: none;
+  }
+
+  .cursor.outer {
+    mix-blend-mode: difference;
+  }
+</style>
