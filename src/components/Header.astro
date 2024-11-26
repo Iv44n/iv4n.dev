@@ -3,19 +3,16 @@ import Hamburger from './Hamburger.astro'
 import Instagram from '../icons/Instagram.astro'
 import Linkedin from '../icons/Linkedin.astro'
 import Github from '../icons/Github.astro'
+import { EMAIL_URL, GITHUB_PROFILE_URL, INSTAGRAM_URL, LINKEDIN_URL } from '../constants/urls'
 
 const navLinks = [
   {
-    name: 'Home',
+    name: 'Work',
     href: '/'
   },
   {
     name: 'About',
     href: '/about'
-  },
-  {
-    name: 'Work',
-    href: '/work'
   },
   {
     name: 'Blog',
@@ -29,20 +26,22 @@ const navLinks = [
 const socialLinks = [
   {
     icon: Instagram,
-    href: '#'
+    href: INSTAGRAM_URL
   },
   {
     icon: Linkedin,
-    href: '#'
+    href: LINKEDIN_URL
   },
   {
     icon: Github,
-    href: '#'
+    href: GITHUB_PROFILE_URL
   }
 ]
+
+const isActive = (href: string) => Astro.url.pathname === href
 ---
 
-<header class='flex justify-between items-center relative px-16 py-4 md:py-6'>
+<header class='flex justify-between items-center relative px-6 md:px-28 py-4 md:py-6'>
   <div>
     <h1 class='text-4xl font-semibold tracking-wide hover:tracking-tight transition-all duration-300'>
       <a href='/' class='font-merienda text-primary-500'>Ivan</a>
@@ -55,9 +54,9 @@ const socialLinks = [
   >
     <nav class='text-lg w-full md:w-auto'>
       <div>
-        <ul class='flex flex-col w-fit items-start text-3xl md:text-5xl gap-16 font-extralight group'>
+        <ul class='flex flex-col w-fit items-start text-4xl md:text-6xl gap-16 font-extralight group'>
           {navLinks.map((link, index) => (
-            <li class='relative font-merienda transition-all duration-500 ease-in-out group/item hover:text-primary-500'>
+            <li class={`relative font-merienda transition-all duration-500 ease-in-out group/item hover:text-primary-500 ${isActive(link.href) ? 'text-primary-500' : ''}`}>
               <a
                 href={link.href}
                 class='peer hover:!opacity-100 group-hover:opacity-30'
@@ -65,7 +64,7 @@ const socialLinks = [
                 {link.name}
               </a>
               <span
-                class='absolute -top-2 -right-4 text-sm opacity-100 group-hover:opacity-0 peer-hover:!opacity-100'
+                class='absolute -top-2 -right-4 text-sm opacity-100 group-hover:opacity-30 peer-hover:!opacity-100'
               >
                 {`0${index + 1}`}
               </span>
@@ -78,7 +77,7 @@ const socialLinks = [
     <div>
       <div class='hidden md:block'>
         <h3 class='text-lg text-neutral-400'>Get in touch</h3>
-        <p class='underline text-2xl font-medium'><a href='#'>Send me an email</a></p>
+        <p class='underline text-2xl font-medium hover:text-primary-500'><a href={EMAIL_URL}>Send me an email</a></p>
       </div>
 
       <div class='mt-8 flex flex-col gap-4'>
