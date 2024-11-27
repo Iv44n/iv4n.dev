@@ -1,62 +1,61 @@
-<div class='cursor-follow'>
-    <div class='cursor'></div>
-    <div class='cursor'></div>
-    <div class='cursor'></div>
-    <div class='cursor'></div>
-    <div class='cursor'></div>
-    <div class='cursor'></div>
-    <div class='cursor'></div>
-    <div class='cursor'></div>
-    <div class='cursor'></div>
-    <div class='cursor'></div>
-    <div class='cursor'></div>
-    <div class='cursor'></div>
-    <div class='cursor'></div>
+<div>
+  <div class='z-50 cursor outer absolute top-0 left-0 w-5 h-5 rounded-full border-2 border-primary-500 pointer-events-none'></div>
+  <div class='z-50 cursor inner absolute top-0 left-0 w-2 h-2 rounded-full bg-primary-500 pointer-events-none'></div>
 </div>
 
-<style>
-    .cursor-follow {
-        @media (max-width: 990px) {
-            display: none;
-        }
-    }
-
-    .cursor {
-        position: fixed;
-        background-color: rgba(255, 255, 255, 0.7);
-        border-radius: 50%;
-        pointer-events: none;
-        z-index: -10;
-        pointer-events: none;
-    }
-
-    body.light-mode .cursor {
-        background-color: rgb(0, 0, 0, 0.7);
-    }
-</style>
-
 <script>
-    document.addEventListener('astro:page-load', () => {
-        if(window.outerWidth < 990) return
+  const outerCursor = document.querySelector<HTMLDivElement>('.cursor.outer')
+  const innerCursor = document.querySelector<HTMLDivElement>('.cursor.inner')
 
-        const cursors = document.querySelectorAll('.cursor') as NodeListOf<HTMLDivElement>
+  let mouseX = 0 // Mouse coordinates
+  let mouseY = 0
 
-        document.addEventListener('mousemove', (e) => {
-            const { clientX: x, clientY: y } = e
+  let outerX = 0 // External cursor position
+  let outerY = 0
 
-            cursors.forEach((cursor, i) => {
-                const cursorX = x - cursor.offsetWidth / 2
-                const cursorY = y - cursor.offsetHeight / 2
-                const arrayCount = cursors.length - i
+  let innerX = 0 // Internal cursor position
+  let innerY = 0
 
-                cursor.style.width = `${arrayCount}px`
-                cursor.style.height = `${arrayCount}px`
+  const outerSpeed = 0.1 // Speed of the outer cursor
+  const innerSpeed = 0.2 // Speed of the inner cursor
 
-                setTimeout(() => {
-                    cursor.style.left = `${cursorX}px`
-                    cursor.style.top = `${cursorY}px`
-                }, 150 + i * 30)
-            })
-        })
-    })
+  function animate() {
+    if (!outerCursor || !innerCursor) return
+
+    // Smoothly interpolate positions
+    outerX += (mouseX - outerX) * outerSpeed
+    outerY += (mouseY - outerY) * outerSpeed
+
+    innerX += (mouseX - innerX) * innerSpeed
+    innerY += (mouseY - innerY) * innerSpeed
+
+    // Update cursor positions
+    outerCursor.style.transform = `translate3d(${outerX}px, ${outerY}px, 0)`
+    innerCursor.style.transform = `translate3d(${innerX}px, ${innerY}px, 0)`
+
+    // Continue the animation
+    requestAnimationFrame(animate)
+  }
+
+  window.addEventListener('mousemove', (e: MouseEvent) => {
+    mouseX = e.clientX
+    mouseY = e.clientY
+  })
+
+  animate()
 </script>
+
+<style>
+  .cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+    pointer-events: none;
+  }
+
+  .cursor.outer {
+    mix-blend-mode: difference;
+  }
+</style>

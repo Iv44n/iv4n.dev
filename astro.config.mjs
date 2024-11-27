@@ -1,17 +1,9 @@
+// @ts-check
 import { defineConfig } from 'astro/config'
 
-import vercel from '@astrojs/vercel/serverless'
+import tailwind from '@astrojs/tailwind'
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://iv4n.dev',
-    output: 'server',
-    adapter: vercel(),
-    i18n: {
-        defaultLocale: 'es',
-        locales: ['es', 'en'],
-        routing: {
-            prefixDefaultLocale: false
-        }
-    }
+  integrations: [tailwind()]
 })
