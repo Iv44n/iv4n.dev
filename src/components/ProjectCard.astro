@@ -4,6 +4,7 @@ interface Props {
   description: string
   imageUrl: string
   meta: {
+    description: string
     urls: {
       github: string
       live: string
@@ -28,23 +29,25 @@ const { title, description, imageUrl, meta } = Astro.props
   />
   <div>
     <h3 class='font-medium text-lg'>{title.toUpperCase()}</h3>
-    <p class='text-xs text-neutral-500'>{description.toUpperCase()}</p>
+    <p class='text-xs text-neutral-500 font-medium'>{description.toUpperCase()}</p>
   </div>
 </button>
 
 <div
   id='modal'
-  class='fixed inset-0 hidden bg-black bg-opacity-75 justify-center items-center z-50 p-4'
+  class='fixed inset-0 hidden bg-black/85 justify-center items-center z-50 p-4'
   role='dialog'
   aria-modal='true'
   aria-labelledby='modalTitle'
   aria-describedby='modalDescription'
 >
-  <div class='bg-dark rounded-sm p-6 max-w-2xl w-full shadow-lg relative flex flex-col gap-8'>
-    <img src={imageUrl} alt={title} class='w-full object-cover rounded-sm mb-4' />
+  <div class='bg-dark rounded-sm p-6 w-fit shadow-lg relative flex flex-col xl:flex-row-reverse max-w-xl xl:max-w-6xl gap-8'>
+    <img src={imageUrl} alt={title} class='w-full object-cover rounded-sm mb-4 xl:max-w-xl' />
     <div>
-      <h3 id='modalTitle' class='font-semibold text-xl mb-1'>{title.toUpperCase()}</h3>
-      <p id='modalDescription' class='text-sm text-neutral-400'>- {description.toUpperCase()}</p>
+      <h3 id='modalTitle' class='font-semibold text-2xl mb-1'>{title.toUpperCase()}</h3>
+      <p id='modalDescription' class='text-sm text-neutral-400 font-medium'>{description.toUpperCase()}</p>
+
+      <p class='mt-4'>{meta.description}</p>
 
       <div class='mt-4'>
         <p class='text-sm text-neutral-300 font-medium'>TECHNOLOGIES:</p>
