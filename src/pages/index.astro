@@ -2,10 +2,30 @@
 import ProjectCard from '../components/ProjectCard.astro'
 import { EMAIL_URL } from '../constants/urls'
 import Layout from '../layouts/Layout.astro'
+
+const projects = [
+  {
+    title: 'Tune',
+    description: 'A music web application with modern design',
+    imageUrl: 'PROJECT/tune.png',
+    meta: {
+      urls: {
+        github: 'https://github.com/Iv44n/tune',
+        live: 'https://tune-ivan.vercel.app'
+      },
+      techIcons: [
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+        'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg',
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/astro/astro-original.svg'
+      ]
+    }
+  }
+]
 ---
 
 <Layout title='Ivan - Web Developer'>
-  <main class='px-6 py-8 md:px-28 md:py-12'>
+  <main class='px-6 py-8 xl:px-28 md:py-12'>
 
     <section class='sm:max-w-3xl text-left'>
       <h1 class='text-3xl font-semibold leading-snug md:text-5xl'>
@@ -25,9 +45,13 @@ import Layout from '../layouts/Layout.astro'
         Here's a selection of some of my works
       </h2>
       <div class='grid grid-cols-1 gap-4 sm:grid-cols-2'>
-        {Array.from({ length: 5 }).map(() => (
-          <ProjectCard title='Tune' description='A music web application with modern design' imageUrl='https://iv4n.dev/PROJECT_IMGS/tune.webp'/>
-        ))}
+        {
+          projects.map((project) => (
+            <ProjectCard
+              {...project}
+            />
+          ))
+        }
       </div>
     </section>
   </main>
