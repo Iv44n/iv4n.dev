@@ -1,0 +1,93 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+const skills = {
+  Languages: [
+    { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+    { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+    { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+    { name: 'Java', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg' }
+  ],
+  Frontend: [
+    { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+    { name: 'HTML', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' },
+    { name: 'CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg' },
+    { name: 'Tailwind CSS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg' }
+  ],
+  Backend: [
+    { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
+    { name: 'Express', icon: 'https://lukeliasi.com/images/dev-logos/express.svg' },
+    { name: 'Bun', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/bun/bun-original.svg' }
+  ],
+  Database: [
+    { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' },
+    { name: 'MySQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+    { name: 'PostgreSQL', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg' }
+  ],
+  'DevOps & Tools': [
+    { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
+    { name: 'GitHub', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg' },
+    { name: 'Linux', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg' }
+  ],
+  Frameworks: [
+    { name: 'Astro', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/astro/astro-original.svg' },
+    { name: 'Next.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg' }
+  ]
+}
+---
+
+<Layout title='About - Ivan'>
+  <main class='px-6 xl:px-28 md:py-8'>
+    <section class='max-w-3xl flex flex-col gap-6 mb-20'>
+      <span class='text-3xl font-semibold font-merienda text-primary-500' id='greetingText'>
+        Hey there!
+      </span>
+      <div>
+        <h1 class='text-xl font-semibold leading-tight mb-6'>
+          I'm Ivan, web developer specialized in frontend based in Lima, Peru. With +1.5 years of experience in creating websites and applications.
+        </h1>
+        <div class='text-lg flex flex-col gap-2'>
+          <p>
+            I am proficient in various technologies such as JavaScript, Typescript, React, HTML, CSS and Astro.I have a strong interest in UI/UX design, which allows me to create attractive and functional interfaces for users.
+          </p>
+          <p>
+            I am passionate about solving problems and building efficient and organized systems that are fast, effective and accessible to everyone.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class='text-3xl font-semibold mb-6 font-merienda'>Skills</h2>
+      <div class='grid grid-cols-2 lg:grid-cols-3 gap-12'>
+        {Object.entries(skills).map(([category, skills]) => (
+          <div class='rounded-lg shadow-lg'>
+            <h3 class='text-xl md:text-2xl font-bold mb-4 text-primary-500 font-merienda'>{category}</h3>
+            <ul class='space-y-2'>
+              {skills.map(({ name, icon }) => (
+                <li class='flex items-center gap-2'>
+                  <img src={icon} alt={name} class='w-6 h-6 object-contain' />
+                  <span class='text-lg font-medium'>{name}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  const greetingText = document.getElementById('greetingText') as HTMLElement
+  const date = new Date()
+  const hour = date.getHours()
+
+  if (hour < 12) {
+    greetingText.textContent = 'Good morning!'
+  } else if (hour < 18) {
+    greetingText.textContent = 'Good afternoon!'
+  } else {
+    greetingText.textContent = 'Good evening!'
+  }
+</script>
