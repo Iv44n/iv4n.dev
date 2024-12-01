@@ -4,6 +4,7 @@ import Layout from '../layouts/Layout.astro'
 import Email from '../icons/Email.astro'
 import Phone from '../icons/Phone.astro'
 import Whatsapp from '../icons/Whatsapp.astro'
+import { EMAIL_URL, PHONE_URL, WHATSAPP_URL } from '../constants/urls'
 ---
 
 <Layout title='Contact - Ivan'>
@@ -24,7 +25,7 @@ import Whatsapp from '../icons/Whatsapp.astro'
             <span class='text-primary-500'>
               <Email />
             </span>
-            <a href='mailto:ivandev2oo6@gmail.com' class='text-lg font-medium hover:text-primary-500 hover:underline transition-all duration-300'>
+            <a href={EMAIL_URL} class='text-lg font-medium hover:text-primary-500 hover:underline transition-all duration-300'>
               Send me an email
             </a>
           </li>
@@ -32,7 +33,7 @@ import Whatsapp from '../icons/Whatsapp.astro'
             <span class='text-primary-500'>
               <Phone />
             </span>
-            <a href='tel:+51927416434' class='text-lg font-medium hover:text-primary-500 hover:underline transition-all duration-300'>
+            <a href={PHONE_URL} class='text-lg font-medium hover:text-primary-500 hover:underline transition-all duration-300'>
               Contact me by phone
             </a>
           </li>
@@ -40,7 +41,7 @@ import Whatsapp from '../icons/Whatsapp.astro'
             <span class='text-primary-500'>
               <Whatsapp />
             </span>
-            <a href='https://wa.me/51927416434' class='text-lg font-medium hover:text-primary-500 hover:underline transition-all duration-300'>
+            <a href={WHATSAPP_URL} class='text-lg font-medium hover:text-primary-500 hover:underline transition-all duration-300'>
               Send me a WhatsApp
             </a>
           </li>
