@@ -89,26 +89,28 @@ const { title, description, imageUrl, meta } = Astro.props
 </div>
 
 <script>
-  const modal = document.querySelector('#modal')
-  const modalBtn = document.querySelector('#modalBtn')
-  const closeModalBtn = document.querySelector('#closeModalBtn')
+  document.addEventListener('astro:page-load', () => {
+    const modal = document.querySelector('#modal')
+    const modalBtn = document.querySelector('#modalBtn')
+    const closeModalBtn = document.querySelector('#closeModalBtn')
 
-  const toggleModal = () => {
-    if (!modal) return
-    const isHidden = modal.classList.toggle('hidden')
-    modal.classList.toggle('flex', !isHidden)
-    modalBtn?.setAttribute('aria-expanded', (!isHidden).toString())
-  }
+    const toggleModal = () => {
+      if (!modal) return
+      const isHidden = modal.classList.toggle('hidden')
+      modal.classList.toggle('flex', !isHidden)
+      modalBtn?.setAttribute('aria-expanded', (!isHidden).toString())
+    }
 
-  modalBtn?.addEventListener('click', toggleModal)
-  closeModalBtn?.addEventListener('click', toggleModal)
+    modalBtn?.addEventListener('click', toggleModal)
+    closeModalBtn?.addEventListener('click', toggleModal)
 
-  window.addEventListener('click', (e) => {
-    if (e.target === modal) toggleModal()
-  })
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) toggleModal()
+    })
 
-  window.addEventListener('keydown', (e) => {
-    if(!modal) return
-    if (e.key === 'Escape' && !modal.classList.contains('hidden')) toggleModal()
+    window.addEventListener('keydown', (e) => {
+      if(!modal) return
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) toggleModal()
+    })
   })
 </script>
