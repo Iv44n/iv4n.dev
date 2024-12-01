@@ -129,48 +129,50 @@
 <script>
   import { actions } from 'astro:actions'
 
-  const form = document.getElementById('contact-form') as HTMLFormElement | null
-  const submitButton = document.getElementById('submit') as HTMLButtonElement | null
-  const statusDiv = document.querySelector('.status') as HTMLDivElement | null
+  document.addEventListener('astro:after-swap', () => {
+    const form = document.getElementById('contact-form') as HTMLFormElement | null
+    const submitButton = document.getElementById('submit') as HTMLButtonElement | null
+    const statusDiv = document.querySelector('.status') as HTMLDivElement | null
 
-  const showStatus = (message: string, isSuccess: boolean) => {
-    if (!statusDiv) return
-    const [successMsg, errorMsg] = statusDiv.children
+    const showStatus = (message: string, isSuccess: boolean) => {
+      if (!statusDiv) return
+      const [successMsg, errorMsg] = statusDiv.children
 
-    if (isSuccess) {
-      successMsg.textContent = message
-      errorMsg.textContent = ''
-    } else {
-      errorMsg.textContent = message
-      successMsg.textContent = ''
+      if (isSuccess) {
+        successMsg.textContent = message
+        errorMsg.textContent = ''
+      } else {
+        errorMsg.textContent = message
+        successMsg.textContent = ''
+      }
+
+      statusDiv.classList.toggle('success', isSuccess)
+      statusDiv.classList.toggle('error', !isSuccess)
+
+      setTimeout(() => statusDiv.classList.remove('success', 'error'), 4000)
     }
 
-    statusDiv.classList.toggle('success', isSuccess)
-    statusDiv.classList.toggle('error', !isSuccess)
+    const sendEmail = async () => {
+      if (!submitButton || !form) return
 
-    setTimeout(() => statusDiv.classList.remove('success', 'error'), 4000)
-  }
+      submitButton.disabled = true
+      submitButton.classList.add('loading')
 
-  const sendEmail = async () => {
-    if (!submitButton || !form) return
+      const formData = new FormData(form)
+      const { error, data } = await actions.sendContactMessage(formData)
 
-    submitButton.disabled = true
-    submitButton.classList.add('loading')
+      console.log({ error, data })
 
-    const formData = new FormData(form)
-    const { error, data } = await actions.sendContactMessage(formData)
+      showStatus(error?.message || data?.message || 'An error occurred', !error)
 
-    console.log({ error, data })
+      submitButton.classList.remove('loading')
+      submitButton.disabled = false
+      form.reset()
+    }
 
-    showStatus(error?.message || data?.message || 'An error occurred', !error)
-
-    submitButton.classList.remove('loading')
-    submitButton.disabled = false
-    form.reset()
-  }
-
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault()
-    sendEmail()
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault()
+      sendEmail()
+    })
   })
 </script>
