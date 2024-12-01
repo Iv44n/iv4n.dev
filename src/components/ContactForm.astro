@@ -1,0 +1,176 @@
+<form id='contact-form' class='flex flex-col gap-4 items-end w-full max-w-full md:w-[600px]'>
+  <div class='flex gap-4 flex-col md:flex-row w-full'>
+    <input
+      type='text'
+      id='name'
+      name='name'
+      placeholder='Name'
+      required
+      class='input-field'
+    />
+    <input
+      type='email'
+      id='email'
+      name='email'
+      placeholder='Email'
+      required
+      class='input-field'
+    />
+  </div>
+  <input
+    type='text'
+    id='subject'
+    name='subject'
+    placeholder='Subject'
+    required
+    class='input-field'
+  />
+  <textarea id='message' name='message' placeholder='Message' rows='5' required class='input-field resize-none'></textarea>
+
+  <button type='submit' id='submit' class='submit-button'>
+    <div class='svg-wrapper-1'>
+      <div class='svg-wrapper'>
+        <svg viewBox='0 0 24 24' width='16' height='15'>
+          <path fill='none' d='M0 0h24v24H0z'></path>
+          <path
+            fill='currentColor'
+            d='M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z'
+          >
+          </path>
+        </svg>
+      </div>
+    </div>
+    <span>Send</span>
+  </button>
+  <div class='status flex items-center text-transparent'>
+    <span id='success' class='status-message green'></span>
+    <span id='error' class='status-message red'></span>
+  </div>
+</form>
+
+<style>
+  .input-field {
+    @apply bg-transparent w-full border border-neutral-500/50 rounded-md px-3 py-2 outline-0 focus:border-transparent focus:outline-1 focus:outline-primary-500 focus:outline;
+  }
+
+  .submit-button {
+    @apply overflow-hidden rounded-md font-medium text-lg border px-3 py-1 bg-transparent border-primary-500/50 flex items-center justify-center text-primary-500 hover:bg-neutral-500/20 hover:border-transparent transition duration-300;
+    transition: all 0.2s;
+  }
+
+  .submit-button span {
+    @apply ml-1 block;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .submit-button svg {
+    @apply block;
+    transform-origin: center center;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .submit-button.loading .svg-wrapper {
+    animation: fly-1 0.6s ease-in-out infinite alternate;
+  }
+
+  .submit-button.loading svg {
+    transform: translateX(1.2em) rotate(45deg) scale(1.1);
+  }
+
+  .submit-button.loading span {
+    transform: translateX(5em);
+  }
+
+  .submit-button:active {
+    transform: scale(0.95);
+  }
+
+  .status-message {
+    @apply hidden p-[1.5px] px-2 rounded-[4px];
+    animation: show 4s ease forwards;
+  }
+
+  .green {
+    background-color: rgba(34, 197, 94, 0.093);
+    color: rgb(39, 226, 107);
+  }
+
+  .red {
+    background-color: rgba(239, 68, 68, 0.093);
+    color: rgb(255, 69, 69);
+  }
+
+  .status.success .green,
+  .status.error .red {
+    @apply block;
+  }
+
+  @keyframes fly-1 {
+    from {
+      transform: translateY(0.1em);
+    }
+    to {
+      transform: translateY(-0.1em);
+    }
+  }
+
+  @keyframes show {
+    0%, 100% {
+      opacity: 0;
+      visibility: hidden;
+    }
+    20%, 90% {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+</style>
+
+<script>
+  import { actions } from 'astro:actions'
+
+  const form = document.getElementById('contact-form') as HTMLFormElement | null
+  const submitButton = document.getElementById('submit') as HTMLButtonElement | null
+  const statusDiv = document.querySelector('.status') as HTMLDivElement | null
+
+  const showStatus = (message: string, isSuccess: boolean) => {
+    if (!statusDiv) return
+    const [successMsg, errorMsg] = statusDiv.children
+
+    if (isSuccess) {
+      successMsg.textContent = message
+      errorMsg.textContent = ''
+    } else {
+      errorMsg.textContent = message
+      successMsg.textContent = ''
+    }
+
+    statusDiv.classList.toggle('success', isSuccess)
+    statusDiv.classList.toggle('error', !isSuccess)
+
+    setTimeout(() => statusDiv.classList.remove('success', 'error'), 4000)
+  }
+
+  const sendEmail = async () => {
+    if (!submitButton || !form) return
+
+    submitButton.disabled = true
+    submitButton.classList.add('loading')
+
+    const formData = new FormData(form)
+    const { error, data } = await actions.sendContactMessage(formData)
+
+    console.log({ error, data })
+
+    showStatus(error?.message || data?.message || 'An error occurred', !error)
+
+    submitButton.classList.remove('loading')
+    submitButton.disabled = false
+    form.reset()
+  }
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault()
+    sendEmail()
+  })
+</script>
