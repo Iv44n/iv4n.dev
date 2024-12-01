@@ -79,15 +79,17 @@ const skills = {
 </Layout>
 
 <script>
-  const greetingText = document.getElementById('greetingText') as HTMLElement
-  const date = new Date()
-  const hour = date.getHours()
+  document.addEventListener('astro:after-swap', () => {
+    const greetingText = document.getElementById('greetingText') as HTMLElement
+    const date = new Date()
+    const hour = date.getHours()
 
-  if (hour < 12) {
-    greetingText.textContent = 'Good morning!'
-  } else if (hour < 18) {
-    greetingText.textContent = 'Good afternoon!'
-  } else {
-    greetingText.textContent = 'Good evening!'
-  }
+    if (hour < 12) {
+      greetingText.textContent = 'Good morning!'
+    } else if (hour < 18) {
+      greetingText.textContent = 'Good afternoon!'
+    } else {
+      greetingText.textContent = 'Good evening!'
+    }
+  })
 </script>
