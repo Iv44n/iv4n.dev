@@ -17,6 +17,9 @@ importers:
       '@astrojs/vercel':
         specifier: ^7.8.2
         version: 7.8.2(astro@4.16.9(rollup@4.24.4)(typescript@5.6.3))(react@18.3.1)(rollup@4.24.4)
+      '@fontsource-variable/maven-pro':
+        specifier: ^5.1.0
+        version: 5.1.0
       '@fontsource-variable/merienda':
         specifier: ^5.1.0
         version: 5.1.0
@@ -395,6 +398,9 @@ packages:
   '@eslint/plugin-kit@0.2.2':
     resolution: {integrity: sha512-CXtq5nR4Su+2I47WPOlWud98Y5Lv8Kyxp2ukhgFx/eW6Blm18VXJO5WuQylPugRo8nbluoi6GvvxBLqHcvqUUw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@fontsource-variable/maven-pro@5.1.0':
+    resolution: {integrity: sha512-wvjCqZzNXUQjw7yU0lV51uK9ZuXDhTc2CnVcffpasS1dKOawQy62MSsoFfuuHjvqP0YtybuDW5wHBP7uTHKfxQ==}
 
   '@fontsource-variable/merienda@5.1.0':
     resolution: {integrity: sha512-5SQwBRYHiOVDI/jAPYIlgg8B1DWI1tVIRHU0St4a6om0FLk3qp79vNPUuT+BVFpSiPiKWtpMzwaYS5QTHP1Z1w==}
@@ -3233,6 +3239,8 @@ snapshots:
   '@eslint/plugin-kit@0.2.2':
     dependencies:
       levn: 0.4.1
+
+  '@fontsource-variable/maven-pro@5.1.0': {}
 
   '@fontsource-variable/merienda@5.1.0': {}
 
