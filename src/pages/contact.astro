@@ -1,0 +1,52 @@
+---
+import ContactForm from '../components/ContactForm.astro'
+import Layout from '../layouts/Layout.astro'
+import Email from '../icons/Email.astro'
+import Phone from '../icons/Phone.astro'
+import Whatsapp from '../icons/Whatsapp.astro'
+---
+
+<Layout title='Contact - Ivan'>
+  <main class='px-6 py-8 xl:px-28 md:py-12 flex flex-col gap-12'>
+    <section>
+      <h1 class='text-4xl font-semibold font-merienda text-primary-500'>Contact me</h1>
+      <p class='mt-4 text-lg max-w-lg'>
+        I'm interested in new professional opportunities to bring my experience and skills.
+        If you have any other requests or questions, feel free to contact me.
+      </p>
+    </section>
+
+    <section class='flex flex-col lg:flex-row gap-10 justify-between'>
+      <div class='max-w-sm'>
+        <h2 class='text-2xl font-semibold mb-6'>Send me a message</h2>
+        <ul class='space-y-4'>
+          <li class='flex items-center gap-3'>
+            <span class='text-primary-500'>
+              <Email />
+            </span>
+            <a href='mailto:ivandev2oo6@gmail.com' class='text-lg font-medium hover:text-primary-500 hover:underline transition-all duration-300'>
+              Send me an email
+            </a>
+          </li>
+          <li class='flex items-center gap-3'>
+            <span class='text-primary-500'>
+              <Phone />
+            </span>
+            <a href='tel:+51927416434' class='text-lg font-medium hover:text-primary-500 hover:underline transition-all duration-300'>
+              Contact me by phone
+            </a>
+          </li>
+          <li class='flex items-center gap-3'>
+            <span class='text-primary-500'>
+              <Whatsapp />
+            </span>
+            <a href='https://wa.me/51927416434' class='text-lg font-medium hover:text-primary-500 hover:underline transition-all duration-300'>
+              Send me a WhatsApp
+            </a>
+          </li>
+        </ul>
+      </div>
+      <ContactForm />
+    </section>
+  </main>
+</Layout>
