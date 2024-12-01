@@ -1,0 +1,70 @@
+<canvas id='noiseCanvas' class='noise'></canvas>
+
+<style>
+  .noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.1;
+  }
+</style>
+
+<script>
+  function initNoiseCanvas() {
+    const canvas = document.getElementById('noiseCanvas') as HTMLCanvasElement | null
+    const ctx = canvas?.getContext('2d') as CanvasRenderingContext2D | null
+
+    if (!canvas || !ctx) return
+
+    let animationFrameId: number
+
+    function resizeCanvas() {
+      if (!canvas) return
+
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+    }
+
+    function drawNoise() {
+      if (!canvas || !ctx) return
+
+      const { width, height } = canvas
+      const imageData = ctx.createImageData(width, height)
+      const data = imageData.data
+      const len = data.length
+
+      for (let i = 0; i < len; i += 4) {
+        const color = Math.random() * 255
+        data[i] = color
+        data[i + 1] = color
+        data[i + 2] = color
+        data[i + 3] = 255 // Transparency value (alpha)
+      }
+
+      ctx.putImageData(imageData, 0, 0)
+    }
+
+    function animateNoise() {
+      drawNoise()
+      animationFrameId = requestAnimationFrame(animateNoise)
+    }
+
+    function cleanup() {
+      cancelAnimationFrame(animationFrameId)
+      window.removeEventListener('resize', resizeCanvas)
+    }
+
+    window.addEventListener('resize', resizeCanvas)
+    resizeCanvas()
+    animateNoise()
+
+    document.addEventListener('astro:before-swap', cleanup)
+  }
+
+  document.addEventListener('astro:after-swap', initNoiseCanvas)
+  document.addEventListener('astro:page-load', initNoiseCanvas)
+</script>
