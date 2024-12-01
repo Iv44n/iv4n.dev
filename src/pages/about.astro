@@ -79,7 +79,7 @@ const skills = {
 </Layout>
 
 <script>
-  document.addEventListener('astro:after-swap', () => {
+  document.addEventListener('astro:page-load', () => {
     const greetingText = document.getElementById('greetingText') as HTMLElement
     const date = new Date()
     const hour = date.getHours()

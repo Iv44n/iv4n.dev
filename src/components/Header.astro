@@ -107,7 +107,7 @@ const isActive = (href: string) => Astro.url.pathname === href
 </style>
 
 <script>
-  document.addEventListener('astro:after-swap', () => {
+  document.addEventListener('astro:page-load', () => {
     const checkbox = document.getElementById('hamburger-toggle') as HTMLInputElement
     const navContainer = document.querySelector('.nav-container') as HTMLElement
 

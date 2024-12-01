@@ -4,7 +4,7 @@
 </div>
 
 <script>
-  document.addEventListener('astro:after-swap', () => {
+  document.addEventListener('astro:page-load', () => {
     const outerCursor = document.querySelector<HTMLDivElement>('.cursor.outer')
     const innerCursor = document.querySelector<HTMLDivElement>('.cursor.inner')
 

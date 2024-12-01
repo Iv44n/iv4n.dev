@@ -129,7 +129,7 @@
 <script>
   import { actions } from 'astro:actions'
 
-  document.addEventListener('astro:after-swap', () => {
+  document.addEventListener('astro:page-load', () => {
     const form = document.getElementById('contact-form') as HTMLFormElement | null
     const submitButton = document.getElementById('submit') as HTMLButtonElement | null
     const statusDiv = document.querySelector('.status') as HTMLDivElement | null
