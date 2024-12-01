@@ -4,45 +4,47 @@
 </div>
 
 <script>
-  const outerCursor = document.querySelector<HTMLDivElement>('.cursor.outer')
-  const innerCursor = document.querySelector<HTMLDivElement>('.cursor.inner')
+  document.addEventListener('astro:after-swap', () => {
+    const outerCursor = document.querySelector<HTMLDivElement>('.cursor.outer')
+    const innerCursor = document.querySelector<HTMLDivElement>('.cursor.inner')
 
-  let mouseX = 0 // Mouse coordinates
-  let mouseY = 0
+    let mouseX = 0 // Mouse coordinates
+    let mouseY = 0
 
-  let outerX = 0 // External cursor position
-  let outerY = 0
+    let outerX = 0 // External cursor position
+    let outerY = 0
 
-  let innerX = 0 // Internal cursor position
-  let innerY = 0
+    let innerX = 0 // Internal cursor position
+    let innerY = 0
 
-  const outerSpeed = 0.1 // Speed of the outer cursor
-  const innerSpeed = 0.2 // Speed of the inner cursor
+    const outerSpeed = 0.1 // Speed of the outer cursor
+    const innerSpeed = 0.2 // Speed of the inner cursor
 
-  function animate() {
-    if (!outerCursor || !innerCursor) return
+    function animate() {
+      if (!outerCursor || !innerCursor) return
 
-    // Smoothly interpolate positions
-    outerX += (mouseX - outerX) * outerSpeed
-    outerY += (mouseY - outerY) * outerSpeed
+      // Smoothly interpolate positions
+      outerX += (mouseX - outerX) * outerSpeed
+      outerY += (mouseY - outerY) * outerSpeed
 
-    innerX += (mouseX - innerX) * innerSpeed
-    innerY += (mouseY - innerY) * innerSpeed
+      innerX += (mouseX - innerX) * innerSpeed
+      innerY += (mouseY - innerY) * innerSpeed
 
-    // Update cursor positions
-    outerCursor.style.transform = `translate3d(${outerX}px, ${outerY}px, 0)`
-    innerCursor.style.transform = `translate3d(${innerX}px, ${innerY}px, 0)`
+      // Update cursor positions
+      outerCursor.style.transform = `translate3d(${outerX}px, ${outerY}px, 0)`
+      innerCursor.style.transform = `translate3d(${innerX}px, ${innerY}px, 0)`
 
-    // Continue the animation
-    requestAnimationFrame(animate)
-  }
+      // Continue the animation
+      requestAnimationFrame(animate)
+    }
 
-  window.addEventListener('mousemove', (e: MouseEvent) => {
-    mouseX = e.clientX
-    mouseY = e.clientY
+    window.addEventListener('mousemove', (e: MouseEvent) => {
+      mouseX = e.clientX
+      mouseY = e.clientY
+    })
+
+    animate()
   })
-
-  animate()
 </script>
 
 <style>
