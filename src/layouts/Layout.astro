@@ -5,6 +5,10 @@ import Header from '../components/Header.astro'
 
 // Supports weights 300-900
 import '@fontsource-variable/merienda'
+// Supports weights 400-900
+import '@fontsource-variable/maven-pro'
+
+import BgAnimate from '../components/BgAnimate.astro'
 
 interface Props {
   title: string;
@@ -23,19 +27,17 @@ const { title } = Astro.props
     <meta name='generator' content={Astro.generator} />
     <title>{title}</title>
     <ViewTransitions />
-    <link rel='preconnect' href='https://fonts.googleapis.com'>
-    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
-    <link href='https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New&family=Zeyada&display=swap' rel='stylesheet'>
   </head>
   <body class='bg-dark text-primary-50 w-full h-dvh'>
     <Header/>
     <slot />
     <CursorFollow/>
+    <BgAnimate/>
   </body>
 </html>
 
 <style>
   * {
-    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-family: 'Maven Pro Variable', sans-serif;
   }
 </style>
