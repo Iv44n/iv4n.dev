@@ -2,12 +2,13 @@
 import ProjectCard from '../components/ProjectCard.astro'
 import { EMAIL_URL } from '../constants/urls'
 import Layout from '../layouts/Layout.astro'
+import tuneImg from '../assets/images/projects/tune.png'
 
 const projects = [
   {
     title: 'Tune',
     description: 'A music web application with modern design',
-    imageUrl: 'PROJECT/tune.png',
+    imageUrl: tuneImg,
     meta: {
       description: 'Developed with the Astro framework to optimize performance by reducing JavaScript overhead. It employs the concept of islands with React for efficient loading of components and resources. Tailwind CSS was used for the layout, offering quick customization of the interface. Global state was managed with Zustand, for efficient data management across the application, complemented by an API route for song fetching.',
       urls: {
