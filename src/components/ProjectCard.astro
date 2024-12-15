@@ -9,8 +9,8 @@ interface Props {
   meta: {
     description: string
     urls: {
-      github: string
-      live: string
+      github?: string
+      live?: string
     }
     techIcons: string[]
   }
@@ -20,10 +20,9 @@ const { title, description, imageUrl, meta } = Astro.props
 ---
 
 <button
-  id='modalBtn'
+  data-modal-btn={title}
   class='flex flex-col gap-2 mb-4 cursor-pointer focus:outline-none text-start'
   aria-expanded='false'
-  aria-controls='modal'
 >
   <Picture
     src={imageUrl}
@@ -32,18 +31,18 @@ const { title, description, imageUrl, meta } = Astro.props
     class='w-full object-cover rounded-sm opacity-50 hover:opacity-100 transition-opacity duration-300'
   />
   <div>
-    <h3 class='font-medium text-lg'>{title.toUpperCase()}</h3>
-    <p class='text-xs text-neutral-500 font-medium'>{description.toUpperCase()}</p>
+    <h3 id={`${title}-label`} class='font-medium text-lg'>{title.toUpperCase()}</h3>
+    <p id={`${title}-desc`} class='text-xs text-neutral-500 font-medium'>{description.toUpperCase()}</p>
   </div>
 </button>
 
 <div
-  id='modal'
+  data-modal={title}
   class='fixed inset-0 hidden bg-black/85 justify-center items-center z-50 p-4'
   role='dialog'
+  aria-labelledby={`${title}-label`}
+  aria-describedby={`${title}-desc`}
   aria-modal='true'
-  aria-labelledby='modalTitle'
-  aria-describedby='modalDescription'
 >
   <div class='bg-dark rounded-sm p-6 w-fit shadow-lg relative flex flex-col xl:flex-row-reverse max-w-xl xl:max-w-6xl gap-8'>
     <Picture
@@ -53,9 +52,8 @@ const { title, description, imageUrl, meta } = Astro.props
       class='w-full object-cover rounded-sm mb-4 xl:max-w-xl'
     />
     <div class='max-w-xl'>
-      <h3 id='modalTitle' class='font-semibold text-2xl mb-1'>{title.toUpperCase()}</h3>
-      <p id='modalDescription' class='text-sm text-neutral-400 font-medium'>{description.toUpperCase()}</p>
-
+      <h3 class='font-semibold text-2xl mb-1'>{title.toUpperCase()}</h3>
+      <p class='text-sm text-primary-500 font-medium'>{description.toUpperCase()}</p>
       <p class='mt-4'>{meta.description}</p>
 
       <div class='mt-4'>
@@ -68,58 +66,75 @@ const { title, description, imageUrl, meta } = Astro.props
       </div>
 
       <div class='flex gap-6 font-medium mt-8 justify-between md:justify-start'>
-        <a
-          href={meta.urls.github}
-          target='_blank'
-          rel='noopener noreferrer'
-          class='rounded-xl px-4 py-[6px] border border-neutral-500/50 hover:text-primary-500 hover:border-transparent hover:bg-neutral-500/20 transition-all'
-        >
-          View Source Code
-        </a>
-        <a
-          href={meta.urls.live}
-          target='_blank'
-          rel='noopener noreferrer'
-          class='rounded-xl px-4 py-[6px] border border-neutral-500/50 hover:text-primary-500 hover:border-transparent hover:bg-neutral-500/20 transition-all'
-        >
-          View Project
-        </a>
+        {meta.urls.github && (
+          <a
+            href={meta.urls.github}
+            target='_blank'
+            rel='noopener noreferrer'
+            class='rounded-xl px-4 py-[6px] border border-neutral-500/50 hover:text-primary-500 hover:border-transparent hover:bg-neutral-500/20 transition-all'
+          >
+            View Source Code
+          </a>
+        )}
+        {meta.urls.live && (
+          <a
+            href={meta.urls.live}
+            target='_blank'
+            rel='noopener noreferrer'
+            class='rounded-xl px-4 py-[6px] border border-neutral-500/50 hover:text-primary-500 hover:border-transparent hover:bg-neutral-500/20 transition-all'
+          >
+            View Project
+          </a>
+        )}
       </div>
     </div>
     <button
-      id='closeModalBtn'
-      class='absolute top-0 right-0 w-10 h-9 pl-2 pb-1 bg-neutral-800 rounded-bl-full flex items-center justify-around'
+      data-close-modal={title}
+      class='absolute top-0 right-0 w-10 h-9 pl-2 pb-1 bg-neutral-800 rounded-bl-full'
     >
       <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'>
-        <path d='M7 17L17 7M7 7l10 10' stroke='#FFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' />
+        <path
+          d='M7 17L17 7M7 7l10 10'
+          stroke='#FFF'
+          stroke-width='2'
+          stroke-linecap='round'
+          stroke-linejoin='round'
+        />
       </svg>
     </button>
   </div>
 </div>
 
 <script>
-  document.addEventListener('astro:page-load', () => {
-    const modal = document.querySelector('#modal')
-    const modalBtn = document.querySelector('#modalBtn')
-    const closeModalBtn = document.querySelector('#closeModalBtn')
+const toggleModal = (modal: HTMLElement, btn: HTMLElement): void => {
+  const isHidden = modal.classList.toggle('hidden')
+  modal.classList.toggle('flex', !isHidden)
+  btn.setAttribute('aria-expanded', (!isHidden).toString())
+}
 
-    const toggleModal = () => {
-      if (!modal) return
-      const isHidden = modal.classList.toggle('hidden')
-      modal.classList.toggle('flex', !isHidden)
-      modalBtn?.setAttribute('aria-expanded', (!isHidden).toString())
-    }
+document.addEventListener('astro:page-load', () => {
+  document.querySelectorAll('[data-modal-btn]').forEach((btn) => {
+    const modalId = (btn as HTMLElement).dataset.modalBtn
+    const modal = document.querySelector(`[data-modal="${modalId}"]`) as HTMLElement | null
+    const closeModalBtn = modal?.querySelector(`[data-close-modal="${modalId}"]`) as HTMLElement | null
 
-    modalBtn?.addEventListener('click', toggleModal)
-    closeModalBtn?.addEventListener('click', toggleModal)
+    btn.addEventListener('click', () => {
+      if (modal) toggleModal(modal, btn as HTMLElement)
+    })
+
+    closeModalBtn?.addEventListener('click', () => {
+      if (modal) toggleModal(modal, btn as HTMLElement)
+    })
 
     window.addEventListener('click', (e) => {
-      if (e.target === modal) toggleModal()
+      if (e.target === modal) toggleModal(modal as HTMLElement, btn as HTMLElement)
     })
 
     window.addEventListener('keydown', (e) => {
-      if(!modal) return
-      if (e.key === 'Escape' && !modal.classList.contains('hidden')) toggleModal()
+      if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+        toggleModal(modal, btn as HTMLElement)
+      }
     })
   })
+})
 </script>
