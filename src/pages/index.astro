@@ -3,6 +3,7 @@ import ProjectCard from '../components/ProjectCard.astro'
 import { EMAIL_URL } from '../constants/urls'
 import Layout from '../layouts/Layout.astro'
 import tuneImg from '../assets/images/projects/tune.png'
+import mernAuthImg from '../assets/images/projects/mern-auth.png'
 
 const projects = [
   {
@@ -22,7 +23,26 @@ const projects = [
         'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/astro/astro-original.svg'
       ]
     }
+  },
+  {
+    title: 'Mern Authentication',
+    description: 'An example of a MERN stack authentication system',
+    imageUrl: mernAuthImg,
+    meta: {
+      description: 'This project is made with TypeScript and Express.js to handle the API. The database is MongoDB and we use Mongoose to facilitate the work. The authentication is protected with JWT. On the frontend we use React, Axios to do the requests and TanStack React Query to handle the data efficiently. The components come from Shadcn/ui, which makes the interface beautiful and looks good on any device.',
+      urls: {
+        github: 'https://github.com/Iv44n/mern-auth'
+      },
+      techIcons: [
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+        'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg'
+      ]
+    }
   }
+
 ]
 ---
 
