@@ -90,7 +90,7 @@ const { title, description, imageUrl, meta } = Astro.props
     </div>
     <button
       data-close-modal={title}
-      class='absolute top-0 right-0 w-10 h-9 pl-2 pb-1 bg-neutral-800 rounded-bl-full'
+      class='absolute top-0 right-0 w-10 h-9 pl-3 pb-1 bg-neutral-800 rounded-bl-full'
     >
       <svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' viewBox='0 0 24 24'>
         <path
@@ -106,35 +106,36 @@ const { title, description, imageUrl, meta } = Astro.props
 </div>
 
 <script>
-const toggleModal = (modal: HTMLElement, btn: HTMLElement): void => {
-  const isHidden = modal.classList.toggle('hidden')
-  modal.classList.toggle('flex', !isHidden)
-  btn.setAttribute('aria-expanded', (!isHidden).toString())
-}
+  const toggleModal = (modal: HTMLElement, btn: HTMLElement): void => {
+    const isHidden = modal.classList.toggle('hidden')
+    document.body.style.overflow = isHidden ? 'auto' : 'hidden'
+    modal.classList.toggle('flex', !isHidden)
+    btn.setAttribute('aria-expanded', (!isHidden).toString())
+  }
 
-document.addEventListener('astro:page-load', () => {
-  document.querySelectorAll('[data-modal-btn]').forEach((btn) => {
-    const modalId = (btn as HTMLElement).dataset.modalBtn
-    const modal = document.querySelector(`[data-modal="${modalId}"]`) as HTMLElement | null
-    const closeModalBtn = modal?.querySelector(`[data-close-modal="${modalId}"]`) as HTMLElement | null
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll('[data-modal-btn]').forEach((btn) => {
+      const modalId = (btn as HTMLElement).dataset.modalBtn
+      const modal = document.querySelector(`[data-modal="${modalId}"]`) as HTMLElement | null
+      const closeModalBtn = modal?.querySelector(`[data-close-modal="${modalId}"]`) as HTMLElement | null
 
-    btn.addEventListener('click', () => {
-      if (modal) toggleModal(modal, btn as HTMLElement)
-    })
+      btn.addEventListener('click', () => {
+        if (modal) toggleModal(modal, btn as HTMLElement)
+      })
 
-    closeModalBtn?.addEventListener('click', () => {
-      if (modal) toggleModal(modal, btn as HTMLElement)
-    })
+      closeModalBtn?.addEventListener('click', () => {
+        if (modal) toggleModal(modal, btn as HTMLElement)
+      })
 
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) toggleModal(modal as HTMLElement, btn as HTMLElement)
-    })
+      window.addEventListener('click', (e) => {
+        if (e.target === modal) toggleModal(modal as HTMLElement, btn as HTMLElement)
+      })
 
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
-        toggleModal(modal, btn as HTMLElement)
-      }
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+          toggleModal(modal, btn as HTMLElement)
+        }
+      })
     })
   })
-})
 </script>
