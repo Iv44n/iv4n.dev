@@ -1,0 +1,54 @@
+.menu__icon {
+  width: 2rem;
+  height: 2rem;
+  padding: 0.25rem;
+  position: relative;
+}
+
+.menu__icon span {
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  top: calc(0.25rem - 1px);
+  left: calc(0.25rem - 1px);
+  transition: transform 0.1806s cubic-bezier(0.04, 0.04, 0.12, 0.96);
+}
+
+.menu__icon span:before {
+  content: "";
+  width: 1.5rem;
+  height: 0.125rem;
+  background-color: var(--color-foreground);
+  position: absolute;
+  left: 0;
+  transition: transform 0.1596s cubic-bezier(0.52, 0.16, 0.52, 0.84) 0.1008s;
+}
+
+.menu__icon span:nth-child(1)::before {
+  top: 0.625rem;
+  transform: translateY(-3px);
+}
+
+.menu__icon span:nth-child(2)::before {
+  bottom: 0.625rem;
+  transform: translateY(3px);
+}
+
+.menu__icon.open :nth-child(1),
+.menu__icon.open :nth-child(2) {
+  transition: transform 0.3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) 0.1008s;
+}
+
+.menu__icon.open :nth-child(1)::before,
+.menu__icon.open :nth-child(2)::before {
+  transform: none;
+  transition: transform 0.1806s cubic-bezier(0.04, 0.04, 0.12, 0.96);
+}
+
+.menu__icon.open :nth-child(1) {
+  transform: rotate(45deg) translateY(1px);
+}
+
+.menu__icon.open :nth-child(2) {
+  transform: rotate(-45deg) translateY(-1px);
+}
