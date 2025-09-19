@@ -70,7 +70,12 @@ export default function ProjectList() {
   if (!isReady) return null
 
   return (
-    <section ref={containerRef} className='mt-12 flex justify-center'>
+    <section
+      id='projects'
+      aria-label='Proyectos'
+      ref={containerRef}
+      className='mt-12 flex justify-center'
+    >
       <div className='w-full rounded-2xl overflow-hidden'>
         {projects.map(project => (
           <div key={project.title} className='mb-20 project-item'>

@@ -101,7 +101,7 @@ export default function Header() {
       <div className='flex justify-between items-center'>
         <div className='z-50 flex items-center gap-1'>
           <span className='bg-emerald-500 rounded-full p-1'></span>
-          <h1 className='text-lg font-medium uppercase'>iv4n.dev</h1>
+          <p className='text-lg font-medium uppercase'>iv4n.dev</p>
         </div>
         <Hamburger onClick={toggleMenu} isOpen={isOpen} />
         <nav

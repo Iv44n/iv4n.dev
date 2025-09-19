@@ -34,7 +34,11 @@ export default function Hero() {
   if (!isReady) return null
 
   return (
-    <section className='flex flex-col items-center'>
+    <section
+      id='about'
+      aria-label='Acerca de mí'
+      className='flex flex-col items-center'
+    >
       <h1
         ref={titleRef}
         className='title-split w-full font-buda uppercase leading-[0.9] tracking-tight text-[clamp(3rem,10vw,8rem)] text-neutral-900'
