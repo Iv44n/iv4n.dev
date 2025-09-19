@@ -3,13 +3,10 @@ import { Buda } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
 import {
-  EMAIL_URL,
   GITHUB_PROFILE_URL,
   INSTAGRAM_URL,
   LINKEDIN_URL,
-  PHONE_URL,
-  WEBSITE_URL,
-  WHATSAPP_URL
+  WEBSITE_URL
 } from '@/constants/urls'
 
 const buda = Buda({
@@ -84,6 +81,7 @@ export default function RootLayout({
       <head>
         <script
           type='application/ld+json'
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD seguro controlado por nosotros
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
