@@ -2,7 +2,15 @@ import type { Metadata } from 'next'
 import { Buda } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/Header'
-import { EMAIL_URL, GITHUB_PROFILE_URL, INSTAGRAM_URL, LINKEDIN_URL, PHONE_URL, WEBSITE_URL, WHATSAPP_URL } from '@/constants/urls'
+import {
+  EMAIL_URL,
+  GITHUB_PROFILE_URL,
+  INSTAGRAM_URL,
+  LINKEDIN_URL,
+  PHONE_URL,
+  WEBSITE_URL,
+  WHATSAPP_URL
+} from '@/constants/urls'
 
 const buda = Buda({
   variable: '--font-buda',
@@ -32,15 +40,19 @@ export const metadata: Metadata = {
     siteName: 'Iván — Portfolio',
     locale: 'es_ES',
     type: 'website',
-    title: 'Iván - Ingeniero de Software, Desarrollador Full-Stack y Desarrollador Mobile',
-    description: 'Portfolio de Iván, un ingeniero de software, desarrollador full-stack y desarrollador mobile.'
+    title:
+      'Iván - Ingeniero de Software, Desarrollador Full-Stack y Desarrollador Mobile',
+    description:
+      'Portfolio de Iván, un ingeniero de software, desarrollador full-stack y desarrollador mobile.'
   },
   twitter: {
     card: 'summary_large_image',
     site: '@iv4n_dev',
     creator: '@iv4n_dev',
-    title: 'Iván - Ingeniero de Software, Desarrollador Full-Stack y Desarrollador Mobile',
-    description: 'Portfolio de Iván, un ingeniero de software, desarrollador full-stack y desarrollador mobile.'
+    title:
+      'Iván - Ingeniero de Software, Desarrollador Full-Stack y Desarrollador Mobile',
+    description:
+      'Portfolio de Iván, un ingeniero de software, desarrollador full-stack y desarrollador mobile.'
   },
   icons: {
     icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }]
@@ -70,7 +82,6 @@ export default function RootLayout({
   return (
     <html lang='es'>
       <head>
-        <link rel='icon' href='/favicon.svg' type='image/svg+xml' />
         <script
           type='application/ld+json'
           dangerouslySetInnerHTML={{
@@ -79,24 +90,15 @@ export default function RootLayout({
               '@type': 'Person',
               name: 'Iván',
               url: WEBSITE_URL,
-              jobTitle: 'Ingeniero de Software',
-              sameAs: [
-                GITHUB_PROFILE_URL,
-                LINKEDIN_URL,
-                INSTAGRAM_URL,
-                EMAIL_URL,
-                PHONE_URL,
-                WHATSAPP_URL
-              ],
-              worksFor: {
-                '@type': 'Organization',
-                name: 'Freelance'
-              }
+              jobTitle: 'Desarrollador de Software Full-Stack',
+              description:
+                'Especializado en desarrollo web y mobile; proyectos con React, React Native y Node.js.',
+              sameAs: [GITHUB_PROFILE_URL, LINKEDIN_URL, INSTAGRAM_URL]
             })
           }}
         />
       </head>
-      <body className={`${buda.variable} antialiased bg-orange-100`}>
+      <body className={`${buda.className} antialiased bg-orange-100`}>
         <Header />
         {children}
       </body>
