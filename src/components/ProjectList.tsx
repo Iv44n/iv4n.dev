@@ -2,15 +2,14 @@
 
 import { gsap } from 'gsap'
 import Image from 'next/image'
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import { projects } from '@/constants/projects'
 
 export default function ProjectList() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const [isReady, setIsReady] = useState(false)
 
   useLayoutEffect(() => {
-    if (!containerRef.current || !isReady) return setIsReady(true)
+    if (!containerRef.current) return
 
     const itemTls: gsap.core.Timeline[] = []
     const items = Array.from(
@@ -65,9 +64,7 @@ export default function ProjectList() {
       })
       io.disconnect()
     }
-  }, [isReady])
-
-  if (!isReady) return null
+  }, [])
 
   return (
     <section
