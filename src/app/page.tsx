@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <main
       aria-label='Hero section'
-      className='w-full min-h-screen flex flex-col items-center px-4 py-20 lg:py-24 lg:px-16'
+      className='w-full min-h-screen flex flex-col items-center px-[5.2%] md:px-[3%] lg:px-[2%] py-20 lg:py-24'
     >
       <Hero />
       <ProjectList />

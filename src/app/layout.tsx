@@ -1,7 +1,11 @@
-import type { Metadata } from 'next'
-import { Buda } from 'next/font/google'
+import type { Metadata, Viewport } from 'next'
+
 import './globals.css'
+import { Buda, Maven_Pro } from 'next/font/google'
+
 import Header from '@/components/Header'
+import PageLoader from '@/components/PageLoader'
+
 import {
   GITHUB_PROFILE_URL,
   INSTAGRAM_URL,
@@ -13,6 +17,11 @@ const buda = Buda({
   variable: '--font-buda',
   subsets: ['latin'],
   weight: ['300']
+})
+
+const mavenPro = Maven_Pro({
+  variable: '--font-maven-pro',
+  subsets: ['latin']
 })
 
 export const metadata: Metadata = {
@@ -54,10 +63,6 @@ export const metadata: Metadata = {
   icons: {
     icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }]
   },
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ede3c7' },
-    { media: '(prefers-color-scheme: dark)', color: '#ede3c7' }
-  ],
   robots: {
     index: true,
     follow: true,
@@ -69,6 +74,13 @@ export const metadata: Metadata = {
       'max-snippet': -1
     }
   }
+}
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffeed2' },
+    { media: '(prefers-color-scheme: dark)', color: '#edc7a1' }
+  ]
 }
 
 export default function RootLayout({
@@ -96,9 +108,13 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${buda.className} antialiased bg-orange-100`}>
-        <Header />
-        {children}
+      <body
+        className={`${mavenPro.variable} ${buda.variable} antialiased font-stylistic text-foreground`}
+      >
+        <PageLoader>
+          <Header />
+          {children}
+        </PageLoader>
       </body>
     </html>
   )
