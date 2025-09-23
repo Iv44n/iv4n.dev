@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import {
+  CV_URL,
   GITHUB_PROFILE_URL,
   INSTAGRAM_URL,
   LINKEDIN_URL
@@ -99,6 +100,13 @@ export default function Header() {
     }
   }, [])
 
+  const handleDownloadCV = () => {
+    const link = document.createElement('a')
+    link.href = CV_URL
+    link.download = 'cv.pdf'
+    link.click()
+  }
+
   return (
     <header className='sticky top-0 left-0 z-50 w-full p-[6%] md:px-[3%] lg:px-[2%] lg:pt-[2.5%] lg:flex lg:justify-between lg:gap-[5%]'>
       <div className='lg:flex-1'>
@@ -133,14 +141,15 @@ export default function Header() {
 
       <div className='hidden items-center gap-3 lg:flex'>
         <button
+          onClick={handleDownloadCV}
           type='button'
-          className='rounded-full border border-emerald-500 px-4 py-1 text-md uppercase tracking-wide'
+          className='rounded-full border border-emerald-500 px-4 py-1 text-md uppercase tracking-wide cursor-pointer'
         >
           Download CV
         </button>
         <button
           type='button'
-          className='rounded-full border border-emerald-500 px-3 py-1 text-md'
+          className='rounded-full border border-emerald-500 px-3 py-1 text-md cursor-pointer'
         >
           EN
         </button>
@@ -174,15 +183,16 @@ export default function Header() {
           <div>
             <div className='flex gap-2 border-t border-foreground py-7 border-b mt-10'>
               <button
+                onClick={handleDownloadCV}
                 type='button'
-                className='rounded-full border border-foreground px-5 py-2.5 uppercase pb-1.5 text-sm flex gap-2 items-center'
+                className='rounded-full border border-foreground px-5 py-2.5 uppercase pb-1.5 text-sm flex gap-2 items-center cursor-pointer'
               >
                 <span className='h-1.5 w-1.5 bg-foreground rounded-full' />
                 Descargar CV
               </button>
               <Link
                 href='#'
-                className='rounded-full border border-foreground px-5 py-2.5 uppercase pb-1.5 text-sm'
+                className='rounded-full border border-foreground px-5 py-2.5 uppercase pb-1.5 text-sm cursor-pointer'
               >
                 EN
               </Link>
