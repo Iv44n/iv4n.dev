@@ -71,7 +71,7 @@ export default function ProjectList() {
       id='projects'
       aria-label='Proyectos'
       ref={containerRef}
-      className='mt-12 flex justify-center'
+      className='pt-[30%] md:pt-[20%] lg:pt-[15%] flex justify-center'
     >
       <div className='w-full rounded-2xl overflow-hidden'>
         {projects.map(project => (
