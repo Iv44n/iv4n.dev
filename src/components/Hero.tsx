@@ -37,7 +37,7 @@ export default function Hero() {
     'Ingeniero de software con experiencia en React, Next.js, Node.js, Astro, Expo y React Native. Disfruto transformar ideas en soluciones digitales innovadoras, eficientes y altamente escalables.'
 
   return (
-    <section id='about' aria-label='Acerca de mí' className='w-full min-h-[calc(100vh-9rem)] lg:min-h-[calc(100vh-15rem)] flex flex-col justify-end'>
+    <section id='about' aria-label='Acerca de mí' className='w-full min-h-[calc(100dvh-9rem)] lg:min-h-[calc(100dvh-16rem)] flex flex-col justify-end'>
       <div className='flex flex-col justify-between gap-5 lg:flex-row lg:items-end lg:mt-0'>
         <div className='flex-1'>
           <span className='block text-[clamp(1rem,3vw,1.25rem)] tracking-wider mb-4 pl-0.5'>
