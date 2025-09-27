@@ -1,4 +1,12 @@
-function getContactEmailContent(data): string {
+interface ContactFormData {
+  fullName: string
+  email: string
+  company?: string
+  subject: string
+  message: string
+}
+
+function getContactEmailContent(data: ContactFormData): string {
   return `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
       <h2 style="color: #333;">New Contact Form Submission</h2>
@@ -6,7 +14,7 @@ function getContactEmailContent(data): string {
       <div style="background-color: #f9f9f9; padding: 20px; border-radius: 5px;">
         <p><strong>Name:</strong> ${data.fullName}</p>
         <p><strong>Email:</strong> ${data.email}</p>
-        ${data.company ? `<p><strong>Company:</strong> ${data.company}</p>` : ''}
+        <p><strong>Company:</strong> ${data.company}</p>
         <p><strong>Subject:</strong> ${data.subject}</p>
       </div>
       

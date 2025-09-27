@@ -2,6 +2,7 @@
 
 import { env } from '@/config/env'
 import resend from '@/config/resend'
+import getContactEmailContent from '@/utils/emailTemplate'
 
 export type ActionState = {
   success: boolean
@@ -36,13 +37,13 @@ function parseContactForm(data: FormData): ContactFormData {
 }
 
 export async function sendMessage(formData: FormData): Promise<ActionState> {
-  const { fullName, subject, message, company } = parseContactForm(formData)
+  const { fullName, subject, message, company, email } = parseContactForm(formData)
 
   const { error } = await resend.emails.send({
     from: `${fullName} <${env.EMAIL_SENDER}>`,
     to: env.EMAIL_SENDER,
     subject: `${company}: ${subject}`,
-    html: `<h1>${message}</h1>`
+    html: getContactEmailContent({ fullName, email, message, subject, company })
   })
 
   if (error) return { success: false, error: error.message }
