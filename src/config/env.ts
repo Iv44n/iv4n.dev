@@ -11,5 +11,6 @@ const getEnv = (key: string, defaultValue?: string) => {
 export const env = {
   NODE_ENV: getEnv('NODE_ENV', 'development'),
   RESEND_API_KEY: getEnv('RESEND_API_KEY'),
-  EMAIL_SENDER: getEnv('EMAIL_SENDER', 'onboarding@resend.dev')
+  EMAIL_SENDER: getEnv('EMAIL_SENDER', 'onboarding@resend.dev'),
+  TO_EMAILS: getEnv('TO_EMAILS').split(',')
 }
