@@ -1,3 +1,4 @@
+import Contact from '@/components/Contact'
 import Hero from '@/components/Hero'
 import ProjectList from '@/components/ProjectList'
 
@@ -9,22 +10,7 @@ export default function Home() {
     >
       <Hero />
       <ProjectList />
-      <section id='contact' aria-label='Contacto' className='w-full mt-16'>
-        <div className='py-4 flex items-center gap-2'>
-          <span className='bg-emerald-500 rounded-full p-1'></span>
-          <h2 className='text-xl font-semibold uppercase'>Contacto</h2>
-        </div>
-        <p className='text-neutral-800'>
-          Puedes escribirme a{' '}
-          <a
-            className='text-emerald-700 underline'
-            href='mailto:ivan@example.com'
-          >
-            ivan@example.com
-          </a>{' '}
-          o encontrarme en LinkedIn y GitHub.
-        </p>
-      </section>
+      <Contact />
     </main>
   )
 }
