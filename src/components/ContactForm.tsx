@@ -71,15 +71,11 @@ export default function ContactForm() {
       </div>
 
       {displayData?.success && (
-        <p className='text-emerald-300 text-xl'>
-          {displayData.message}
-        </p>
+        <p className='text-emerald-300 text-xl'>{displayData.message}</p>
       )}
 
       {displayData?.error && (
-        <p className='text-red-300 text-xl'>
-          {displayData.error}
-        </p>
+        <p className='text-red-300 text-xl'>{displayData.error}</p>
       )}
     </form>
   )

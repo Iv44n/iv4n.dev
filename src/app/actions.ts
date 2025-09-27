@@ -40,14 +40,15 @@ const getToEmail = () =>
   env.NODE_ENV === 'development' ? 'delivered@resend.dev' : env.TO_EMAILS
 
 export async function sendMessage(formData: FormData): Promise<ActionState> {
-  const { fullName, subject, message, company, email } = parseContactForm(formData)
+  const { fullName, subject, message, company, email } =
+    parseContactForm(formData)
 
   const { error } = await resend.emails.send({
     from: `${fullName} <${env.EMAIL_SENDER}>`,
     to: getToEmail(),
     subject: `${company}: ${subject}`,
     html: getContactEmailContent({ fullName, email, message, subject, company })
-  })  
+  })
 
   if (error) return { success: false, error: error.message }
 
