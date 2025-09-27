@@ -12,7 +12,7 @@ export default function Contact() {
   return (
     <section
       id='contact'
-      aria-label='Contact Information'
+      aria-label='Información de contacto'
       className='min-h-screen flex flex-col items-start justify-center w-full md:px-[10%] pt-[25%] lg:pt-[5%]'
     >
       <ContactHeader />
@@ -26,10 +26,10 @@ function ContactHeader() {
   return (
     <header className='text-start mb-12'>
       <h2 className='text-4xl md:text-4xl font-bold tracking-wide uppercase'>
-        Contact Info
+        Información de contacto
       </h2>
       <p className='mt-3 text-gray-400 text-xl md:text-2xl'>
-        Feel free to reach out by filling this form
+        No dudes en ponerte en contacto rellenando este formulario
       </p>
     </header>
   )
@@ -37,11 +37,11 @@ function ContactHeader() {
 
 function SocialLinks() {
   return (
-    <footer className='mt-12 flex flex-col md:flex-row md:items-center md:gap-6 text-lg'>
+    <footer className='mt-12 flex flex-col md:flex-row md:items-center md:gap-6 text-xl pb-20 md:pb-0'>
       <span className='font-semibold text-gray-300 mb-2 md:mb-0'>
-        Also find me on:
+        También me puedes encontrar en:
       </span>
-      <nav className='flex gap-6' aria-label='Social media links'>
+      <nav className='flex gap-6' aria-label='Enlaces a redes sociales'>
         {SOCIAL_LINKS.map(({ name, url }) => (
           <a
             key={name}

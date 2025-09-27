@@ -5,13 +5,13 @@ import { type ActionState, sendMessage } from '@/app/actions'
 import InputField from './InputField'
 
 const FORM_FIELDS = [
-  { id: 'fullName', placeholder: 'Full Name', type: 'text' },
-  { id: 'email', placeholder: 'Email', type: 'email' },
-  { id: 'subject', placeholder: 'Subject', type: 'text' },
-  { id: 'company', placeholder: 'Company', type: 'text' },
+  { id: 'fullName', placeholder: 'Nombre completo', type: 'text' },
+  { id: 'email', placeholder: 'Correo electrónico', type: 'email' },
+  { id: 'subject', placeholder: 'Asunto', type: 'text' },
+  { id: 'company', placeholder: 'Compañía', type: 'text' },
   {
     id: 'message',
-    placeholder: 'Message',
+    placeholder: 'Mensaje',
     type: 'textarea',
     rows: 5,
     colSpan: 'md:col-span-2'
@@ -59,14 +59,13 @@ export default function ContactForm() {
         </div>
       ))}
 
-      {/* Submit Button */}
       <div className='md:col-span-2 flex justify-start mt-6 text-xl'>
         <button
           type='submit'
           className='inline-flex items-center gap-2 bg-emerald-400 hover:bg-emerald-300 disabled:bg-gray-600 disabled:cursor-not-allowed text-black font-semibold py-2 px-8 rounded-full transition-all hover:scale-105 disabled:hover:scale-100'
           disabled={isPending}
         >
-          {isPending ? 'Sending...' : 'Send'}
+          {isPending ? 'Enviando...' : 'Enviar'}
         </button>
       </div>
 
