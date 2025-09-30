@@ -105,12 +105,13 @@ export default function Header() {
     link.href = CV_URL
     link.download = 'cv.pdf'
     link.click()
+    link.remove()
   }
 
   return (
-    <header className='sticky top-0 left-0 z-50 w-full p-[6%] md:px-[3%] lg:px-[2%] lg:pt-[2.5%] lg:flex lg:justify-between lg:gap-[5%]'>
+    <header className='sticky top-0 left-0 z-50 w-full p-[6%] md:px-[3%] lg:pt-[2.5%] lg:flex lg:justify-between lg:gap-[5%]'>
       <div className='lg:flex-1'>
-        <div className='mb-1 h-[2.5px] w-full border-b border-neutral-500 lg:mb-5 rounded-full'>
+        <div className='mb-1 h-[2.5px] lg:w-[85%] border-b border-neutral-500 lg:mb-5 rounded-full'>
           <div
             ref={barRef}
             className='h-[2.5px] bg-emerald-500 rounded-full'
@@ -118,7 +119,7 @@ export default function Header() {
           />
         </div>
 
-        <div className='flex items-center justify-between'>
+        <div className='flex items-center justify-between lg:max-w-[85%]'>
           <div className='z-50 flex items-center gap-2 tracking-widest'>
             <span className='text-xl lg:text-2xl font-stylistic'>IV4N.DEV</span>
           </div>
@@ -127,7 +128,7 @@ export default function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className='text-xl transition-colors'
+                className='text-lg mt-1 font-medium transition-colors'
               >
                 {link.label}
               </Link>
@@ -139,17 +140,18 @@ export default function Header() {
         </div>
       </div>
 
-      <div className='hidden items-center gap-3 lg:flex'>
+      <div className='hidden items-center gap-3 lg:flex mt-5'>
         <button
           onClick={handleDownloadCV}
           type='button'
-          className='rounded-full border border-emerald-500 px-4 py-1 text-md uppercase tracking-wide cursor-pointer'
+          className='rounded-full border border-foreground px-5 py-1.5 uppercase flex gap-2 items-center cursor-pointer'
         >
+          <span className='h-1.5 w-1.5 bg-foreground rounded-full' />
           Download CV
         </button>
         <button
           type='button'
-          className='rounded-full border border-emerald-500 px-3 py-1 text-md cursor-pointer'
+          className='rounded-full border border-foreground px-4 py-1.5 uppercase cursor-pointer'
         >
           EN
         </button>
@@ -173,7 +175,7 @@ export default function Header() {
                 <Link
                   href={link.href}
                   onClick={toggleMenu}
-                  className='font-buda text-5xl'
+                  className='text-5xl'
                 >
                   {link.label}
                 </Link>
@@ -185,20 +187,20 @@ export default function Header() {
               <button
                 onClick={handleDownloadCV}
                 type='button'
-                className='rounded-full border border-foreground px-5 py-2.5 uppercase pb-1.5 text-sm flex gap-2 items-center cursor-pointer'
+                className='rounded-full border border-foreground px-5 py-2.5 uppercase pb-2 text-sm flex gap-2 items-center cursor-pointer'
               >
                 <span className='h-1.5 w-1.5 bg-foreground rounded-full' />
                 Descargar CV
               </button>
               <Link
                 href='#'
-                className='rounded-full border border-foreground px-5 py-2.5 uppercase pb-1.5 text-sm cursor-pointer'
+                className='rounded-full border border-foreground px-5 py-2.5 uppercase pb-2 text-sm cursor-pointer'
               >
                 EN
               </Link>
             </div>
             <div className='space-x-2 flex flex-col mt-5 gap-1'>
-              <span className='uppercase font-bold tracking-tight'>
+              <span className='uppercase font-semibold tracking-tight text-md'>
                 Sigueme
               </span>
               <div className='flex gap-4'>
@@ -206,7 +208,7 @@ export default function Header() {
                   <Link
                     href={social.href}
                     key={social.label}
-                    className='text-sm leading-relaxed tracking-wider hover:underline'
+                    className='text-md leading-relaxed tracking-wider hover:underline'
                     target='_blank'
                   >
                     {social.label}

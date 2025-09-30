@@ -42,7 +42,7 @@ export default function ContactForm() {
 
   return (
     <form
-      className='grid grid-cols-1 md:grid-cols-2 gap-8 w-full text-lg'
+      className='grid grid-cols-1 md:grid-cols-2 gap-8 w-full'
       action={action}
     >
       {FORM_FIELDS.map(({ id, placeholder, type, rows, colSpan }) => (
@@ -59,10 +59,10 @@ export default function ContactForm() {
         </div>
       ))}
 
-      <div className='md:col-span-2 flex justify-start mt-6 text-xl'>
+      <div className='md:col-span-2 flex justify-start mt-6 text-lg'>
         <button
           type='submit'
-          className='inline-flex items-center gap-2 bg-emerald-400 hover:bg-emerald-300 disabled:bg-gray-600 disabled:cursor-not-allowed text-black font-semibold py-2 px-8 rounded-full transition-all hover:scale-105 disabled:hover:scale-100'
+          className='inline-flex items-center gap-2 bg-emerald-400 hover:bg-emerald-300 disabled:bg-gray-600 disabled:cursor-not-allowed text-black font-medium py-2 px-6 rounded-full transition-all hover:scale-105 disabled:hover:scale-100'
           disabled={isPending}
         >
           {isPending ? 'Enviando...' : 'Enviar'}

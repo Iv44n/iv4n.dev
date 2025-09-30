@@ -1,8 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 
 import './globals.css'
-import { Buda, Maven_Pro } from 'next/font/google'
-
+import localFont from 'next/font/local'
 import Header from '@/components/Header'
 import PageLoader from '@/components/PageLoader'
 
@@ -13,15 +12,9 @@ import {
   WEBSITE_URL
 } from '@/constants/urls'
 
-const buda = Buda({
-  variable: '--font-buda',
-  subsets: ['latin'],
-  weight: ['300']
-})
-
-const mavenPro = Maven_Pro({
-  variable: '--font-maven-pro',
-  subsets: ['latin']
+const Chillax = localFont({
+  src: '../fonts/Chillax-Variable.ttf',
+  variable: '--font-chillax'
 })
 
 export const metadata: Metadata = {
@@ -77,10 +70,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffeed2' },
-    { media: '(prefers-color-scheme: dark)', color: '#edc7a1' }
-  ]
+  themeColor: [{ media: '(prefers-color-scheme: light)', color: '#eef6f3' }]
 }
 
 export default function RootLayout({
@@ -109,7 +99,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${mavenPro.variable} ${buda.variable} antialiased font-stylistic text-foreground`}
+        className={`${Chillax.variable} antialiased font-default text-foreground`}
       >
         <PageLoader>
           <Header />

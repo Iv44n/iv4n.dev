@@ -25,10 +25,10 @@ export default function Contact() {
 function ContactHeader() {
   return (
     <header className='text-start mb-12'>
-      <h2 className='text-4xl md:text-4xl font-bold tracking-wide uppercase'>
+      <h2 className='text-2xl md:text-4xl font-medium uppercase'>
         Información de contacto
       </h2>
-      <p className='mt-3 text-gray-400 text-xl md:text-2xl'>
+      <p className='mt-3 text-foreground-alt text-lg md:text-2xl'>
         No dudes en ponerte en contacto rellenando este formulario
       </p>
     </header>
@@ -38,7 +38,7 @@ function ContactHeader() {
 function SocialLinks() {
   return (
     <footer className='mt-12 flex flex-col md:flex-row md:items-center md:gap-6 text-xl pb-20 md:pb-0'>
-      <span className='font-semibold text-gray-300 mb-2 md:mb-0'>
+      <span className='font-medium text-foreground mb-2 md:mb-0'>
         También me puedes encontrar en:
       </span>
       <nav className='flex gap-6' aria-label='Enlaces a redes sociales'>
@@ -48,7 +48,7 @@ function SocialLinks() {
             href={url}
             target='_blank'
             rel='noopener noreferrer'
-            className='text-gray-400 hover:text-emerald-400 transition-colors'
+            className='text-foreground-alt hover:text-emerald-400 transition-colors underline text-base'
           >
             {name}
           </a>

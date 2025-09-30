@@ -2,17 +2,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #000000;
-  --foreground: #ffeed2;
-  --foreground-alt: #b2a898;
+  --background: #fff4ed;
+  --foreground: #272420;
+  --foreground-alt: #76726c;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-foreground-alt: var(--foreground-alt);
-  --font-stylistic: var(--font-buda);
-  --font-default: var(--font-maven-pro);
+  --font-stylistic: var(--font-chillax);
+  --font-default: var(--font-chillax);
 }
 
 html {
@@ -45,7 +45,7 @@ body {
       ellipse 80% 75% at 90% 80%,
       rgba(85, 247, 99, 0.1),
       transparent 55%
-    ), #000000;
+    ), var(--color-background);
   background-attachment: fixed;
 }
 

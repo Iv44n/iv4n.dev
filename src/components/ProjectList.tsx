@@ -91,7 +91,7 @@ export default function ProjectList() {
             </div>
             <div className='py-4 flex items-center gap-1'>
               <span className='bg-emerald-500 rounded-full p-1'></span>
-              <h2 className='text-xl font-semibold uppercase'>
+              <h2 className='text-xl font-medium uppercase'>
                 {project.title}
               </h2>
             </div>

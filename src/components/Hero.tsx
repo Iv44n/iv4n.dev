@@ -3,14 +3,14 @@
 import { gsap } from 'gsap'
 import { SplitText } from 'gsap/SplitText'
 import Link from 'next/link'
-import { useEffect, useRef } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 
 gsap.registerPlugin(SplitText)
 
 export default function Hero() {
   const titleRef = useRef<HTMLHeadingElement>(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!titleRef.current) return
 
     const split = new SplitText(titleRef.current, { type: 'lines' })
@@ -18,8 +18,8 @@ export default function Hero() {
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
     tl.from(split.lines, {
-      y: 100,
-      opacity: 0,
+      y: 20,
+      autoAlpha: 0,
       duration: 0.6,
       ease: 'back.out(1.7)',
       stagger: 0.15
@@ -44,13 +44,13 @@ export default function Hero() {
     >
       <div className='flex flex-col justify-between gap-5 lg:flex-row lg:items-end lg:mt-0'>
         <div className='flex-1'>
-          <span className='block text-[clamp(1rem,3vw,1.25rem)] tracking-wider mb-4 pl-0.5'>
+          <span className='block text-[clamp(1rem,3vw,1.25rem)] mb-4 pl-0.5'>
             Hola, mi nombre es
           </span>
 
           <h1
             ref={titleRef}
-            className='uppercase text-[clamp(2.8rem,6vw,5rem)] leading-[0.95] font-bold font-stylistic'
+            className='uppercase text-[clamp(2.6rem,5.5vw,6rem)] leading-10 md:leading-21 font-semibold lg:font-medium font-stylistic'
           >
             <span>{name},</span>
             <br />
@@ -58,7 +58,7 @@ export default function Hero() {
           </h1>
         </div>
 
-        <p className='lg:w-[40%] text-foreground-alt text-[clamp(1.2rem,3vw,1.6rem)] pl-0.5'>
+        <p className='lg:w-[40%] text-[clamp(1.15rem,4vw,1.4rem)] leading-7 pl-0.5'>
           {tagline}
         </p>
       </div>
@@ -67,7 +67,7 @@ export default function Hero() {
           href='#projects'
           className='lg:w-[40%] flex gap-2 rounded-full border border-foreground p-1.5 lg:border-0 lg:p-0 self-end mt-13 hover:opacity-50 transition-opacity'
         >
-          <span className='w-full hidden lg:block uppercase border-b border-foreground mb-2'>
+          <span className='w-full hidden lg:block uppercase border-b border-foreground mb-2 text-lg'>
             Ir a proyectos
           </span>
           <svg
