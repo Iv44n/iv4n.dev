@@ -30,8 +30,9 @@ export default function Button<E extends ElementType = 'button'>({
   const className = `${baseClasses} ${variants[variant]} ${props.className || ''}`
 
   if (Component === 'a') {
+    const { href, ...linkProps } = props as ComponentProps<'a'>
     return (
-      <Link {...props} className={className}>
+      <Link href={href || '#'} {...linkProps} className={className}>
         {children}
       </Link>
     )
