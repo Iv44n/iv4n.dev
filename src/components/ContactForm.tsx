@@ -2,6 +2,7 @@
 
 import { useActionState, useEffect, useState } from 'react'
 import { type ActionState, sendMessage } from '@/app/actions'
+import Button from './Button'
 import InputField from './InputField'
 
 const FORM_FIELDS = [
@@ -60,13 +61,14 @@ export default function ContactForm() {
       ))}
 
       <div className='md:col-span-2 flex justify-start mt-6 text-lg'>
-        <button
+        <Button
           type='submit'
-          className='inline-flex items-center gap-2 bg-emerald-400 hover:bg-emerald-300 disabled:bg-gray-600 disabled:cursor-not-allowed text-black font-medium py-2 px-6 rounded-full transition-all hover:scale-105 disabled:hover:scale-100'
+          variant='primary'
           disabled={isPending}
+          className='disabled:bg-gray-600 disabled:cursor-not-allowed disabled:hover:scale-100'
         >
           {isPending ? 'Enviando...' : 'Enviar'}
-        </button>
+        </Button>
       </div>
 
       {displayData?.success && (

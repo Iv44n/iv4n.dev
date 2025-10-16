@@ -50,7 +50,7 @@ export async function sendMessage(formData: FormData): Promise<ActionState> {
     html: getContactEmailContent({ fullName, email, message, subject, company })
   })
 
-  if (error) return { success: false, error: error.message }
+  if (error) return { success: false, error: 'Error al enviar el mensaje' }
 
-  return { success: true, message: 'Message sent successfully' }
+  return { success: true, message: 'Mensaje enviado con éxito' }
 }

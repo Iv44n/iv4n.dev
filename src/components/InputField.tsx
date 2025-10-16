@@ -11,7 +11,7 @@ const InputField = ({
   rows
 }: InputFieldProps) => {
   const baseClasses =
-    'bg-transparent border-b border-foreground-alt focus:border-emerald-400 focus:border-b-[1.5px] outline-none py-2 placeholder-foreground-alt transition-colors text-lg'
+    'bg-transparent border-b border-foreground-alt focus:border-foreground focus:border-b-[1.5px] outline-none py-2 placeholder-foreground-alt transition-colors text-lg'
 
   if (type === 'textarea') {
     return (

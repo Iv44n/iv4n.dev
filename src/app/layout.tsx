@@ -3,7 +3,6 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import localFont from 'next/font/local'
 import Header from '@/components/Header'
-import PageLoader from '@/components/PageLoader'
 
 import {
   GITHUB_PROFILE_URL,
@@ -79,7 +78,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='es'>
+    <html lang='es' data-scroll-behavior='smooth'>
       <head>
         <script
           type='application/ld+json'
@@ -101,10 +100,20 @@ export default function RootLayout({
       <body
         className={`${Chillax.variable} antialiased font-default text-foreground`}
       >
-        <PageLoader>
-          <Header />
-          {children}
-        </PageLoader>
+        <div className='w-full relative bg-background'>
+          {/* Pearl Mist Background with Top Glow */}
+          <div
+            className='fixed inset-0 z-0'
+            style={{
+              background:
+                'radial-gradient(ellipse 80% 60% at 50% 0%, rgba(226, 232, 240, 0.15), transparent 70%), #000000'
+            }}
+          />
+          <div className='max-w-5xl mx-auto'>
+            <Header />
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   )

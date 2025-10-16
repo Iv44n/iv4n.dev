@@ -13,7 +13,7 @@ export default function Contact() {
     <section
       id='contact'
       aria-label='Información de contacto'
-      className='min-h-screen flex flex-col items-start justify-center w-full md:px-[10%] pt-[25%] lg:pt-[5%]'
+      className='flex flex-col items-start justify-center w-full z-40 mb-20'
     >
       <ContactHeader />
       <ContactForm />
@@ -48,7 +48,8 @@ function SocialLinks() {
             href={url}
             target='_blank'
             rel='noopener noreferrer'
-            className='text-foreground-alt hover:text-emerald-400 transition-colors underline text-base'
+            aria-label={`Visita mi perfil de ${name}`}
+            className='text-foreground-alt hover:text-emerald-400 transition-colors underline text-base hover:scale-105'
           >
             {name}
           </a>
