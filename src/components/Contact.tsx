@@ -1,11 +1,16 @@
 'use client'
 
-import { INSTAGRAM_URL, LINKEDIN_URL } from '@/constants/urls'
+import {
+  GITHUB_PROFILE_URL,
+  INSTAGRAM_URL,
+  LINKEDIN_URL
+} from '@/constants/urls'
 import ContactForm from './ContactForm'
 
 const SOCIAL_LINKS = [
   { name: 'Instagram', url: INSTAGRAM_URL },
-  { name: 'LinkedIn', url: LINKEDIN_URL }
+  { name: 'LinkedIn', url: LINKEDIN_URL },
+  { name: 'GitHub', url: GITHUB_PROFILE_URL }
 ]
 
 export default function Contact() {

@@ -1,53 +1,43 @@
-'use client'
-
-import { useActionState, useEffect, useState } from 'react'
-import { type ActionState, sendMessage } from '@/app/actions'
+import { useActionState } from 'react'
+import { actions } from '@/actions'
+import type { FormState } from '@/validations/contact'
 import Button from './Button'
+import { FormError } from './FormError'
 import InputField from './InputField'
 
 const FORM_FIELDS = [
   { id: 'fullName', placeholder: 'Nombre completo', type: 'text' },
   { id: 'email', placeholder: 'Correo electrónico', type: 'email' },
   { id: 'subject', placeholder: 'Asunto', type: 'text' },
-  { id: 'company', placeholder: 'Compañía', type: 'text' },
-  {
-    id: 'message',
-    placeholder: 'Mensaje',
-    type: 'textarea',
-    rows: 5,
-    colSpan: 'md:col-span-2'
+  { id: 'company', placeholder: 'Compañía', type: 'text' }
+] as const
+
+const INITIAL_STATE: FormState = {
+  success: false,
+  message: '',
+  errors: null,
+  values: {
+    fullName: '',
+    email: '',
+    subject: '',
+    company: '',
+    message: ''
   }
-]
+}
 
 export default function ContactForm() {
-  const [displayData, setDisplayData] = useState<ActionState | null>(null)
-
-  const [state, action, isPending] = useActionState<ActionState, FormData>(
-    async (_prev, formData) => {
-      return await sendMessage(formData)
-    },
-    null
+  const [formState, formAction, isPending] = useActionState(
+    actions.contact.sendMessage,
+    INITIAL_STATE
   )
-
-  useEffect(() => {
-    if (state) {
-      setDisplayData(state)
-
-      const timer = setTimeout(() => {
-        setDisplayData(null)
-      }, 3000)
-
-      return () => clearTimeout(timer)
-    }
-  }, [state])
 
   return (
     <form
       className='grid grid-cols-1 md:grid-cols-2 gap-8 w-full'
-      action={action}
+      action={formAction}
     >
-      {FORM_FIELDS.map(({ id, placeholder, type, rows, colSpan }) => (
-        <div key={id} className={`flex flex-col flex-1 ${colSpan || ''}`}>
+      {FORM_FIELDS.map(({ id, placeholder, type }) => (
+        <div key={id} className='flex flex-col flex-1'>
           <label htmlFor={id} className='sr-only'>
             {placeholder}
           </label>
@@ -55,10 +45,26 @@ export default function ContactForm() {
             id={id}
             type={type}
             placeholder={placeholder}
-            rows={rows}
+            defaultValue={formState.values?.[id]}
+            onChange={() => {}}
           />
+          <FormError error={formState.errors?.[id]} />
         </div>
       ))}
+      <div className='flex flex-col flex-1 md:col-span-2'>
+        <label htmlFor='message' className='sr-only'>
+          Mensaje
+        </label>
+        <InputField
+          id='message'
+          type='textarea'
+          placeholder='Mensaje'
+          rows={5}
+          defaultValue={formState.values.message}
+          onChange={() => {}}
+        />
+        <FormError error={formState.errors?.message} />
+      </div>
 
       <div className='md:col-span-2 flex justify-start mt-6 text-lg'>
         <Button
@@ -71,12 +77,8 @@ export default function ContactForm() {
         </Button>
       </div>
 
-      {displayData?.success && (
-        <p className='text-emerald-300 text-xl'>{displayData.message}</p>
-      )}
-
-      {displayData?.error && (
-        <p className='text-red-300 text-xl'>{displayData.error}</p>
+      {formState.success && (
+        <p className='text-emerald-300 text-xl'>{formState.message}</p>
       )}
     </form>
   )
