@@ -6,16 +6,30 @@ export const skills = {
     'Next.js',
     'Astro',
     'Tailwind CSS',
-    'React Native'
+    'React Native',
+    'Expo',
+    'TanStack Query',
+    'Axios'
   ],
   backend: [
+    'Java',
     'Node.js',
     'Bun',
     'Express',
-    'Spring Boot (básico)',
+    'Hono',
+    'Spring Boot',
+    'Spring Security',
     'JWT',
-    'REST APIs'
+    'REST APIs',
+    'Go (Básico)'
   ],
-  database: ['MongoDB', 'PostgreSQL', 'SQLite', 'WatermelonDB'],
-  tools: ['Git', 'GitHub', 'Vercel', 'Docker', 'Java']
+  'Bases de Datos': [
+    'MongoDB',
+    'PostgreSQL',
+    'MySQL',
+    'SQLite',
+    'WatermelonDB',
+    'Redis'
+  ],
+  Herramientas: ['Git', 'GitHub', 'Vercel', 'Docker', 'Render']
 }

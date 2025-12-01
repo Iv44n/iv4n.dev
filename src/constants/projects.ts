@@ -32,5 +32,21 @@ export const projects: Project[] = [
     urls: {
       github: 'https://github.com/Iv44n/mern-auth'
     }
+  },
+  {
+    title: 'Just Time',
+    description:
+      'Sistema de gestión de acceso a recursos desarrollado con Spring Boot, donde los usuarios pueden solicitar acceso y los administradores aprobar o rechazar dichas solicitudes. Al ser aprobadas, el sistema genera una API Key que se revela solo una vez. Utiliza PostgreSQL como base de datos principal y permite registrar recursos que pueden ser bases de datos PostgreSQL, MySQL, SQLite, etc. Estableciendo conexiones dinámicas en tiempo de ejecución para ejecutar consultas. Implementa arquitectura MVC con Services y Repository, junto con Spring Security para la autenticación y protección de rutas. Además, cuenta con un cliente desarrollado en Next.js que utiliza TanStack Query para la comunicación eficiente con la API y Zustand la gestión del estado.',
+    technologies: [
+      'Spring Boot',
+      'Spring Security',
+      'Postgres SQL',
+      'Next.js',
+      'Zustand',
+      'TanStack Query'
+    ],
+    urls: {
+      github: 'https://github.com/Iv44n/Just-Time'
+    }
   }
 ]

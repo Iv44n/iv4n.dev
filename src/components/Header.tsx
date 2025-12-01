@@ -12,10 +12,10 @@ export default function Header() {
         <Link
           href={CV_URL}
           target='_blank'
-          className='rounded-full border border-foreground px-5 py-1.5 uppercase flex gap-2 items-center cursor-pointer z-10 transition-colors hover:bg-foreground hover:text-background'
+          className='group rounded-full border border-foreground px-5 py-1.5 uppercase flex gap-2 items-center cursor-pointer z-10 transition-colors hover:bg-foreground hover:text-background'
         >
-          <span className='h-1.5 w-1.5 bg-foreground rounded-full' />
-          Download CV
+          <span className='h-1.5 w-1.5 bg-foreground rounded-full transition-colors group-hover:bg-background' />
+          Descargar CV
         </Link>
         {/* <button
           type='button'
