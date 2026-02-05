@@ -15,8 +15,10 @@ import {
   SiJavascript,
   SiMongodb,
   SiMysql,
+  SiNestjs,
   SiNextdotjs,
   SiNodedotjs,
+  SiNotion,
   SiPostgresql,
   SiReact,
   SiReactquery,
@@ -63,5 +65,7 @@ export const SKILL_ICON_MAP: Record<string, JSX.Element> = {
   Render: <SiRender />,
   MySQL: <SiMysql />,
   Redis: <SiRedis />,
-  'Go (Básico)': <SiGo />
+  'Go (Básico)': <SiGo />,
+  Notion: <SiNotion />,
+  NestJS: <SiNestjs />
 }

@@ -13,6 +13,7 @@ export const skills = {
   ],
   backend: [
     'Java',
+    'NestJS',
     'Node.js',
     'Bun',
     'Express',
@@ -31,5 +32,5 @@ export const skills = {
     'WatermelonDB',
     'Redis'
   ],
-  Herramientas: ['Git', 'GitHub', 'Vercel', 'Docker', 'Render']
+  Herramientas: ['Git', 'GitHub', 'Vercel', 'Docker', 'Render', 'Notion']
 }
