@@ -1,6 +1,6 @@
+import { RESEND_API_KEY } from 'astro:env/server'
 import { Resend } from 'resend'
-import { env } from './env'
 
-const resend = new Resend(env.RESEND_API_KEY)
+const resend = new Resend(RESEND_API_KEY)
 
 export default resend
