@@ -1,0 +1,30 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content'
+import BlogPost from '#/layouts/BlogPost.astro'
+import { getBlogSlug, getLocalizedPath } from '#/i18n/utils'
+
+interface Props {
+  post: CollectionEntry<'blog'>
+}
+
+const { post } = Astro.props
+
+const allPosts = await getCollection('blog')
+
+const alternateLinks = allPosts
+  .filter(p => p.data.id === post.data.id)
+  .map(p => {
+    const slug = getBlogSlug(p.id)
+    return {
+      lang: p.data.lang,
+      href: getLocalizedPath(p.data.lang, `/blog/${slug}/`),
+      title: p.data.title
+    }
+  })
+
+const { Content } = await render(post)
+---
+
+<BlogPost {...post.data} alternateLinks={alternateLinks} isBlogPost={true}>
+  <Content />
+</BlogPost>

@@ -1,38 +1,27 @@
 // @ts-check
-import { defineConfig, envField } from 'astro/config'
 
-import vercel from '@astrojs/vercel'
+import mdx from '@astrojs/mdx'
+import sitemap from '@astrojs/sitemap'
+import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from 'astro/config'
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://iv4n.dev',
-  output: 'server',
+  integrations: [mdx(), sitemap()],
 
-  env: {
-    validateSecrets: true,
-    schema: {
-      NODE_ENV: envField.string({
-        context: 'server',
-        access: 'public',
-        optional: true,
-        default: 'development'
-      }),
-      RESEND_API_KEY: envField.string({
-        context: 'server',
-        access: 'secret'
-      }),
-      EMAIL_SENDER: envField.string({
-        context: 'server',
-        access: 'secret',
-        optional: true,
-        default: 'onboarding@resend.dev'
-      }),
-      TO_EMAILS: envField.string({
-        context: 'server',
-        access: 'secret'
-      })
-    }
+  vite: {
+    plugins: [tailwindcss()]
   },
-
-  adapter: vercel()
+  server: {
+    allowedHosts: true
+  },
+  i18n: {
+    defaultLocale: 'es',
+    locales: ['es', 'en'],
+    routing: {
+      prefixDefaultLocale: false,
+      redirectToDefaultLocale: false
+    }
+  }
 })

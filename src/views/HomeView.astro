@@ -1,0 +1,118 @@
+---
+import Container from '#/components/Container.astro'
+import { PROJECTS, SITE, SKILLS, SOCIALS } from '#/config/site'
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations
+} from '#/i18n/utils'
+import BaseLayout from '#/layouts/BaseLayout.astro'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const translatePath = useTranslatedPath(lang)
+---
+
+<BaseLayout title={SITE.title} description={t('hero.subtitle')}>
+  <Container class='gap-20 sm:gap-32'>
+    <!-- Hero Section -->
+    <section class='flex flex-col items-start w-full'>
+      <h1 data-reveal class='text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-[1.1] tracking-[-0.04em] mb-4'>
+        {t('hero.title.hi')}<br />
+        <span class='text-gray-dark font-medium'>{t('hero.title.role')}</span>
+      </h1>
+      <p data-reveal class='text-lg sm:text-xl text-gray max-w-135 leading-relaxed tracking-tight mb-10'>
+        {t('hero.subtitle')}
+      </p>
+
+      <!-- Action Buttons (Mobile First Stack) -->
+      <div data-reveal class='flex flex-col sm:flex-row items-stretch sm:items-center w-full sm:w-auto gap-3'>
+        <a
+          href={translatePath('/blog/')}
+          class='flex items-center justify-center py-3 px-6 bg-foreground text-background text-[0.95rem] font-medium rounded-lg transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-foreground hover:opacity-90 hover:shadow-md hover:-translate-y-0.5'
+        >
+          {t('hero.btn.blog')}
+        </a>
+        <a
+          href={translatePath('/about/')}
+          class='flex items-center justify-center py-3 px-6 bg-background-secondary text-foreground text-[0.95rem] font-medium rounded-lg border border-border transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-border hover:bg-background hover:border-border-light hover:shadow-sm hover:-translate-y-0.5'
+        >
+          {t('hero.btn.about')}
+        </a>
+        <a
+          href={SITE.cv}
+          download
+          class='flex items-center justify-center gap-2 py-3 px-6 bg-background text-gray-dark text-[0.95rem] font-medium rounded-lg border border-border transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-border hover:text-foreground hover:border-border-light hover:shadow-sm hover:-translate-y-0.5'
+        >
+          <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'>
+            <path d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'></path>
+            <polyline points='7 10 12 15 17 10'></polyline>
+            <line x1='12' x2='12' y1='15' y2='3'></line>
+          </svg>
+          {t('hero.btn.cv')}
+        </a>
+      </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section data-reveal class='flex flex-col gap-5 w-full'>
+      <h2 class='text-xs uppercase tracking-widest text-gray font-semibold m-0'>
+        {t('tech.title')}
+      </h2>
+      <div class='flex flex-wrap gap-2.5'>
+        {
+          SKILLS.map(tech => (
+            <div class='flex items-center h-8 px-4 rounded-full bg-background-secondary border border-border-light text-gray-dark text-sm font-medium transition-all duration-200 hover:bg-background hover:text-foreground hover:border-border hover:shadow-sm cursor-default'>
+              {tech}
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Featured Work -->
+    <section class='flex flex-col gap-8 w-full'>
+      <div data-reveal class='flex items-baseline justify-between border-b border-border-light pb-4'>
+        <h2 class='text-2xl font-semibold text-foreground tracking-tight m-0'>
+          {t('featured.title')}
+        </h2>
+        <a
+          href={SOCIALS.github}
+          target='_blank'
+          rel='noopener noreferrer'
+          class='text-sm font-medium text-gray hover:text-foreground transition-colors outline-none focus-visible:ring-2 focus-visible:ring-border rounded'
+        >
+          {t('featured.viewAll')}
+        </a>
+      </div>
+
+      <div class='grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6'>
+        {
+          PROJECTS.map(project => (
+            <a
+              href={project.url}
+              target='_blank'
+              rel='noopener noreferrer'
+              data-reveal
+              class='group flex flex-col gap-3 p-6 bg-background rounded-xl border border-border transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-border hover:border-border-light hover:shadow-md hover:-translate-y-1'
+            >
+              <h3 class='text-lg font-semibold text-foreground tracking-tight transition-colors group-hover:text-accent m-0'>
+                {project.title}
+              </h3>
+              <p class='text-base text-gray-dark leading-relaxed m-0'>
+                {project.description[lang]}
+              </p>
+              <div class='flex flex-wrap gap-2 mt-auto pt-2'>
+                {project.tags.map(tag => (
+                  <span class='text-xs font-medium text-gray bg-background-secondary border border-border-light rounded-full px-2.5 py-1'>
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </Container>
+</BaseLayout>

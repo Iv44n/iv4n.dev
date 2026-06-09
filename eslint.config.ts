@@ -4,6 +4,7 @@ import eslintPluginAstro from 'eslint-plugin-astro'
 import stylistic from '@stylistic/eslint-plugin'
 
 export default defineConfig([
+  ...tseslint.configs.recommended,
   ...eslintPluginAstro.configs.recommended,
 
   {
@@ -48,10 +49,8 @@ export default defineConfig([
       'no-duplicate-imports': 'error'
     }
   },
-  ...tseslint.configs.recommended,
-  ...eslintPluginAstro.configs.recommended,
 
   {
-    ignores: ['dist/', 'node_modules/', '.vscode/', '.astro/']
+    ignores: ['dist/', 'node_modules/', '.vscode/', '.astro/', 'public/']
   }
 ])
