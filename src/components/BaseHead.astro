@@ -3,7 +3,6 @@
 // all pages through the use of the <BaseHead /> component.
 import '#/styles/global.css'
 import type { ImageMetadata } from 'astro'
-import FallbackImage from '#/assets/blog-placeholder-1.jpg'
 import { SITE } from '#/config/site'
 import '@fontsource/geist-sans'
 
@@ -19,14 +18,19 @@ interface Props {
   alternateLinks?: AlternateLink[]
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const site = Astro.site ?? new URL('https://iv4n.dev')
+const canonicalURL = new URL(Astro.url.pathname, site)
 
 const {
   title,
   description,
-  image = FallbackImage,
+  image,
   alternateLinks
 } = Astro.props
+
+const imageURL = image
+  ? new URL(image.src, site).href
+  : undefined
 ---
 
 <!-- Global Metadata -->
@@ -58,7 +62,7 @@ window.localStorage.setItem('theme', theme)
   rel='alternate'
   type='application/rss+xml'
   title={SITE.title}
-  href={new URL('rss.xml', Astro.site)}
+  href={new URL('rss.xml', site)}
 />
 <meta name='generator' content={Astro.generator} />
 
@@ -67,7 +71,7 @@ window.localStorage.setItem('theme', theme)
 
 <!-- Alternate Language Links -->
 {alternateLinks?.map(({ lang, href }) => (
-  <link rel='alternate' hreflang={lang} href={new URL(href, Astro.site ?? 'https://iv4n.dev')} />
+  <link rel='alternate' hreflang={lang} href={new URL(href, site)} />
 ))}
 
 <!-- Primary Meta Tags -->
@@ -80,11 +84,14 @@ window.localStorage.setItem('theme', theme)
 <meta property='og:url' content={Astro.url} />
 <meta property='og:title' content={title} />
 <meta property='og:description' content={description} />
-<meta property='og:image' content={new URL(image.src, Astro.url)} />
-
+{imageURL && (
+  <meta property='og:image' content={imageURL} />
+)}
 <!-- Twitter -->
 <meta property='twitter:card' content='summary_large_image' />
 <meta property='twitter:url' content={Astro.url} />
 <meta property='twitter:title' content={title} />
 <meta property='twitter:description' content={description} />
-<meta property='twitter:image' content={new URL(image.src, Astro.url)} />
+{imageURL && (
+  <meta name='twitter:image' content={imageURL} />
+)}

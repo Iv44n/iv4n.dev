@@ -51,6 +51,6 @@ export default defineConfig([
   },
 
   {
-    ignores: ['dist/', 'node_modules/', '.vscode/', '.astro/', 'public/']
+    ignores: ['dist/', 'node_modules/', '.vscode/', '.astro/', 'public/', '.vercel']
   }
 ])
