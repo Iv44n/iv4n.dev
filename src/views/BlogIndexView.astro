@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets'
+import Container from '#/components/Container.astro'
+import FormattedDate from '#/components/FormattedDate.astro'
+import { SITE } from '#/config/site'
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+  getPostsByLocale,
+  getBlogSlug
+} from '#/i18n/utils'
+import BaseLayout from '#/layouts/BaseLayout.astro'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const translatePath = useTranslatedPath(lang)
+
+const posts = await getPostsByLocale(lang)
+---
+
+<BaseLayout title={`${t('nav.writing')} | ${SITE.title}`} description={SITE.description}>
+  <Container class='gap-12'>
+    <header data-reveal class='flex flex-col gap-2'>
+      <h1 class='text-4xl sm:text-5xl font-bold text-foreground tracking-[-0.04em] m-0'>
+        {t('nav.writing')}
+      </h1>
+      <p class='text-lg text-gray-dark m-0'>Thoughts, updates, and tutorials.</p>
+      <hr class='border-t border-border-light my-6' />
+    </header>
+
+    <section>
+      <ul class='grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-10 p-0 m-0 list-none'>
+        {
+          posts.map((post, index) => {
+            const slug = getBlogSlug(post.id)
+            const href = translatePath(`/blog/${slug}/`)
+            return (
+              <li data-reveal class={`flex flex-col gap-3 group ${index === 0 ? 'sm:col-span-2 mb-4' : ''}`}>
+                <a href={href} class='block overflow-hidden rounded-xl border border-border-light transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-border hover:shadow-md hover:border-border hover:-translate-y-1'>
+                  {post.data.heroImage && (
+                    <Image
+                      width={index === 0 ? 1020 : 720}
+                      height={index === 0 ? 510 : 360}
+                      src={post.data.heroImage}
+                      alt=''
+                      class='w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]'
+                    />
+                  )}
+                </a>
+                <a href={href} class='flex flex-col gap-1 outline-none group-focus-visible:ring-2 ring-border rounded'>
+                  <h4 class={`font-semibold text-foreground tracking-tight transition-colors group-hover:text-accent m-0 ${index === 0 ? 'text-3xl' : 'text-xl'}`}>
+                    {post.data.title}
+                  </h4>
+                  <p class='text-[0.9rem] font-mono text-gray m-0 group-hover:text-gray-dark transition-colors'>
+                    <FormattedDate date={post.data.pubDate} />
+                  </p>
+                </a>
+              </li>
+            )
+          })
+        }
+      </ul>
+    </section>
+  </Container>
+</BaseLayout>

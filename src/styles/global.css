@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Geist Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  
+  --color-background: var(--background);
+  --color-background-secondary: var(--background-secondary);
+  --color-surface: var(--surface);
+  
+  --color-foreground: var(--foreground);
+  --color-gray-dark: var(--gray-dark);
+  --color-gray: var(--gray);
+  --color-gray-light: var(--gray-light);
+  
+  --color-border: var(--border-color);
+  --color-border-light: var(--border-light);
+  
+  --shadow-sm: var(--shadow-sm);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+}
+
+:root {
+  /* Primary */
+  --accent: #f43f5e;
+  --accent-hover: #e11d48;
+  --accent-soft: rgba(244, 63, 94, 0.08);
+
+  /* Light Base */
+  --background: #ffffff;
+  --background-secondary: #f9f9fb;
+  --surface: rgba(255, 255, 255, 0.85);
+
+  /* Typography */
+  --foreground: #11181c; /* Named foreground to avoid conflict with literal black in tailwind if needed */
+  --gray-dark: #4b5563;
+  --gray: #6b7280;
+  --gray-light: #e5e7eb;
+
+  /* UI */
+  --border-color: rgba(0, 0, 0, 0.06);
+  --border-light: rgba(0, 0, 0, 0.03);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.02), 0 2px 8px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.03), 0 2px 8px rgba(0, 0, 0, 0.02);
+  --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.02);
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+}
+
+.dark {
+  /* Primary */
+  --accent: #fb7185;
+  --accent-hover: #f43f5e;
+  --accent-soft: rgba(251, 113, 133, 0.1);
+
+  /* Dark Base */
+  --background: #0d0d0e;
+  --background-secondary: #161618;
+  --surface: rgba(22, 22, 24, 0.65);
+
+  /* Typography */
+  --foreground: #ededed;
+  --gray-dark: #a1a1aa;
+  --gray: #71717a;
+  --gray-light: #27272a;
+
+  /* UI */
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(255, 255, 255, 0.03);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 16px 64px rgba(0, 0, 0, 0.4);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    @apply bg-background text-foreground font-sans text-base transition-colors duration-200 tracking-[-0.01em];
+  }
+
+  html.js [data-reveal] {
+    opacity: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html.js [data-reveal] {
+      opacity: 1;
+    }
+  }
+}
+
+/* Typography elements for markdown/prose that don't need utility classes everywhere */
+@layer components {
+  .prose-container h1,
+  .prose-container h2,
+  .prose-container h3,
+  .prose-container h4 {
+    @apply text-foreground font-semibold tracking-[-0.04em] mb-4;
+  }
+  .prose-container h1 {
+    @apply text-4xl font-bold tracking-[-0.05em] mb-6;
+  }
+  .prose-container h2 {
+    @apply text-3xl mt-12;
+  }
+  .prose-container h3 {
+    @apply text-xl mt-8;
+  }
+
+  .prose-container p {
+    @apply text-gray-dark mb-6 text-lg leading-relaxed;
+  }
+
+  .prose-container a {
+    @apply text-accent hover:text-accent-hover transition-colors;
+  }
+
+  .prose-container ul,
+  .prose-container ol {
+    @apply mb-6 pl-6 text-gray-dark space-y-2;
+  }
+
+  .prose-container blockquote {
+    @apply my-8 py-3 pl-5 border-l-4 border-border italic text-gray text-lg;
+  }
+
+  .prose-container code {
+    @apply font-mono px-1.5 py-0.5 bg-background-secondary border border-border text-foreground rounded text-[0.85em];
+  }
+
+  .prose-container pre {
+    @apply p-5 bg-background-secondary border border-border rounded-md overflow-x-auto text-[0.85rem] leading-relaxed my-6;
+  }
+
+  .prose-container pre code {
+    @apply bg-transparent border-none p-0 text-inherit;
+  }
+
+  .prose-container img {
+    @apply max-w-full h-auto rounded-md border border-border-light shadow-md my-10;
+  }
+
+  .prose-container hr {
+    @apply border-t border-border my-12;
+  }
+}

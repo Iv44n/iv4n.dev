@@ -1,0 +1,117 @@
+---
+import { languages } from '#/i18n/ui'
+import {
+  getLangFromUrl,
+  getRouteFromUrl,
+  useTranslatedPath
+} from '#/i18n/utils'
+
+const currentLang = getLangFromUrl(Astro.url)
+const translatePath = useTranslatedPath(currentLang)
+const currentRoute = getRouteFromUrl(Astro.url)
+---
+
+<div class='relative lang-dropdown-container'>
+  <!-- Toggle Button -->
+  <button
+    class='lang-dropdown-btn flex items-center justify-center h-9 px-2.5 rounded-full text-[0.85rem] font-medium text-gray-dark hover:text-foreground hover:bg-border-light transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-border border border-transparent uppercase'
+    aria-label='Select language'
+    aria-expanded='false'
+    aria-haspopup='true'
+  >
+    {currentLang}
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      width='14'
+      height='14'
+      viewBox='0 0 24 24'
+      fill='none'
+      stroke='currentColor'
+      stroke-width='2'
+      stroke-linecap='round'
+      stroke-linejoin='round'
+      class='ml-1 opacity-60 transition-transform duration-200 target-arrow'
+    >
+      <polyline points='6 9 12 15 18 9'></polyline>
+    </svg>
+  </button>
+
+  <!-- Dropdown Menu (visibility toggled via the .open class on the container) -->
+  <div
+    class='lang-dropdown-menu absolute right-0 top-[calc(100%+0.5rem)] w-32 p-1.5 rounded-xl bg-surface/95 border border-border backdrop-blur-xl shadow-lg flex flex-col gap-0.5 origin-top-right scale-95 opacity-0 invisible transition-all duration-200 ease-out z-50'
+  >
+    {
+      Object.entries(languages).map(([lang, label]) => (
+        <a
+          href={translatePath(currentRoute, lang)}
+          class:list={[
+            'flex items-center justify-between w-full px-3 py-2 rounded-lg text-[0.875rem] font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-border',
+            currentLang === lang
+              ? 'bg-background text-foreground shadow-sm border border-border'
+              : 'text-gray-dark hover:text-foreground hover:bg-border-light border border-transparent'
+          ]}
+        >
+          {label}
+          {currentLang === lang && (
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='14'
+              height='14'
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='currentColor'
+              stroke-width='2'
+              stroke-linecap='round'
+              stroke-linejoin='round'
+              class='text-accent'
+            >
+              <polyline points='20 6 9 17 4 12' />
+            </svg>
+          )}
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .lang-dropdown-container.open .lang-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+  }
+
+  .lang-dropdown-container.open .target-arrow {
+    transform: rotate(180deg);
+  }
+</style>
+
+<script>
+const container = document.querySelector('.lang-dropdown-container')
+const button = document.querySelector('.lang-dropdown-btn')
+
+if (container && button) {
+  // Toggle the menu when the button is clicked
+  button.addEventListener('click', (e) => {
+    e.stopPropagation()
+    const isOpen = container.classList.toggle('open')
+    button.setAttribute('aria-expanded', String(isOpen))
+  })
+
+  // Close the menu when clicking outside of it
+  document.addEventListener('click', (e) => {
+    if (!container.contains(e.target as Node)) {
+      container.classList.remove('open')
+      button.setAttribute('aria-expanded', 'false')
+    }
+  })
+
+  // Close the menu with the Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      container.classList.remove('open')
+      button.setAttribute('aria-expanded', 'false')
+    }
+  })
+}
+</script>

@@ -1,0 +1,71 @@
+---
+import { Image } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
+import Container from '#/components/Container.astro'
+import FormattedDate from '#/components/FormattedDate.astro'
+import BaseLayout from '#/layouts/BaseLayout.astro'
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations
+} from '#/i18n/utils'
+
+type Props = CollectionEntry<'blog'>['data'] & {
+  alternateLinks?: { lang: string; href: string }[]
+  isBlogPost?: boolean
+}
+
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  alternateLinks,
+  isBlogPost = true
+} = Astro.props
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const translatePath = useTranslatedPath(lang)
+---
+
+<BaseLayout title={title} description={description} alternateLinks={alternateLinks} isBlogPost={isBlogPost}>
+  <Container>
+    <article class='max-w-[65ch] mx-auto w-full'>
+      <a
+        href={translatePath('/blog/')}
+        data-reveal
+        class='group inline-flex items-center gap-1.5 mb-8 text-sm font-medium text-gray hover:text-foreground transition-colors outline-none focus-visible:ring-2 focus-visible:ring-border rounded'
+      >
+        <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true' class='transition-transform duration-200 group-hover:-translate-x-0.5'>
+          <path d='m12 19-7-7 7-7'></path>
+          <path d='M19 12H5'></path>
+        </svg>
+        {t('blog.back')}
+      </a>
+      <header class='mb-10 text-left' data-reveal>
+        <div class='text-gray text-[0.9rem] mb-4 font-mono flex items-center'>
+          <FormattedDate date={pubDate} />
+          {updatedDate && (
+            <span class='italic ml-2 text-gray-dark'>
+              (Updated <FormattedDate date={updatedDate} />)
+            </span>
+          )}
+        </div>
+        <h1 class='text-[clamp(2rem,4vw,3rem)] leading-[1.15] m-0 tracking-[-0.04em] font-bold text-foreground'>{title}</h1>
+        <hr class='mt-10 mb-0 border-t border-border-light' />
+      </header>
+
+      {heroImage && (
+        <div class='mb-12 rounded-xl overflow-hidden shadow-sm border border-border-light' data-reveal>
+          <Image width={1020} height={510} src={heroImage} alt='' class='block w-full h-auto object-cover' />
+        </div>
+      )}
+
+      <div class='prose-container w-full' data-reveal>
+        <slot />
+      </div>
+    </article>
+  </Container>
+</BaseLayout>

@@ -1,0 +1,39 @@
+---
+import BaseHead from '#/components/BaseHead.astro'
+import Footer from '#/components/Footer.astro'
+import Header from '#/components/Header.astro'
+import { getLangFromUrl, getAlternateLinks } from '#/i18n/utils'
+
+interface AlternateLink {
+  lang: string
+  href: string
+}
+
+interface Props {
+  title: string
+  description: string
+  alternateLinks?: AlternateLink[]
+  isBlogPost?: boolean
+}
+
+const { title, description, isBlogPost = false } = Astro.props
+const lang = getLangFromUrl(Astro.url)
+
+const alternateLinks =
+  Astro.props.alternateLinks ?? (isBlogPost ? [] : getAlternateLinks(Astro.url))
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <BaseHead title={title} description={description} alternateLinks={alternateLinks} />
+  </head>
+  <body class='flex flex-col min-h-screen'>
+    <Header />
+    <slot />
+    <Footer />
+    <script>
+      import '../scripts/reveal.ts'
+    </script>
+  </body>
+</html>

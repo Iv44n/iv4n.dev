@@ -1,0 +1,166 @@
+---
+import Container from '#/components/Container.astro'
+import {
+  EDUCATION,
+  EXPERIENCE,
+  PRINCIPLES,
+  SITE,
+  SKILL_GROUPS,
+  SOCIALS,
+  SPOKEN_LANGUAGES
+} from '#/config/site'
+import { getLangFromUrl, useTranslations } from '#/i18n/utils'
+import BaseLayout from '#/layouts/BaseLayout.astro'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+
+const contacts = [
+  { label: 'GitHub', href: SOCIALS.github },
+  { label: 'LinkedIn', href: SOCIALS.linkedin },
+  { label: 'Instagram', href: SOCIALS.instagram },
+  { label: SITE.email, href: `mailto:${SITE.email}` }
+]
+
+const sectionHeading =
+  'text-2xl font-semibold text-foreground tracking-tight border-b border-border-light pb-4 m-0'
+const chip =
+  'flex items-center h-8 px-4 rounded-full bg-background-secondary border border-border-light text-gray-dark text-sm font-medium transition-all duration-200 hover:bg-background hover:text-foreground hover:border-border hover:shadow-sm cursor-default'
+---
+
+<BaseLayout title={`${t('nav.about')} · ${SITE.title}`} description={t('about.desc')}>
+  <Container class='gap-16'>
+    <!-- Background -->
+    <section data-reveal class='flex flex-col gap-6 w-full max-w-[65ch]'>
+      <h1 class='text-3xl sm:text-4xl font-bold text-foreground tracking-[-0.04em] m-0'>
+        {t('about.bg.title')}
+      </h1>
+      <p class='text-sm text-gray font-mono m-0'>{SITE.location[lang]}</p>
+      <p class='text-gray-dark text-lg leading-relaxed m-0'>{t('about.bg.p1')}</p>
+      <p class='text-gray-dark text-lg leading-relaxed m-0'>{t('about.bg.p2')}</p>
+    </section>
+
+    <!-- Experience -->
+    <section data-reveal class='flex flex-col gap-6 w-full max-w-[65ch]'>
+      <h2 class={sectionHeading}>{t('about.exp.title')}</h2>
+      <div class='flex flex-col gap-10'>
+        {
+          EXPERIENCE.map(job => (
+            <div class='flex flex-col gap-2'>
+              <div class='flex flex-wrap justify-between items-baseline gap-x-4'>
+                <h3 class='text-[1.1rem] font-semibold m-0 tracking-[-0.02em]'>
+                  {job.role} · {job.company}
+                </h3>
+                <span class='text-[0.85rem] text-gray font-mono'>{job.period[lang]}</span>
+              </div>
+              <p class='text-sm text-gray m-0'>{job.location[lang]}</p>
+              <ul class='flex flex-col gap-2 mt-2 pl-5 list-disc marker:text-border'>
+                {job.bullets[lang].map(item => (
+                  <li class='text-gray-dark leading-relaxed'>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section data-reveal class='flex flex-col gap-6 w-full'>
+      <h2 class={sectionHeading}>{t('about.skills.title')}</h2>
+      <div class='flex flex-col gap-6'>
+        {
+          SKILL_GROUPS.map(group => (
+            <div class='flex flex-col gap-3'>
+              <h3 class='text-xs uppercase tracking-widest text-gray font-semibold m-0'>
+                {group.label[lang]}
+              </h3>
+              <div class='flex flex-wrap gap-2.5'>
+                {group.items.map(item => (
+                  <div class={chip}>{item}</div>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- Architecture & principles -->
+    <section data-reveal class='flex flex-col gap-6 w-full'>
+      <h2 class={sectionHeading}>{t('about.principles.title')}</h2>
+      <div class='flex flex-wrap gap-2.5'>
+        {PRINCIPLES[lang].map(item => <div class={chip}>{item}</div>)}
+      </div>
+    </section>
+
+    <!-- AI & modern practices -->
+    <section data-reveal class='flex flex-col gap-4 w-full max-w-[65ch]'>
+      <h2 class={sectionHeading}>{t('about.ai.title')}</h2>
+      <p class='text-gray-dark text-lg leading-relaxed m-0'>{t('about.ai.desc')}</p>
+    </section>
+
+    <!-- Education -->
+    <section data-reveal class='flex flex-col gap-6 w-full max-w-[65ch]'>
+      <h2 class={sectionHeading}>{t('about.edu.title')}</h2>
+      {
+        EDUCATION.map(edu => (
+          <div class='flex flex-col gap-1'>
+            <div class='flex flex-wrap justify-between items-baseline gap-x-4'>
+              <h3 class='text-[1.1rem] font-semibold m-0 tracking-[-0.02em]'>{edu.school}</h3>
+              <span class='text-[0.85rem] text-gray font-mono'>{edu.period[lang]}</span>
+            </div>
+            <p class='text-gray-dark m-0'>{edu.degree[lang]}</p>
+          </div>
+        ))
+      }
+    </section>
+
+    <!-- Languages -->
+    <section data-reveal class='flex flex-col gap-6 w-full max-w-[65ch]'>
+      <h2 class={sectionHeading}>{t('about.lang.title')}</h2>
+      <ul class='flex flex-col gap-2 m-0 p-0 list-none'>
+        {
+          SPOKEN_LANGUAGES.map(item => (
+            <li class='flex items-baseline justify-between gap-4 border-b border-border-light pb-2'>
+              <span class='font-medium text-foreground'>{item.name[lang]}</span>
+              <span class='text-gray'>{item.level[lang]}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <!-- Contact -->
+    <section data-reveal class='flex flex-col gap-6 w-full max-w-[65ch]'>
+      <h2 class={sectionHeading}>{t('about.contact.title')}</h2>
+      <p class='text-gray-dark text-lg leading-relaxed m-0'>{t('about.contact.desc')}</p>
+      <div class='flex flex-wrap gap-3'>
+        {
+          contacts.map(contact => (
+            <a
+              href={contact.href}
+              target={contact.href.startsWith('mailto:') ? undefined : '_blank'}
+              rel='noopener noreferrer'
+              class='flex items-center justify-center py-2.5 px-5 bg-background-secondary text-foreground text-[0.95rem] font-medium rounded-lg border border-border transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-border hover:bg-background hover:border-border-light hover:shadow-sm hover:-translate-y-0.5'
+            >
+              {contact.label}
+            </a>
+          ))
+        }
+        <a
+          href={SITE.cv}
+          download
+          class='flex items-center justify-center gap-2 py-2.5 px-5 bg-foreground text-background text-[0.95rem] font-medium rounded-lg transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-foreground hover:opacity-90 hover:shadow-md hover:-translate-y-0.5'
+        >
+          <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' aria-hidden='true'>
+            <path d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'></path>
+            <polyline points='7 10 12 15 17 10'></polyline>
+            <line x1='12' x2='12' y1='15' y2='3'></line>
+          </svg>
+          {t('hero.btn.cv')}
+        </a>
+      </div>
+    </section>
+  </Container>
+</BaseLayout>
