@@ -88,29 +88,32 @@ const translatePath = useTranslatedPath(lang)
 
       <div class='grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6'>
         {
-          PROJECTS.map(project => (
-            <a
-              href={project.url}
-              target='_blank'
-              rel='noopener noreferrer'
-              data-reveal
-              class='group flex flex-col gap-3 p-6 bg-background rounded-xl border border-border transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-border hover:border-border-light hover:shadow-md hover:-translate-y-1'
-            >
-              <h3 class='text-lg font-semibold text-foreground tracking-tight transition-colors group-hover:text-accent m-0'>
-                {project.title}
-              </h3>
-              <p class='text-base text-gray-dark leading-relaxed m-0'>
-                {project.description[lang]}
-              </p>
-              <div class='flex flex-wrap gap-2 mt-auto pt-2'>
-                {project.tags.map(tag => (
-                  <span class='text-xs font-medium text-gray bg-background-secondary border border-border-light rounded-full px-2.5 py-1'>
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </a>
-          ))
+          PROJECTS.map(project => {
+            const Card = project.url ? 'a' : 'div'
+            return (
+              <Card
+                href={project.url ?? undefined}
+                target={project.url ? '_blank' : undefined}
+                rel={project.url ? 'noopener noreferrer' : undefined}
+                data-reveal
+                class='group flex flex-col gap-3 p-6 bg-background rounded-xl border border-border transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-border hover:border-border-light hover:shadow-md hover:-translate-y-1'
+              >
+                <h3 class='text-lg font-semibold text-foreground tracking-tight transition-colors group-hover:text-accent m-0'>
+                  {project.title}
+                </h3>
+                <p class='text-base text-gray-dark leading-relaxed m-0'>
+                  {project.description[lang]}
+                </p>
+                <div class='flex flex-wrap gap-2 mt-auto pt-2'>
+                  {project.tags.map(tag => (
+                    <span class='text-xs font-medium text-gray bg-background-secondary border border-border-light rounded-full px-2.5 py-1'>
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </Card>
+            )
+          })
         }
       </div>
     </section>

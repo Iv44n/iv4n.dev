@@ -5,7 +5,7 @@ export const SITE = {
   location: { es: 'Lima, Perú', en: 'Lima, Peru' },
   cv: '/cv.pdf',
   description:
-    'Iván Todelano — Desarrollador Fullstack enfocado en backend con Go, PostgreSQL, Node.js y Bun. Construyo software mantenible y escalable con APIs REST, arquitectura limpia, CQRS y pipelines asíncronos.'
+    'Iván Todelano — Desarrollador de software especializado en backend y sistemas distribuidos. Construyo APIs, servicios escalables y arquitecturas orientadas a eventos con TypeScript, NestJS, Go y Java.'
 } as const
 
 export const SOCIALS = {
@@ -18,14 +18,14 @@ export const SKILLS = [
   'Go',
   'TypeScript',
   'Node.js',
+  'NestJS',
   'Bun',
+  'Java',
   'PostgreSQL',
-  'Nest.js',
-  'React',
-  'Next.js',
-  'Astro',
-  'Docker',
   'Redis',
+  'AWS',
+  'Docker',
+  'React',
   'React Native'
 ] as const
 
@@ -33,66 +33,64 @@ export const SKILL_GROUPS = [
   {
     label: { es: 'Backend', en: 'Backend' },
     items: [
-      'Go',
+      'JavaScript',
+      'TypeScript',
       'Node.js',
+      'NestJS',
       'Bun',
-      'Nest.js',
-      'Hono',
-      'Express',
-      'Spring Boot',
-      'JWT',
-      'REST APIs'
+      'Go',
+      'Java',
+      'REST APIs',
+      'OAuth 2.0',
+      'JWT'
     ]
   },
   {
-    label: { es: 'Bases de datos', en: 'Databases' },
-    items: ['PostgreSQL', 'MongoDB', 'MySQL', 'SQLite', 'Redis', 'WatermelonDB']
+    label: { es: 'Bases de datos y caché', en: 'Databases & cache' },
+    items: ['PostgreSQL', 'MySQL', 'Redis']
+  },
+  {
+    label: { es: 'Cloud e infraestructura', en: 'Cloud & infrastructure' },
+    items: ['AWS', 'Amazon S3', 'Docker', 'Nginx', 'Linux', 'CI/CD']
+  },
+  {
+    label: { es: 'Desarrollo móvil', en: 'Mobile development' },
+    items: ['React Native', 'Expo', 'SQLite', 'WatermelonDB']
   },
   {
     label: { es: 'Frontend', en: 'Frontend' },
-    items: [
-      'TypeScript',
-      'React',
-      'Next.js',
-      'Astro',
-      'Tailwind CSS',
-      'React Native',
-      'Expo',
-      'TanStack Query'
-    ]
-  },
-  {
-    label: { es: 'Herramientas', en: 'Tools' },
-    items: ['Git', 'GitHub', 'Vercel', 'Render', 'Docker', 'Notion']
+    items: ['React', 'Next.js', 'Astro', 'HTML', 'CSS', 'Tailwind CSS']
   }
 ] as const
 
 export const EXPERIENCE = [
   {
-    role: 'Fullstack Developer',
+    role: 'Software Engineer',
     company: 'Japisale',
     period: { es: 'Feb. 2026 – Actualidad', en: 'Feb. 2026 – Present' },
     location: { es: 'Miraflores, Lima, Perú', en: 'Miraflores, Lima, Peru' },
     bullets: {
       es: [
-        'Desarrollé funcionalidades fullstack en producción: frontend, backend, base de datos e integraciones externas.',
-        'Apliqué Clean Architecture y separación de responsabilidades, mejorando la mantenibilidad y testabilidad.',
-        'Diseñé una separación CQRS entre escritura y lectura para reducir la complejidad del dominio.',
-        'Implementé flujos de streaming para subida y generación de archivos con menor consumo de memoria.',
-        'Construí pipelines asíncronos para procesos pesados, optimizando los tiempos de respuesta.',
-        'Migré identificadores de bigint a UUID para preparar el sistema a escenarios distribuidos.',
-        'Integré APIs de terceros con validación, documentación y manejo de errores robusto.',
-        'Usé Go, Node.js y Bun según el contexto técnico, priorizando rendimiento y velocidad de entrega.'
+        'Participé en el desarrollo de un nuevo módulo del área contable, enfocado en escalabilidad, integración entre sistemas y automatización de procesos internos.',
+        'Diseñé e implementé la migración de identificadores hacia UUIDv7 para preparar la plataforma para escenarios distribuidos.',
+        'Implementé un sistema de autenticación basado en OAuth 2.0 para centralizar el acceso entre múltiples aplicaciones y módulos internos.',
+        'Desarrollé flujos de procesamiento asíncrono con BullMQ, Redis y eventos de NestJS para desacoplar procesos y mejorar la escalabilidad.',
+        'Integré servicios de generación y streaming de archivos hacia Amazon S3 utilizando servicios desarrollados en Go.',
+        'Participé en la integración de múltiples sistemas empresariales mediante APIs y servicios compartidos.',
+        'Colaboré en la definición de estándares de arquitectura para separación de dominios, infraestructura, aplicación y comunicación mediante eventos y jobs.',
+        'Implementé automatizaciones basadas en IA para resolver tickets de baja complejidad, con GitHub Actions y generación automatizada de Pull Requests.',
+        'Contribuí a un framework interno de conocimientos y guías técnicas para que agentes de IA comprendieran la arquitectura del proyecto y ejecutaran cambios de manera consistente.'
       ],
       en: [
-        'Built fullstack features in production: frontend, backend, database and external integrations.',
-        'Applied Clean Architecture and separation of concerns, improving maintainability and testability.',
-        'Designed a CQRS split between writes and reads to reduce domain complexity.',
-        'Implemented streaming flows for file upload and generation with lower memory usage.',
-        'Built asynchronous pipelines for heavy processes, optimizing response times.',
-        'Migrated identifiers from bigint to UUID to prepare the system for distributed scenarios.',
-        'Integrated third-party APIs with validation, documentation and robust error handling.',
-        'Used Go, Node.js and Bun depending on the technical context, prioritizing performance and delivery speed.'
+        'Contributed to a new accounting module focused on scalability, cross-system integration and automation of internal processes.',
+        'Designed and implemented the migration of identifiers to UUIDv7 to prepare the platform for distributed scenarios.',
+        'Implemented an OAuth 2.0-based authentication system to centralize access across multiple internal applications and modules.',
+        'Built asynchronous processing flows with BullMQ, Redis and NestJS events to decouple processes and improve scalability.',
+        'Integrated file generation and streaming services to Amazon S3 using services built in Go.',
+        'Participated in the integration of multiple enterprise systems through APIs and shared services.',
+        'Helped define architecture standards for separating domain, infrastructure and application layers, with communication via events and jobs.',
+        'Implemented AI-based automations to resolve low-complexity tickets, using GitHub Actions and automated Pull Request generation.',
+        'Contributed to an internal knowledge framework and technical guides enabling AI agents to understand the project architecture and apply changes consistently.'
       ]
     }
   }
@@ -102,6 +100,8 @@ export const PRINCIPLES = {
   es: [
     'Clean Architecture / Hexagonal',
     'CQRS ligero: escritura y lectura desacopladas',
+    'Arquitectura orientada a eventos',
+    'Sistemas distribuidos y microservicios',
     'Procesamiento asíncrono y streaming de archivos',
     'Modelado relacional con PostgreSQL',
     'Integración de APIs externas con trazabilidad',
@@ -110,6 +110,8 @@ export const PRINCIPLES = {
   en: [
     'Clean Architecture / Hexagonal',
     'Lightweight CQRS: decoupled reads and writes',
+    'Event-driven architecture',
+    'Distributed systems and microservices',
     'Asynchronous processing and file streaming',
     'Relational modeling with PostgreSQL',
     'External API integration with traceability',
@@ -135,6 +137,15 @@ export const SPOKEN_LANGUAGES = [
 
 export const PROJECTS = [
   {
+    title: 'Gestor de Contraseñas Multi-dispositivo',
+    url: null,
+    tags: ['React Native', 'Expo', 'Go', 'PostgreSQL'],
+    description: {
+      es: 'Aplicación móvil de gestión de credenciales con arquitectura zero-knowledge: las contraseñas se cifran localmente con una clave maestra y el backend en Go solo sincroniza y almacena datos cifrados, manteniendo la confidencialidad incluso ante accesos al servidor.',
+      en: 'Mobile credential manager with a zero-knowledge architecture: passwords are encrypted locally with a master key and the Go backend only syncs and stores encrypted data, keeping information confidential even if the server is compromised.'
+    }
+  },
+  {
     title: 'Sistema de Gestión de Proyectos',
     url: 'https://github.com/Iv44n/Movil-Task-App',
     tags: ['React Native', 'Expo', 'WatermelonDB', 'Clerk', 'RevenueCat'],
@@ -146,7 +157,14 @@ export const PROJECTS = [
   {
     title: 'Just Time',
     url: 'https://github.com/Iv44n/Just-Time',
-    tags: ['Spring Boot', 'Spring Security', 'PostgreSQL', 'Next.js', 'Zustand'],
+    tags: [
+      'Spring Boot',
+      'Spring Security',
+      'PostgreSQL',
+      'Next.js',
+      'Zustand',
+      'TanStack Query'
+    ],
     description: {
       es: 'Gestión de acceso a recursos con aprobación de solicitudes, API Keys de un solo uso y conexiones dinámicas a múltiples bases de datos en runtime. Backend en Spring Boot y frontend en Next.js.',
       en: 'Resource access management with request approval, single-use API keys and dynamic connections to multiple databases at runtime. Spring Boot backend and Next.js frontend.'

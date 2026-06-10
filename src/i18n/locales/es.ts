@@ -5,7 +5,7 @@ export const es = {
   'hero.title.hi': 'Hola, soy Ivan.',
   'hero.title.role': 'Desarrollador Fullstack.',
   'hero.subtitle':
-    'Desarrollador Fullstack enfocado en backend con experiencia en Go, PostgreSQL, TypeScript, Node.js y Bun. Construyo software mantenible y escalable con APIs REST, arquitectura limpia, CQRS y pipelines asíncronos.',
+    'Desarrollador de software especializado en backend y sistemas distribuidos. Construyo APIs, servicios escalables y arquitecturas orientadas a eventos con TypeScript, NestJS, Go y Java.',
   'hero.btn.blog': 'Leer mi blog',
   'hero.btn.about': 'Más sobre mí',
   'hero.btn.cv': 'Descargar CV',
@@ -13,12 +13,14 @@ export const es = {
   'featured.title': 'Proyectos Destacados',
   'featured.viewAll': 'Ver todos →',
   'blog.back': 'Volver al blog',
-  'about.desc': 'Desarrollador Fullstack enfocado en backend.',
+  'blog.subtitle': 'Reflexiones, novedades y tutoriales.',
+  'about.desc':
+    'Desarrollador de software especializado en backend y sistemas distribuidos.',
   'about.bg.title': 'Sobre mí',
   'about.bg.p1':
-    'Soy Iván, desarrollador Fullstack enfocado en backend con experiencia en Go, PostgreSQL, TypeScript, Node.js y Bun en productos reales.',
+    'Soy Iván, desarrollador de software especializado en backend y sistemas distribuidos. Tengo experiencia construyendo APIs, servicios escalables y arquitecturas orientadas a eventos con JavaScript, TypeScript, NestJS, Go y Java.',
   'about.bg.p2':
-    'Trabajo con APIs REST, arquitectura limpia, CQRS, streaming y pipelines asíncronos. Me interesa construir software mantenible y escalable con criterio técnico para reducir la complejidad y mejorar la productividad del equipo.',
+    'He trabajado con infraestructura cloud en AWS, bases de datos relacionales, caché con Redis y despliegues con Docker y Nginx. Además, desarrollo aplicaciones móviles multiplataforma con React Native y Expo, enfocadas en rendimiento, mantenibilidad y experiencia de usuario.',
   'about.exp.title': 'Experiencia',
   'about.skills.title': 'Habilidades',
   'about.principles.title': 'Arquitectura y principios',

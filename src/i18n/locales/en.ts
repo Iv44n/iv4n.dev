@@ -5,7 +5,7 @@ export const en = {
   'hero.title.hi': 'Hi, I\'m Ivan.',
   'hero.title.role': 'Fullstack Developer.',
   'hero.subtitle':
-    'Backend-focused Fullstack developer experienced in Go, PostgreSQL, TypeScript, Node.js and Bun. I build maintainable, scalable software with REST APIs, clean architecture, CQRS and asynchronous pipelines.',
+    'Software developer specialized in backend and distributed systems. I build APIs, scalable services and event-driven architectures with TypeScript, NestJS, Go and Java.',
   'hero.btn.blog': 'Read my blog',
   'hero.btn.about': 'More about me',
   'hero.btn.cv': 'Download CV',
@@ -13,12 +13,14 @@ export const en = {
   'featured.title': 'Featured Work',
   'featured.viewAll': 'View all →',
   'blog.back': 'Back to blog',
-  'about.desc': 'Backend-focused Fullstack developer.',
+  'blog.subtitle': 'Thoughts, updates, and tutorials.',
+  'about.desc':
+    'Software developer specialized in backend and distributed systems.',
   'about.bg.title': 'About me',
   'about.bg.p1':
-    'I\'m Iván, a backend-focused Fullstack developer experienced in Go, PostgreSQL, TypeScript, Node.js and Bun on real products.',
+    'I\'m Iván, a software developer specialized in backend and distributed systems. I have experience building APIs, scalable services and event-driven architectures with JavaScript, TypeScript, NestJS, Go and Java.',
   'about.bg.p2':
-    'I work with REST APIs, clean architecture, CQRS, streaming and asynchronous pipelines. I care about building maintainable, scalable software with the technical judgement to reduce complexity and improve team productivity.',
+    'I\'ve worked with cloud infrastructure on AWS, relational databases, Redis caching and deployments with Docker and Nginx. I also build cross-platform mobile apps with React Native and Expo, focused on performance, maintainability and user experience.',
   'about.exp.title': 'Experience',
   'about.skills.title': 'Skills',
   'about.principles.title': 'Architecture & principles',
