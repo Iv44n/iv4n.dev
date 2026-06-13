@@ -14,9 +14,19 @@ interface Props {
   description: string
   alternateLinks?: AlternateLink[]
   isBlogPost?: boolean
+  type?: 'website' | 'article'
+  publishedTime?: Date
+  updatedDate?: Date
 }
 
-const { title, description, isBlogPost = false } = Astro.props
+const {
+  title,
+  description,
+  isBlogPost = false,
+  type = 'website',
+  publishedTime,
+  updatedDate
+} = Astro.props
 const lang = getLangFromUrl(Astro.url)
 
 const alternateLinks =
@@ -26,7 +36,14 @@ const alternateLinks =
 <!doctype html>
 <html lang={lang}>
   <head>
-    <BaseHead title={title} description={description} alternateLinks={alternateLinks} />
+    <BaseHead
+      title={title}
+      description={description}
+      alternateLinks={alternateLinks}
+      type={type}
+      publishedTime={publishedTime}
+      updatedDate={updatedDate}
+    />
   </head>
   <body class='flex flex-col min-h-screen'>
     <Header />

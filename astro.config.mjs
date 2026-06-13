@@ -10,7 +10,20 @@ import vercel from '@astrojs/vercel'
 // https://astro.build/config
 export default defineConfig({
   site: 'https://iv4n.dev',
-  integrations: [mdx(), sitemap()],
+  integrations: [
+    mdx(),
+    sitemap({
+      i18n: {
+        defaultLocale: 'es',
+        locales: { es: 'es-ES', en: 'en-US' }
+      }
+    })
+  ],
+
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: 'hover'
+  },
 
   vite: {
     plugins: [tailwindcss()]

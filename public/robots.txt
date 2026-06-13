@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://iv4n.dev/sitemap-index.xml

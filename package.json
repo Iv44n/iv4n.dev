@@ -8,7 +8,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "og": "node scripts/generate-og.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "6.0.3",
@@ -18,7 +19,6 @@
     "@fontsource/geist-sans": "^5.2.5",
     "@tailwindcss/vite": "^4.3.0",
     "astro": "6.4.5",
-    "gsap": "^3.15.0",
     "sharp": "^0.34.3",
     "tailwindcss": "^4.3.0"
   },

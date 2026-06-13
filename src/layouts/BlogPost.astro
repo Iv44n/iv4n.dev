@@ -30,7 +30,15 @@ const t = useTranslations(lang)
 const translatePath = useTranslatedPath(lang)
 ---
 
-<BaseLayout title={title} description={description} alternateLinks={alternateLinks} isBlogPost={isBlogPost}>
+<BaseLayout
+  title={title}
+  description={description}
+  alternateLinks={alternateLinks}
+  isBlogPost={isBlogPost}
+  type='article'
+  publishedTime={pubDate}
+  updatedDate={updatedDate}
+>
   <Container>
     <article class='max-w-[65ch] mx-auto w-full'>
       <a

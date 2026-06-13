@@ -1,4 +1,5 @@
 export const en = {
+  'meta.title.home': 'Iván Todelano — Backend & Distributed Systems Developer',
   'nav.home': 'Home',
   'nav.writing': 'Writing',
   'nav.about': 'About',

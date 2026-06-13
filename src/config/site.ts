@@ -1,9 +1,15 @@
 export const SITE = {
   title: 'IV4N.DEV',
+  name: 'Iván Todelano',
   author: 'Iván Moisés Todelano Toledo',
+  jobTitle: {
+    es: 'Desarrollador Backend y Sistemas Distribuidos',
+    en: 'Backend & Distributed Systems Developer'
+  },
   email: 'ivandev2oo6@gmail.com',
   location: { es: 'Lima, Perú', en: 'Lima, Peru' },
   cv: '/cv.pdf',
+  ogImage: '/og.png',
   description:
     'Iván Todelano — Desarrollador de software especializado en backend y sistemas distribuidos. Construyo APIs, servicios escalables y arquitecturas orientadas a eventos con TypeScript, NestJS, Go y Java.'
 } as const
