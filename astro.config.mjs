@@ -11,7 +11,16 @@ import vercel from '@astrojs/vercel'
 export default defineConfig({
   site: 'https://iv4n.dev',
   integrations: [
-    mdx(),
+    mdx({
+      optimize: true,
+      shikiConfig: {
+        themes: {
+          light: 'vitesse-light',
+          dark: 'vitesse-dark'
+        },
+        defaultColor: false
+      }
+    }),
     sitemap({
       i18n: {
         defaultLocale: 'es',

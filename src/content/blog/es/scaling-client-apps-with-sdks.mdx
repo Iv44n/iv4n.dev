@@ -1,0 +1,384 @@
+---
+title: 'Escalando aplicaciones del cliente con SDKs'
+description: 'La clásica carpeta services funciona perfectamente durante mucho tiempo. Pero cuando aparecen aplicaciones móviles, dashboards e integraciones externas, mantener la lógica de comunicación entre clientes se vuelve cada vez más costoso. En este artículo exploramos cómo una arquitectura basada en SDKs permite centralizar contratos, autenticación, tiempo real y resiliencia para construir aplicaciones escalables.'
+pubDate: '2026-06-15'
+heroImage: '../../../assets/blog/sdk-architecture.png'
+lang: es
+id: scaling-client-apps-with-sdks
+---
+
+Al inicio de cualquier proyecto, la vida es simple.
+
+Creamos una carpeta `services`, añadimos algunos archivos para consumir la API y seguimos construyendo funcionalidades.
+
+```txt
+src/
+├── services/
+│   ├── auth.service.ts
+│   ├── users.service.ts
+│   └── projects.service.ts
+├── hooks/
+├── pages/
+└── components/
+```
+
+Y, sinceramente, funciona muy bien, durante meses, durante años.
+
+El problema es que la mayoría de arquitecturas no fallan cuando son pequeñas. Fallan cuando tienen éxito.
+
+Lo que hoy parece una solución limpia y organizada puede convertirse en una fuente constante de duplicación, inconsistencias y fricción entre equipos a medida que el producto crece.
+
+---
+
+# El enfoque que todos hemos utilizado
+
+La mayoría de aplicaciones terminan teniendo algo parecido a esto:
+
+```ts
+// services/users.service.ts
+
+import { api } from '@/lib/api';
+import { Profile, UpdateProfileDto } from '@/types';
+
+export const userService = {
+  async getProfile() {
+    const response = await api.get<Profile>('/users/me');
+    return response.data;
+  },
+
+  async updateProfile(data: UpdateProfileDto) {
+    const response = await api.put<UpdateProfileDto, Profile>('/users/me', data);
+    return response.data;
+  },
+};
+```
+
+```ts
+// services/projects.service.ts
+
+import { api } from '@/lib/api';
+import { CreateProjectDto, Project } from '@/types';
+
+
+export const projectService = {
+  async create(data: CreateProjectDto) {
+    const response = await api.post<CreateProjectDto, Project>('/projects', data);
+    return response.data;
+  },
+
+  async getAll() {
+    const response = await api.get<Project[]>('/projects');
+    return response.data;
+  },
+};
+```
+
+Luego los componentes consumen esos servicios:
+
+```ts
+function ProfilePage() {
+  const profile = useQuery({
+    queryKey: ['profile'],
+    queryFn: userService.getProfile,
+  });
+
+  return <Profile data={profile.data} />;
+}
+```
+
+No hay nada malo aquí, de hecho para una aplicación web única suele ser una solución excelente. Pero el problema aparece cuando el producto empieza a crecer.
+
+---
+
+# Cuando el éxito complica las cosas
+
+Imagina que tu producto despega.
+
+Ya no tienes únicamente una aplicación React.
+
+Ahora también existen:
+
+* Una aplicación móvil en React Native.
+* Un dashboard administrativo.
+* Una extensión para navegador.
+* Integraciones con terceros.
+* Scripts internos para automatizar procesos.
+
+Y todos necesitan consumir la misma API.
+
+Lo que suele ocurrir es que cada repositorio termina desarrollando su propia versión de:
+
+```txt
+users.service.ts
+projects.service.ts
+auth.service.ts
+notifications.service.ts
+```
+
+Al principio parece inofensivo.
+
+Después de todo, copiar unos cuantos archivos lleva cinco minutos. Pero con el tiempo comienzan a aparecer problemas.
+
+- Un equipo corrige un bug en la autenticación.
+
+- Otro olvida aplicar el mismo cambio.
+
+- La aplicación móvil implementa reintentos automáticos, la web no.
+
+- El dashboard interpreta los errores de forma distinta.
+
+Y de repente la empresa tiene cuatro implementaciones diferentes de la misma lógica, no porque los desarrolladores sean malos, sino porque la arquitectura los empuja hacia esa dirección.
+
+---
+
+# El cambio de mentalidad
+
+Las empresas que operan múltiples clientes suelen adoptar una idea bastante simple:
+
+> Tratar su propio backend como si fuera un servicio de terceros.
+
+Piensa en Stripe, en Supabase, en Firebase.
+
+Cuando utilizas cualquiera de estos servicios, no construyes peticiones HTTP manualmente en cada aplicación.
+
+Instalas un SDK.
+
+Y utilizas sus métodos.
+
+```ts
+await stripe.paymentIntents.create(...)
+```
+
+```ts
+await supabase.auth.signInWithPassword(...)
+```
+
+La pregunta es:
+
+¿Por qué no hacer lo mismo con nuestro propio backend?
+
+---
+
+# Introduciendo un SDK interno
+
+En lugar de que cada aplicación implemente su propia capa de comunicación, construimos una única puerta de entrada para todos los clientes.
+
+```txt
+┌─────────────────┐
+│   React Web     │
+└────────┬────────┘
+         │
+
+┌─────────────────┐
+│ React Native    │
+└────────┬────────┘
+         │
+
+┌─────────────────┐
+│ Dashboard       │
+└────────┬────────┘
+         │
+
+         ▼
+
+┌─────────────────┐
+│   SDK Interno   │
+└────────┬────────┘
+         │
+
+         ▼
+
+┌─────────────────┐
+│    Backend      │
+└─────────────────┘
+```
+
+Ahora la lógica compartida vive en un único lugar.
+
+---
+
+# ¿Cómo se ve en la práctica?
+
+El SDK encapsula toda la comunicación con el backend.
+
+```ts
+// @empresa/sdk/users
+
+export const users = {
+  getProfile() {
+    return http.get('/users/me');
+  },
+
+  updateProfile(data) {
+    return http.put('/users/me', data);
+  },
+};
+```
+
+```ts
+// @empresa/sdk/projects
+
+export const projects = {
+  create(data) {
+    return http.post('/projects', data);
+  },
+
+  getAll() {
+    return http.get('/projects');
+  },
+};
+```
+
+Y desde cualquier aplicación simplemente consumimos esos métodos.
+
+```ts
+import { users } from '@empresa/sdk';
+
+function ProfilePage() {
+  const profile = useQuery({
+    queryKey: ['profile'],
+    queryFn: users.getProfile,
+  });
+
+  return <Profile data={profile.data} />;
+}
+```
+
+La aplicación ya no necesita saber:
+
+* Qué URL utiliza la API.
+* Cómo se manejan los tokens.
+* Cómo funciona el refresh token.
+* Qué cabeceras son obligatorias.
+* Cómo se gestionan los errores.
+* Si la comunicación es REST, GraphQL o gRPC.
+
+Todo eso queda oculto detrás del SDK.
+
+---
+
+# Mucho más que un wrapper de HTTP
+
+Uno de los errores más comunes es pensar que un SDK es simplemente una colección de funciones para hacer peticiones.
+
+En realidad, suele convertirse en el hogar de toda la lógica transversal de la plataforma.
+
+Por ejemplo:
+
+* Gestión de autenticación.
+* Renovación automática de sesiones.
+* Reintentos automáticos con exponential backoff.
+* Manejo consistente de errores.
+* WebSockets y eventos en tiempo real.
+* Telemetría.
+* Logging.
+* Feature Flags.
+* Tipado compartido entre backend y frontend.
+
+En otras palabras:
+
+El SDK se convierte en la infraestructura que todas las aplicaciones utilizan.
+
+---
+
+# Lo que ganas
+
+Hasta este punto todo suena bastante atractivo.
+
+Y en muchos casos realmente lo es.
+
+La primera ventaja es la consistencia.
+
+Cuando una empresa tiene múltiples aplicaciones, es muy fácil que cada equipo termine resolviendo los mismos problemas de formas distintas.
+
+Con un SDK, esas decisiones viven en un único lugar.
+
+Si mañana necesitas agregar una cabecera de seguridad, incorporar telemetría o modificar el flujo de autenticación, actualizas una única dependencia.
+
+Otra ventaja enorme aparece cuando el backend evoluciona.
+
+Si el SDK se genera a partir de OpenAPI, GraphQL o gRPC, los contratos se mantienen sincronizados automáticamente.
+
+Si un endpoint cambia de forma incompatible, el error aparece durante el desarrollo y no cuando los usuarios ya están utilizando la aplicación.
+
+Y quizás el beneficio más infravalorado sea el onboarding.
+
+Un desarrollador nuevo ya no necesita entender todos los detalles internos de la plataforma.
+
+Simplemente importa el SDK y comienza a construir funcionalidades.
+
+---
+
+# Lo que pagas
+
+Por supuesto, no todo es perfecto.
+
+Los SDKs también tienen costos.
+
+Cuando el frontend necesita consumir una nueva funcionalidad, normalmente aparece un paso adicional.
+
+1. El backend implementa el cambio.
+2. El SDK se actualiza.
+3. Se publica una nueva versión.
+4. El frontend actualiza la dependencia.
+
+Si el proceso está automatizado, apenas se nota.
+
+Si no lo está, puede generar cierta fricción.
+
+También existe un riesgo importante.
+
+La centralización.
+
+Si una versión defectuosa introduce un error en la autenticación o en la gestión de peticiones, todas las aplicaciones que dependan de ese SDK heredarán el problema.
+
+La misma característica que lo hace tan poderoso también exige disciplina en su mantenimiento.
+
+---
+
+# ¿Cuándo tiene sentido?
+
+Existe una regla bastante simple.
+
+Si tienes múltiples aplicaciones consumiendo el mismo backend, probablemente deberías empezar a pensar en un SDK.
+
+Por ejemplo:
+
+* React Web.
+* React Native.
+* Dashboard administrativo.
+* Extensión de navegador.
+* Integraciones externas.
+
+En ese escenario la lógica compartida crece tan rápido que el SDK termina pagándose solo.
+
+Por otro lado, si estás construyendo:
+
+* Un MVP.
+* Una startup en validación.
+* Una única aplicación web.
+* Un proyecto personal.
+
+Probablemente todavía no lo necesites.
+
+Una carpeta `/services` bien organizada seguirá siendo la opción más simple y productiva.
+
+---
+
+# Conclusión
+
+Las carpetas `services` no son malas.
+
+De hecho, son una excelente solución para muchísimos proyectos.
+
+El problema aparece cuando intentan resolver desafíos para los que nunca fueron diseñadas.
+
+A medida que aparecen nuevos clientes, nuevos equipos y nuevas responsabilidades compartidas, la lógica comienza a duplicarse entre repositorios y mantener la consistencia se vuelve cada vez más difícil.
+
+En ese momento, un SDK deja de ser una optimización prematura y se convierte en una herramienta de escalabilidad.
+
+Porque el objetivo no es abstraer HTTP.
+
+El objetivo es construir una única fuente de verdad para toda la infraestructura que comparten tus aplicaciones.
+
+Y cuando llegas a ese punto, tratar tu propio backend como si fuera un producto puede ser una de las mejores decisiones arquitectónicas que tomes.
