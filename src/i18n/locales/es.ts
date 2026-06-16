@@ -15,6 +15,11 @@ export const es = {
   'featured.viewAll': 'Ver todos →',
   'blog.back': 'Volver al blog',
   'blog.subtitle': 'Reflexiones, novedades y tutoriales.',
+  'blog.copyMd': 'Copiar MD',
+  'blog.copied': '¡Copiado!',
+  'blog.openIn': 'Abrir en',
+  'blog.copyMdLink': 'Copiar enlace MD',
+  'blog.linkCopied': '¡Enlace copiado!',
   'about.desc':
     'Desarrollador de software especializado en backend y sistemas distribuidos.',
   'about.bg.title': 'Sobre mí',

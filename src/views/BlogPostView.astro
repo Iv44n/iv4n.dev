@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content'
 import BlogPost from '#/layouts/BlogPost.astro'
+import { SITE } from '#/config/site'
 import { getBlogSlug, getLocalizedPath } from '#/i18n/utils'
 
 interface Props {
@@ -22,9 +23,22 @@ const alternateLinks = allPosts
     }
   })
 
+const slug = getBlogSlug(post.id)
+const mdUrl = new URL(
+  getLocalizedPath(post.data.lang, `/blog/${slug}.md`),
+  Astro.site
+).href
+const githubUrl = `${SITE.repo.url}/blob/${SITE.repo.branch}/${post.filePath}`
+
 const { Content } = await render(post)
 ---
 
-<BlogPost {...post.data} alternateLinks={alternateLinks} isBlogPost={true}>
+<BlogPost
+  {...post.data}
+  alternateLinks={alternateLinks}
+  isBlogPost={true}
+  mdUrl={mdUrl}
+  githubUrl={githubUrl}
+>
   <Content />
 </BlogPost>

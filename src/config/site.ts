@@ -10,6 +10,10 @@ export const SITE = {
   location: { es: 'Lima, Perú', en: 'Lima, Peru' },
   cv: '/cv.pdf',
   ogImage: '/og.png',
+  repo: {
+    url: 'https://github.com/Iv44n/iv4n.dev',
+    branch: 'main'
+  },
   description:
     'Iván Todelano — Desarrollador de software especializado en backend y sistemas distribuidos. Construyo APIs, servicios escalables y arquitecturas orientadas a eventos con TypeScript, NestJS, Go y Java.'
 } as const
