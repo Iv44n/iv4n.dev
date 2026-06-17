@@ -40,7 +40,6 @@ const navLinks = [
     <a
       class='flex items-center gap-2.5 no-underline group outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-full'
       href={homePath}
-      aria-label='Home'
     >
       <div
         class='w-2 h-2 rounded-full bg-accent shadow-[0_0_12px_rgba(244,63,94,0.5)] transition-transform duration-300 group-hover:scale-110'
@@ -110,6 +109,9 @@ const navLinks = [
         id='mobile-menu-toggle'
         class='sm:hidden flex items-center justify-center h-9 w-9 shrink-0 rounded-full text-gray-dark hover:text-foreground hover:bg-border-light transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-border border border-transparent'
         aria-label='Open mobile menu'
+        aria-controls='mobile-menu'
+        aria-expanded='false'
+        aria-haspopup='true'
       >
         <svg
           xmlns='http://www.w3.org/2000/svg'
@@ -134,11 +136,13 @@ const navLinks = [
   <div
     id='mobile-menu'
     class='hidden sm:hidden absolute top-[calc(100%+0.5rem)] left-0 w-full p-2 rounded-2xl bg-surface/95 border border-border backdrop-blur-xl shadow-lg flex-col gap-1 origin-top scale-95 opacity-0 transition-all duration-200 ease-out'
+    role='menu'
   >
     {
       navLinks.map((link) => (
         <a
           href={link.href}
+          role='menuitem'
           aria-current={link.isActive ? 'page' : undefined}
           class:list={[
             'flex items-center justify-center w-full h-11 rounded-xl text-[0.95rem] font-medium transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-border',
@@ -173,23 +177,41 @@ const mobileToggle = document.getElementById('mobile-menu-toggle')
 const mobileMenu = document.getElementById('mobile-menu')
 
 if (mobileToggle && mobileMenu) {
-  mobileToggle.addEventListener('click', () => {
-    const isHidden = mobileMenu.classList.contains('hidden')
+  const openMenu = () => {
+    mobileMenu.classList.remove('hidden')
+    mobileMenu.classList.add('flex')
+    setTimeout(() => {
+      mobileMenu.classList.remove('scale-95', 'opacity-0')
+      mobileMenu.classList.add('scale-100', 'opacity-100')
+    }, 10)
+    mobileToggle.setAttribute('aria-expanded', 'true')
+    mobileToggle.setAttribute('aria-label', 'Close mobile menu')
+  }
 
-    if (isHidden) {
-      mobileMenu.classList.remove('hidden')
-      mobileMenu.classList.add('flex')
-      setTimeout(() => {
-        mobileMenu.classList.remove('scale-95', 'opacity-0')
-        mobileMenu.classList.add('scale-100', 'opacity-100')
-      }, 10)
+  const closeMenu = () => {
+    mobileMenu.classList.remove('scale-100', 'opacity-100')
+    mobileMenu.classList.add('scale-95', 'opacity-0')
+    setTimeout(() => {
+      mobileMenu.classList.add('hidden')
+      mobileMenu.classList.remove('flex')
+    }, 200)
+    mobileToggle.setAttribute('aria-expanded', 'false')
+    mobileToggle.setAttribute('aria-label', 'Open mobile menu')
+  }
+
+  mobileToggle.addEventListener('click', () => {
+    if (mobileMenu.classList.contains('hidden')) {
+      openMenu()
     } else {
-      mobileMenu.classList.remove('scale-100', 'opacity-100')
-      mobileMenu.classList.add('scale-95', 'opacity-0')
-      setTimeout(() => {
-        mobileMenu.classList.add('hidden')
-        mobileMenu.classList.remove('flex')
-      }, 200)
+      closeMenu()
+    }
+  })
+
+  // Close on Escape for keyboard users.
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+      closeMenu()
+      mobileToggle.focus()
     }
   })
 }

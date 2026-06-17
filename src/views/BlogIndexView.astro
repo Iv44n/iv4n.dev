@@ -37,7 +37,7 @@ const posts = await getPostsByLocale(lang)
             const href = translatePath(`/blog/${slug}/`)
             return (
               <li data-reveal class={`flex flex-col gap-3 group ${index === 0 ? 'sm:col-span-2 mb-4' : ''}`}>
-                <a href={href} class='block overflow-hidden rounded-xl border border-border-light transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-border hover:shadow-md hover:border-border hover:-translate-y-1'>
+                <a href={href} tabindex='-1' aria-hidden='true' class='block overflow-hidden rounded-xl border border-border-light transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-border hover:shadow-md hover:border-border hover:-translate-y-1'>
                   {post.data.heroImage && (
                     <Image
                       width={index === 0 ? 1020 : 720}

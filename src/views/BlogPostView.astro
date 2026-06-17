@@ -3,6 +3,7 @@ import { type CollectionEntry, getCollection, render } from 'astro:content'
 import BlogPost from '#/layouts/BlogPost.astro'
 import { SITE } from '#/config/site'
 import { getBlogSlug, getLocalizedPath } from '#/i18n/utils'
+import { defaultLang } from '#/i18n/ui'
 
 interface Props {
   post: CollectionEntry<'blog'>
@@ -12,7 +13,7 @@ const { post } = Astro.props
 
 const allPosts = await getCollection('blog')
 
-const alternateLinks = allPosts
+const translations = allPosts
   .filter(p => p.data.id === post.data.id)
   .map(p => {
     const slug = getBlogSlug(p.id)
@@ -22,6 +23,13 @@ const alternateLinks = allPosts
       title: p.data.title
     }
   })
+
+// x-default points at the default-locale translation when it exists.
+const defaultTranslation =
+  translations.find(t => t.lang === defaultLang) ?? translations[0]
+const alternateLinks = defaultTranslation
+  ? [...translations, { ...defaultTranslation, lang: 'x-default' }]
+  : translations
 
 const slug = getBlogSlug(post.id)
 const mdUrl = new URL(

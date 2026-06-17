@@ -25,18 +25,17 @@ export function useTranslations(lang: keyof typeof ui) {
   }
 }
 
+function buildLocalizedPath(lang: string, path: string): string {
+  const pathName = path.startsWith('/') ? path : `/${path}`
+  return !showDefaultLang && lang === defaultLang ? pathName : `/${lang}${pathName}`
+}
+
 export function useTranslatedPath(lang: keyof typeof ui) {
-  return function translatePath(path: string, l: string = lang) {
-    const pathName = path.startsWith('/') ? path : `/${path}`
-    return !showDefaultLang && l === defaultLang ? pathName : `/${l}${pathName}`
-  }
+  return (path: string, l: string = lang) => buildLocalizedPath(l, path)
 }
 
 export function getLocalizedPath(lang: keyof typeof ui, path: string): string {
-  const pathName = path.startsWith('/') ? path : `/${path}`
-  return !showDefaultLang && lang === defaultLang
-    ? pathName
-    : `/${lang}${pathName}`
+  return buildLocalizedPath(lang, path)
 }
 
 export function getBlogSlug(id: string): string {
@@ -53,10 +52,11 @@ export async function getPostsByLocale(lang: keyof typeof ui) {
 
 export function getAlternateLinks(url: URL) {
   const route = getRouteFromUrl(url)
-  return Object.keys(ui).map(lang => {
-    return {
-      lang,
-      href: getLocalizedPath(lang as keyof typeof ui, route)
-    }
-  })
+  const links = Object.keys(ui).map(lang => ({
+    lang,
+    href: getLocalizedPath(lang as keyof typeof ui, route)
+  }))
+  // x-default points search engines at the default-locale version.
+  links.push({ lang: 'x-default', href: getLocalizedPath(defaultLang, route) })
+  return links
 }

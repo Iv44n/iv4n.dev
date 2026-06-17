@@ -1,14 +1,9 @@
 ---
-import { getCollection } from 'astro:content'
 import BlogPostView from '#/views/BlogPostView.astro'
-import { getBlogSlug } from '#/i18n/utils'
+import { getBlogStaticPaths } from '#/utils/blog'
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog', p => p.data.lang === 'en')
-  return posts.map(post => ({
-    params: { slug: getBlogSlug(post.id) },
-    props: { post }
-  }))
+  return getBlogStaticPaths('en')
 }
 
 const { post } = Astro.props

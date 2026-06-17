@@ -38,10 +38,6 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  server: {
-    allowedHosts: true
-  },
-
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en'],

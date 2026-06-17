@@ -17,7 +17,9 @@ export async function generateRSS(
     items: posts.map(post => {
       const slug = getBlogSlug(post.id)
       return {
-        ...post.data,
+        title: post.data.title,
+        description: post.data.description,
+        pubDate: post.data.pubDate,
         link: getLocalizedPath(locale, `/blog/${slug}/`)
       }
     })

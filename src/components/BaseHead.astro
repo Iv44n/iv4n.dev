@@ -4,8 +4,20 @@
 import '#/styles/global.css'
 import { SITE, SOCIALS, SKILLS } from '#/config/site'
 import { getLangFromUrl } from '#/i18n/utils'
-import '@fontsource/geist-sans'
-import '@fontsource/jetbrains-mono'
+// Only the latin subset and the weights actually used by the UI. Importing the
+// bare package would ship every subset and only weight 400, forcing the browser
+// to synthesize the 500/600/700 used across headings (faux-bold).
+import '@fontsource/geist-sans/latin-400.css'
+import '@fontsource/geist-sans/latin-500.css'
+import '@fontsource/geist-sans/latin-600.css'
+import '@fontsource/geist-sans/latin-700.css'
+import '@fontsource/jetbrains-mono/latin-400.css'
+// Hashed URLs for the above-the-fold Geist weights, preloaded below so they are
+// ready at first paint and don't cause a font-swap layout shift (CLS).
+import geistSans400 from '@fontsource/geist-sans/files/geist-sans-latin-400-normal.woff2?url'
+import geistSans500 from '@fontsource/geist-sans/files/geist-sans-latin-500-normal.woff2?url'
+import geistSans600 from '@fontsource/geist-sans/files/geist-sans-latin-600-normal.woff2?url'
+import geistSans700 from '@fontsource/geist-sans/files/geist-sans-latin-700-normal.woff2?url'
 
 interface AlternateLink {
   lang: string
@@ -100,7 +112,6 @@ const jsonLd = { '@context': 'https://schema.org', '@graph': graph }
 <!-- Global Metadata -->
 <meta charset='utf-8' />
 <script is:inline>
-document.documentElement.classList.add('js')
 const theme = (() => {
   if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
     return localStorage.getItem('theme')
@@ -122,6 +133,12 @@ window.localStorage.setItem('theme', theme)
 <meta name='theme-color' media='(prefers-color-scheme: light)' content='#ffffff' />
 <meta name='theme-color' media='(prefers-color-scheme: dark)' content='#0d0d0e' />
 <meta name='color-scheme' content='light dark' />
+
+<!-- Preload above-the-fold fonts to avoid a swap-induced layout shift (CLS) -->
+<link rel='preload' as='font' type='font/woff2' crossorigin href={geistSans400} />
+<link rel='preload' as='font' type='font/woff2' crossorigin href={geistSans700} />
+<link rel='preload' as='font' type='font/woff2' crossorigin href={geistSans600} />
+<link rel='preload' as='font' type='font/woff2' crossorigin href={geistSans500} />
 
 <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
 <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
