@@ -7,8 +7,10 @@ export const SITE = {
     en: 'Backend & Distributed Systems Developer'
   },
   email: 'ivandev2oo6@gmail.com',
+  phone: '+51 927 416 434',
   location: { es: 'Lima, Perú', en: 'Lima, Peru' },
-  cv: '/cv.pdf',
+  // Generated from this file by `bun run cv` (see scripts/generate-cv.mjs).
+  cv: { es: '/cv.pdf', en: '/cv-en.pdf' },
   ogImage: '/og.png',
   repo: {
     url: 'https://github.com/Iv44n/iv4n.dev',
@@ -50,26 +52,30 @@ export const SKILL_GROUPS = [
       'Bun',
       'Go',
       'Java',
+      'Python',
+      'FastAPI',
+      'BullMQ',
       'REST APIs',
       'OAuth 2.0',
-      'JWT'
+      'JWT',
+      'Better Auth'
     ]
   },
   {
     label: { es: 'Bases de datos y caché', en: 'Databases & cache' },
-    items: ['PostgreSQL', 'MySQL', 'Redis']
+    items: ['PostgreSQL', 'MySQL', 'Redis', 'Drizzle ORM', 'TypeORM']
   },
   {
     label: { es: 'Cloud e infraestructura', en: 'Cloud & infrastructure' },
-    items: ['AWS', 'Amazon S3', 'Docker', 'Nginx', 'Linux', 'CI/CD']
+    items: ['AWS', 'Amazon S3', 'Docker', 'Nginx', 'Linux', 'Cloudflare', 'GitHub Actions', 'CI/CD']
   },
   {
-    label: { es: 'Desarrollo móvil', en: 'Mobile development' },
-    items: ['React Native', 'Expo', 'SQLite', 'WatermelonDB']
+    label: { es: 'Móvil y escritorio', en: 'Mobile & desktop' },
+    items: ['React Native', 'Expo', 'SQLite', 'WatermelonDB', 'Tauri']
   },
   {
     label: { es: 'Frontend', en: 'Frontend' },
-    items: ['React', 'Next.js', 'Astro', 'HTML', 'CSS', 'Tailwind CSS']
+    items: ['React', 'Next.js', 'TanStack', 'Astro', 'HTML', 'CSS', 'Tailwind CSS']
   }
 ] as const
 
@@ -81,26 +87,26 @@ export const EXPERIENCE = [
     location: { es: 'Miraflores, Lima, Perú', en: 'Miraflores, Lima, Peru' },
     bullets: {
       es: [
-        'Participé en el desarrollo de un nuevo módulo del área contable, enfocado en escalabilidad, integración entre sistemas y automatización de procesos internos.',
-        'Diseñé e implementé la migración de identificadores hacia UUIDv7 para preparar la plataforma para escenarios distribuidos.',
-        'Implementé un sistema de autenticación basado en OAuth 2.0 para centralizar el acceso entre múltiples aplicaciones y módulos internos.',
-        'Desarrollé flujos de procesamiento asíncrono con BullMQ, Redis y eventos de NestJS para desacoplar procesos y mejorar la escalabilidad.',
+        'Desarrollé una plataforma de gestión de comprobantes electrónicos integrada con SUNAT (SIRE): sincronización y recuperación automática de facturas, asignación contable por detalle y exportación hacia el ERP del área contable, con NestJS, PostgreSQL (Drizzle) y Redis.',
+        'Construí una aplicación de escritorio con Tauri 2 (Rust) y React que se autentica en SUNAT y descarga comprobantes (XML, CDR y PDF) con reintentos y backoff, probada contra servidores simulados y con actualizaciones automáticas.',
+        'Implementé un sistema de autenticación basado en OAuth 2.0 para centralizar el acceso entre múltiples aplicaciones, con API keys y rate limiting para integraciones máquina a máquina.',
+        'Desarrollé flujos de procesamiento asíncrono con BullMQ, Redis y eventos de NestJS, incluyendo locks distribuidos en Redis para la gestión de tokens de acceso.',
         'Integré servicios de generación y streaming de archivos hacia Amazon S3 utilizando servicios desarrollados en Go.',
-        'Participé en la integración de múltiples sistemas empresariales mediante APIs y servicios compartidos.',
-        'Colaboré en la definición de estándares de arquitectura para separación de dominios, infraestructura, aplicación y comunicación mediante eventos y jobs.',
-        'Implementé automatizaciones basadas en IA para resolver tickets de baja complejidad, con GitHub Actions y generación automatizada de Pull Requests.',
-        'Contribuí a un framework interno de conocimientos y guías técnicas para que agentes de IA comprendieran la arquitectura del proyecto y ejecutaran cambios de manera consistente.'
+        'Diseñé e implementé la migración de identificadores hacia UUIDv7 para preparar la plataforma para escenarios distribuidos.',
+        'Construí una plataforma de datos para un contact center (FastAPI y TanStack): extracción programada de reportes diarios, sincronización de contactos y evaluación de la calidad de atención con LLMs de múltiples proveedores y KPIs de productividad por agente.',
+        'Extendí la API central de productos (NestJS, TypeORM) con filtros de dashboard y consultas guardadas por proyecto sobre un datamart.',
+        'Implementé automatizaciones con IA para resolver tickets de baja complejidad mediante GitHub Actions y Pull Requests automáticos, apoyadas en un framework interno de guías para que agentes de IA comprendan la arquitectura del proyecto.'
       ],
       en: [
-        'Contributed to a new accounting module focused on scalability, cross-system integration and automation of internal processes.',
-        'Designed and implemented the migration of identifiers to UUIDv7 to prepare the platform for distributed scenarios.',
-        'Implemented an OAuth 2.0-based authentication system to centralize access across multiple internal applications and modules.',
-        'Built asynchronous processing flows with BullMQ, Redis and NestJS events to decouple processes and improve scalability.',
+        'Built an electronic invoice management platform integrated with SUNAT (SIRE): automatic invoice sync and recovery, line-level accounting assignment and export to the accounting ERP, using NestJS, PostgreSQL (Drizzle) and Redis.',
+        'Built a desktop app with Tauri 2 (Rust) and React that authenticates against SUNAT and downloads invoices (XML, CDR and PDF) with retries and backoff, tested against mock servers and shipped with automatic updates.',
+        'Implemented an OAuth 2.0-based authentication system to centralize access across multiple applications, with API keys and rate limiting for machine-to-machine integrations.',
+        'Built asynchronous processing flows with BullMQ, Redis and NestJS events, including distributed Redis locks for access token management.',
         'Integrated file generation and streaming services to Amazon S3 using services built in Go.',
-        'Participated in the integration of multiple enterprise systems through APIs and shared services.',
-        'Helped define architecture standards for separating domain, infrastructure and application layers, with communication via events and jobs.',
-        'Implemented AI-based automations to resolve low-complexity tickets, using GitHub Actions and automated Pull Request generation.',
-        'Contributed to an internal knowledge framework and technical guides enabling AI agents to understand the project architecture and apply changes consistently.'
+        'Designed and implemented the migration of identifiers to UUIDv7 to prepare the platform for distributed scenarios.',
+        'Built a data platform for a contact center (FastAPI and TanStack): scheduled extraction of daily reports, contact sync, and service-quality evaluation with multi-provider LLMs plus per-agent productivity KPIs.',
+        'Extended the central product API (NestJS, TypeORM) with dashboard filters and per-project saved queries over a datamart.',
+        'Implemented AI automations that resolve low-complexity tickets through GitHub Actions and automated Pull Requests, backed by an internal guide framework that lets AI agents understand the project architecture.'
       ]
     }
   }
@@ -147,6 +153,24 @@ export const SPOKEN_LANGUAGES = [
 
 export const PROJECTS = [
   {
+    title: 'Arcton',
+    url: 'https://github.com/Iv44n/arcton',
+    tags: ['TypeScript', 'Bun', 'Node.js', 'OpenAPI', 'Turborepo'],
+    description: {
+      es: 'Framework backend para TypeScript publicado en npm (@arcton/core): router con precedencia definida, contexto tipado a partir de las rutas, validación con cualquier Standard Schema (Zod, Valibot) y un núcleo desacoplado del runtime (Bun o Node.js). Incluye CLI, scaffolding, OpenAPI y documentación.',
+      en: 'TypeScript backend framework published on npm (@arcton/core): a router with defined precedence, context typed from the route literals, validation with any Standard Schema (Zod, Valibot) and a runtime-decoupled core (Bun or Node.js). Ships with a CLI, scaffolding, OpenAPI and docs.'
+    }
+  },
+  {
+    title: 'Liro',
+    url: null,
+    tags: ['Bun', 'Arcton', 'Better Auth', 'Drizzle', 'PostgreSQL', 'TanStack Start'],
+    description: {
+      es: 'Plataforma de automatización de decisiones: se define una decisión una vez y se consume desde cualquier sistema vía API. Backend en Bun sobre Arcton con organizaciones y API keys (Better Auth), Drizzle y PostgreSQL, y evaluación con IA mediante proveedores intercambiables con fallback.',
+      en: 'Decision automation platform: define a decision once and consume it from any system through an API. Bun backend built on Arcton with organizations and API keys (Better Auth), Drizzle and PostgreSQL, and AI evaluation through swappable providers with fallback.'
+    }
+  },
+  {
     title: 'Gestor de Contraseñas Multi-dispositivo',
     url: null,
     tags: ['React Native', 'Expo', 'Go', 'PostgreSQL'],
@@ -178,15 +202,6 @@ export const PROJECTS = [
     description: {
       es: 'Gestión de acceso a recursos con aprobación de solicitudes, API Keys de un solo uso y conexiones dinámicas a múltiples bases de datos en runtime. Backend en Spring Boot y frontend en Next.js.',
       en: 'Resource access management with request approval, single-use API keys and dynamic connections to multiple databases at runtime. Spring Boot backend and Next.js frontend.'
-    }
-  },
-  {
-    title: 'Autenticación MERN',
-    url: 'https://github.com/Iv44n/mern-auth',
-    tags: ['MongoDB', 'Express', 'React', 'Node.js', 'TanStack Query'],
-    description: {
-      es: 'Sistema de autenticación completo con el stack MERN (MongoDB, Express, React, Node.js), con rutas protegidas y manejo del estado global mediante TanStack Query.',
-      en: 'Complete authentication system with the MERN stack (MongoDB, Express, React, Node.js), featuring protected routes and global state management via TanStack Query.'
     }
   }
 ] as const

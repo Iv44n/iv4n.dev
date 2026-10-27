@@ -26,17 +26,20 @@ export const en = {
   'about.bg.p1':
     'I\'m Iván, a software developer specialized in backend and distributed systems. I have experience building APIs, scalable services and event-driven architectures with JavaScript, TypeScript, NestJS, Go and Java.',
   'about.bg.p2':
-    'I\'ve worked with cloud infrastructure on AWS, relational databases, Redis caching and deployments with Docker and Nginx. I also build cross-platform mobile apps with React Native and Expo, focused on performance, maintainability and user experience.',
+    'I\'ve worked with cloud infrastructure on AWS, relational databases, Redis caching and deployments with Docker and Nginx. I also build mobile apps with React Native and Expo and desktop apps with Tauri, and I maintain Arcton, an open-source backend framework for TypeScript.',
   'about.exp.title': 'Experience',
   'about.skills.title': 'Skills',
   'about.principles.title': 'Architecture & principles',
   'about.ai.title': 'AI & modern practices',
   'about.ai.desc':
-    'LLM API integration · Cursor / Claude Code / Codex as development aids · Advanced prompting · Assisted debugging · Interest in RAG and autonomous agents.',
+    'Multi-provider LLM API integration · Automated LLM evaluation · AI agents in CI with GitHub Actions · Claude Code / Cursor / Codex as development aids · Interest in RAG and autonomous agents.',
   'about.edu.title': 'Education',
   'about.lang.title': 'Languages',
   'about.contact.title': 'Contact',
   'about.contact.desc':
     'Have a project in mind or just want to say hi? You can find me here:',
+  'cv.headline': 'Fullstack Developer · Backend & Distributed Systems',
+  'cv.profile': 'Professional summary',
+  'cv.projects': 'Selected projects',
   'footer.rights': 'All rights reserved.'
 } as const

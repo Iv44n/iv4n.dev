@@ -7,7 +7,7 @@ Built with [Astro](https://astro.build), bilingual (ES/EN), statically generated
 
 ## Stack
 
-- **[Astro 6](https://astro.build)** — static output, content collections, view transitions/prefetch
+- **[Astro 7](https://astro.build)** — static output, content collections, view transitions/prefetch
 - **[Tailwind CSS 4](https://tailwindcss.com)** (via `@tailwindcss/vite`)
 - **MDX** for blog posts + **[Shiki](https://shiki.style)** dual-theme syntax highlighting (`vitesse-light` / `vitesse-dark`)
 - **i18n** — Spanish (default, no prefix) and English (`/en`), with `hreflang` + localized RSS
@@ -21,7 +21,7 @@ Built with [Astro](https://astro.build), bilingual (ES/EN), statically generated
 src/
 ├── assets/          # Images processed by Astro (blog hero art, …)
 ├── components/      # UI components (Header, Footer, BlogActions, …)
-├── config/site.ts   # Single source of truth: profile, skills, projects, experience
+├── config/site.ts   # Single source of truth: profile, skills, projects, experience (site + CV)
 ├── content/blog/    # Blog posts as MDX, split by locale: es/ and en/
 ├── i18n/            # Locale config, UI strings (locales/) and helpers (utils.ts)
 ├── layouts/         # BaseLayout + BlogPost
@@ -30,7 +30,7 @@ src/
 ├── styles/          # global.css (Tailwind theme + prose styles)
 ├── utils/           # rss.ts, markdown.ts
 └── views/           # Page-level composition (HomeView, AboutView, …)
-scripts/             # Node build scripts for static assets (sharp)
+scripts/             # Node build scripts for static assets (sharp, headless Chrome)
 ```
 
 ## Commands
@@ -46,6 +46,7 @@ scripts/             # Node build scripts for static assets (sharp)
 | `bun run check`     | Type-check `.astro`/TS with `astro check`               |
 | `bun run og`        | Regenerate `public/og.png` + `apple-touch-icon.png`     |
 | `bun run blog:hero` | Regenerate the blog hero art in `src/assets/blog/`      |
+| `bun run cv`        | Build and print `/cv` + `/en/cv` to `public/cv*.pdf`    |
 
 ## Writing a blog post
 
@@ -65,6 +66,15 @@ scripts/             # Node build scripts for static assets (sharp)
 
 3. To link a translation, give both the ES and EN versions the **same `id`** — the
    language switcher and `hreflang` tags resolve the alternate URL from it.
+
+## CV
+
+The CV is not edited by hand: `src/views/CvView.astro` renders it from
+`src/config/site.ts` and the `cv.*` / `about.*` strings, at `/cv` (es) and `/en/cv` (en).
+`bun run cv` builds the site and prints both pages with headless Chrome to
+`public/cv.pdf` and `public/cv-en.pdf` (set `CHROME_PATH` if Chrome isn't on `PATH`
+as `google-chrome`). Re-run it after changing the profile, and check that each PDF
+is still one page.
 
 ## i18n model
 

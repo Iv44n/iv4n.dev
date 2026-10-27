@@ -1,0 +1,195 @@
+---
+// Printable CV rendered from the same data as the site. `bun run cv` prints
+// /cv/ and /en/cv/ to public/cv.pdf and public/cv-en.pdf (scripts/generate-cv.mjs).
+import '#/styles/global.css'
+import '@fontsource/geist-sans/latin-400.css'
+import '@fontsource/geist-sans/latin-500.css'
+import '@fontsource/geist-sans/latin-600.css'
+import '@fontsource/geist-sans/latin-700.css'
+import {
+  EDUCATION,
+  EXPERIENCE,
+  PRINCIPLES,
+  PROJECTS,
+  SITE,
+  SKILL_GROUPS,
+  SOCIALS,
+  SPOKEN_LANGUAGES
+} from '#/config/site'
+import { getLangFromUrl, useTranslations } from '#/i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+
+const stripProtocol = (url: string) => url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')
+const siteUrl = Astro.site?.href ?? 'https://iv4n.dev'
+
+const contacts = [
+  { label: SITE.location[lang] },
+  { label: SITE.email, href: `mailto:${SITE.email}` },
+  { label: SITE.phone, href: `tel:${SITE.phone.replaceAll(' ', '')}` },
+  { label: stripProtocol(SOCIALS.linkedin), href: SOCIALS.linkedin },
+  { label: stripProtocol(SOCIALS.github), href: SOCIALS.github },
+  { label: stripProtocol(siteUrl), href: siteUrl }
+]
+
+const sectionHeading =
+  'text-[8pt] uppercase tracking-[0.14em] font-bold text-foreground border-b border-foreground/15 pb-[2pt] mb-[5pt] mt-0'
+const chip =
+  'inline-block px-[4pt] py-[1pt] rounded-[3pt] border border-foreground/12 text-[7.5pt] text-gray-dark'
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset='utf-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <meta name='robots' content='noindex' />
+    <title>{SITE.author} — CV</title>
+  </head>
+  <body class='bg-background-secondary py-8 print:bg-white print:p-0'>
+    <main
+      class='w-[210mm] min-h-[297mm] mx-auto bg-white px-[12mm] py-[10mm] shadow-lg text-[8.2pt] leading-[1.38] print:shadow-none'
+    >
+      <header class='flex flex-col gap-[2pt]'>
+        <h1 class='text-[20pt] font-bold tracking-[-0.03em] leading-tight text-foreground m-0'>
+          {SITE.author}
+        </h1>
+        <p class='text-[10pt] font-semibold text-gray-dark m-0'>{t('cv.headline')}</p>
+        <p class='flex flex-wrap gap-x-2 text-gray m-0 mt-[2pt]'>
+          {
+            contacts.map((contact, i) => (
+              <span>
+                {i > 0 && <span class='mr-2 text-gray-light'>|</span>}
+                {contact.href ? <a href={contact.href}>{contact.label}</a> : contact.label}
+              </span>
+            ))
+          }
+        </p>
+      </header>
+
+      <div class='grid grid-cols-[1fr_54mm] gap-x-[7mm] mt-[5mm]'>
+        <div class='flex flex-col gap-3'>
+          <section>
+            <h2 class={sectionHeading}>{t('cv.profile')}</h2>
+            <p class='text-gray-dark m-0'>{t('about.bg.p1')}</p>
+            <p class='text-gray-dark m-0 mt-1'>{t('about.bg.p2')}</p>
+          </section>
+
+          <section>
+            <h2 class={sectionHeading}>{t('about.exp.title')}</h2>
+            {
+              EXPERIENCE.map(job => (
+                <div class='flex flex-col'>
+                  <div class='flex justify-between items-baseline gap-x-4'>
+                    <h3 class='text-[9.5pt] font-semibold text-foreground m-0'>
+                      {job.role} — {job.company}
+                    </h3>
+                    <span class='text-[7.5pt] text-gray whitespace-nowrap'>{job.period[lang]}</span>
+                  </div>
+                  <p class='text-[7.5pt] text-gray m-0'>{job.location[lang]}</p>
+                  <ul class='flex flex-col gap-[2pt] mt-1 mb-0 pl-[10pt] list-disc marker:text-gray'>
+                    {job.bullets[lang].map(item => (
+                      <li class='text-gray-dark break-inside-avoid'>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))
+            }
+          </section>
+
+          <section>
+            <h2 class={sectionHeading}>{t('cv.projects')}</h2>
+            <div class='flex flex-col gap-[5pt]'>
+              {
+                PROJECTS.map(project => (
+                  <div class='break-inside-avoid'>
+                    <h3 class='text-[9pt] font-semibold text-foreground m-0'>
+                      {project.url ? <a href={project.url}>{project.title}</a> : project.title}
+                    </h3>
+                    <p class='text-[7.5pt] font-medium text-accent m-0'>{project.tags.join(' · ')}</p>
+                    <p class='text-gray-dark m-0 mt-[1pt]'>{project.description[lang]}</p>
+                  </div>
+                ))
+              }
+            </div>
+          </section>
+
+        </div>
+
+        <aside class='flex flex-col gap-3'>
+          <section>
+            <h2 class={sectionHeading}>{t('about.skills.title')}</h2>
+            <div class='flex flex-col gap-[5pt]'>
+              {
+                SKILL_GROUPS.map(group => (
+                  <div>
+                    <h3 class='text-[7pt] uppercase tracking-widest font-semibold text-gray m-0 mb-[2pt]'>
+                      {group.label[lang]}
+                    </h3>
+                    <div class='flex flex-wrap gap-1'>
+                      {group.items.map(item => (
+                        <span class={chip}>{item}</span>
+                      ))}
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </section>
+
+          <section>
+            <h2 class={sectionHeading}>{t('about.principles.title')}</h2>
+            <ul class='flex flex-col gap-0.5 m-0 pl-[10pt] list-disc marker:text-gray text-gray-dark'>
+              {PRINCIPLES[lang].map(item => <li>{item}</li>)}
+            </ul>
+          </section>
+
+          <section>
+            <h2 class={sectionHeading}>{t('about.ai.title')}</h2>
+            <p class='text-gray-dark m-0'>{t('about.ai.desc')}</p>
+          </section>
+
+          <section>
+            <h2 class={sectionHeading}>{t('about.edu.title')}</h2>
+            {
+              EDUCATION.map(edu => (
+                <div>
+                  <h3 class='text-[8.5pt] font-semibold text-foreground m-0'>{edu.school}</h3>
+                  <p class='text-gray-dark m-0'>{edu.degree[lang]}</p>
+                  <p class='text-[7.5pt] text-gray m-0'>{edu.period[lang]}</p>
+                </div>
+              ))
+            }
+          </section>
+
+          <section>
+            <h2 class={sectionHeading}>{t('about.lang.title')}</h2>
+            <ul class='flex flex-col gap-0.5 m-0 p-0 list-none'>
+              {
+                SPOKEN_LANGUAGES.map(item => (
+                  <li class='text-gray-dark'>
+                    <span class='font-semibold text-foreground'>{item.name[lang]}</span> —{' '}
+                    {item.level[lang]}
+                  </li>
+                ))
+              }
+            </ul>
+          </section>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  html {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+</style>

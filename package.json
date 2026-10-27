@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "og": "node scripts/generate-og.mjs",
-    "blog:hero": "node scripts/generate-blog-hero.mjs"
+    "blog:hero": "node scripts/generate-blog-hero.mjs",
+    "cv": "astro build && node scripts/generate-cv.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^8.1.1",

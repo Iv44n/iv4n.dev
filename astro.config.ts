@@ -20,6 +20,8 @@ export default defineConfig({
       }
     }),
     sitemap({
+      // The /cv pages only exist to be printed to public/cv*.pdf.
+      filter: page => !/\/cv\/$/.test(page),
       i18n: {
         defaultLocale: 'es',
         locales: { es: 'es-ES', en: 'en-US' }
